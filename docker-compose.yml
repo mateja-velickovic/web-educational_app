@@ -9,6 +9,7 @@ services:
       - "6033:3306"
     volumes:
       - dbdata:/var/lib/mysql
+      - ./db_jpprod.sql:/docker-entrypoint-initdb.d/db_jpprod.sql
     networks:
       - jpnetwork
 
