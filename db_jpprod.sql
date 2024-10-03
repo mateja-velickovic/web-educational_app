@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: db:3306
--- Generation Time: Sep 12, 2024 at 08:01 AM
+-- Host: db
+-- Generation Time: Oct 03, 2024 at 07:15 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.0.27
 
@@ -26,30 +26,52 @@ USE `db_jpprod`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_activite`
+-- Table structure for table `t_activity`
 --
 
-DROP TABLE IF EXISTS `t_activite`;
-CREATE TABLE `t_activite` (
+CREATE TABLE `t_activity` (
   `idActivite` int NOT NULL,
-  `actLibelle` varchar(50) NOT NULL,
+  `actName` varchar(50) NOT NULL,
   `actDate` date NOT NULL,
-  `actLieu` varchar(50) NOT NULL,
-  `actCapacite` int NOT NULL
+  `actPlace` varchar(50) NOT NULL,
+  `actCapacity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `t_activity`
+--
+
+INSERT INTO `t_activity` (`idActivite`, `actName`, `actDate`, `actPlace`, `actCapacity`) VALUES
+(1, 'Yoga Session', '2024-10-05', 'Gym', 30),
+(2, 'Coding Workshop', '2024-11-10', 'Room 203', 25),
+(3, 'Art Class', '2024-10-15', 'Studio 12', 15),
+(4, 'Math Tutoring', '2024-12-01', 'Library', 10),
+(5, 'Science Fair', '2024-11-25', 'Auditorium', 50),
+(6, 'Music Concert', '2024-10-20', 'Main Hall', 100),
+(7, 'Drama Play', '2024-10-30', 'Theater', 75),
+(8, 'Cooking Class', '2024-11-05', 'Cafeteria', 20),
+(9, 'Photography Workshop', '2024-12-15', 'Room 101', 12),
+(10, 'Robotics Demo', '2024-11-18', 'Lab 5', 40);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_inscription`
+-- Table structure for table `t_registration`
 --
 
-DROP TABLE IF EXISTS `t_inscription`;
-CREATE TABLE `t_inscription` (
-  `idInscription` int NOT NULL,
+CREATE TABLE `t_registration` (
+  `idRegistration` int NOT NULL,
   `fkUser` int NOT NULL,
-  `fkActivite` int NOT NULL
+  `fkActivity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `t_registration`
+--
+
+INSERT INTO `t_registration` (`idRegistration`, `fkUser`, `fkActivity`) VALUES
+(2, 1, 8),
+(3, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -57,11 +79,17 @@ CREATE TABLE `t_inscription` (
 -- Table structure for table `t_role`
 --
 
-DROP TABLE IF EXISTS `t_role`;
 CREATE TABLE `t_role` (
   `idRole` int NOT NULL,
-  `rolNom` varchar(50) NOT NULL
+  `rolName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `t_role`
+--
+
+INSERT INTO `t_role` (`idRole`, `rolName`) VALUES
+(1, 'user');
 
 -- --------------------------------------------------------
 
@@ -69,32 +97,37 @@ CREATE TABLE `t_role` (
 -- Table structure for table `t_user`
 --
 
-DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
   `idUser` int NOT NULL,
-  `useNom` varchar(50) NOT NULL,
-  `usePrenom` varchar(50) NOT NULL,
-  `usePassword` varchar(20) NOT NULL,
+  `useUsername` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `usePassword` text NOT NULL,
   `fkRole` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `t_user`
+--
+
+INSERT INTO `t_user` (`idUser`, `useUsername`, `usePassword`, `fkRole`) VALUES
+(1, 'root', 'root', 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `t_activite`
+-- Indexes for table `t_activity`
 --
-ALTER TABLE `t_activite`
+ALTER TABLE `t_activity`
   ADD PRIMARY KEY (`idActivite`);
 
 --
--- Indexes for table `t_inscription`
+-- Indexes for table `t_registration`
 --
-ALTER TABLE `t_inscription`
-  ADD PRIMARY KEY (`idInscription`),
-  ADD KEY `fkUser` (`fkUser`,`fkActivite`),
-  ADD KEY `fkActivite` (`fkActivite`);
+ALTER TABLE `t_registration`
+  ADD PRIMARY KEY (`idRegistration`),
+  ADD KEY `fkUser` (`fkUser`,`fkActivity`),
+  ADD KEY `fkActivity` (`fkActivity`);
 
 --
 -- Indexes for table `t_role`
@@ -116,39 +149,39 @@ ALTER TABLE `t_user`
 --
 
 --
--- AUTO_INCREMENT for table `t_activite`
+-- AUTO_INCREMENT for table `t_activity`
 --
-ALTER TABLE `t_activite`
-  MODIFY `idActivite` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `t_activity`
+  MODIFY `idActivite` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `t_inscription`
+-- AUTO_INCREMENT for table `t_registration`
 --
-ALTER TABLE `t_inscription`
-  MODIFY `idInscription` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `t_registration`
+  MODIFY `idRegistration` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `t_role`
 --
 ALTER TABLE `t_role`
-  MODIFY `idRole` int NOT NULL AUTO_INCREMENT;
+  MODIFY `idRole` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `t_user`
 --
 ALTER TABLE `t_user`
-  MODIFY `idUser` int NOT NULL AUTO_INCREMENT;
+  MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `t_inscription`
+-- Constraints for table `t_registration`
 --
-ALTER TABLE `t_inscription`
-  ADD CONSTRAINT `t_inscription_ibfk_1` FOREIGN KEY (`fkActivite`) REFERENCES `t_activite` (`idActivite`),
-  ADD CONSTRAINT `t_inscription_ibfk_2` FOREIGN KEY (`fkUser`) REFERENCES `t_user` (`idUser`);
+ALTER TABLE `t_registration`
+  ADD CONSTRAINT `t_registration_ibfk_1` FOREIGN KEY (`fkActivity`) REFERENCES `t_activity` (`idActivite`),
+  ADD CONSTRAINT `t_registration_ibfk_2` FOREIGN KEY (`fkUser`) REFERENCES `t_user` (`idUser`);
 
 --
 -- Constraints for table `t_user`
