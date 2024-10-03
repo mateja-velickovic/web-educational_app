@@ -7,27 +7,28 @@ include "database.php";
 $username = $_POST['user'];
 $password = $_POST['pass'];
 
-$sql = "SELECT * FROM t_user WHERE useUsername = :username AND usePassword = :password";
-
+// Requête pour vérifier qu'un utilisateur existe à ce nom (nom unique)
+$sql = "SELECT * FROM t_user WHERE useUsername = :username";
 $result = $pdo->prepare($sql);
-
-$hash = password_hash($password, PASSWORD_DEFAULT);
-
-// Prévention des injections SQL avec les paramètres préparés
 $result->bindParam(':username', $username);
-$result->bindParam(':password', $hash);
-
 $result->execute();
 
 if ($result->rowCount() > 0) {
-    // if (password_verify($password, $hash)) {
     $user = $result->fetch();
 
-    $_SESSION['loggedin'] = true;
-    $_SESSION['username'] = $user['useUsername'];
-    $_SESSION['userid'] = $user['idUser'];
+    // Le
+    if (password_verify($password, $user['usePassword'])) {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $user['useUsername'];
+        $_SESSION['userid'] = $user['idUser'];
 
-    header("Location: ../../../index.php");
+        header("Location: ../../../index.php");
+        exit();
+    } else {
+        header("Location: ../login.php?error=incorrect_password");
+        exit();
+    }
 } else {
-    header("Location: ../login.php");
+    header("Location: ../login.php?error=incorrect_password");
+    exit();
 }

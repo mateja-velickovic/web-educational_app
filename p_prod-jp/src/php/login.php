@@ -29,9 +29,17 @@
             <p>
             <p>Mot de passe</p>
             <input type="password" id="pass" name="pass" placeholder="Votre mot de passe..." />
+
+            <?php if ($_GET['error'] == "incorrect_password") { ?>
+                <p id="incorrect_password">Identifiants incorrects</p>
+            <?php } ?>
+
             </p>
+
             <input type="submit" id="btn" value="Connexion" /><br>
             <a href="signin.php">Créer un compte</a>
+
+
     </div>
     </form>
     </div>
