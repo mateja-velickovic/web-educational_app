@@ -7,24 +7,25 @@ include "database.php";
 $username = $_POST['user'];
 $password = $_POST['pass'];
 
-$sql = "SELECT * FROM t_user WHERE useUsername = :username AND usePassword = :password";
-
+$sql = "SELECT * FROM t_user WHERE useUsername = :username";
 $result = $pdo->prepare($sql);
-
-// Prévention des injections SQL avec les paramètres préparés
 $result->bindParam(':username', $username);
-$result->bindParam(':password', $password);
-
 $result->execute();
 
 if ($result->rowCount() == 0) {
-    $sql_create = "INSERT INTO `t_user`(`useUsername`, `usePassword`, `fkRole`) VALUES (?,?,1)";
-
+    $sql_create = "INSERT INTO `t_user`(`useUsername`, `usePassword`, `fkRole`) VALUES (?, ?, 1)";
     $result_create = $pdo->prepare($sql_create);
-    $c_password = password_hash($password, PASSWORD_DEFAULT);
-    $result_create->execute([$username, $c_password]);
 
-    header("Location: ../login.php");
+    $c_password = password_hash($password, PASSWORD_DEFAULT);
+
+    if ($result_create->execute([$username, $c_password])) {
+        header("Location: ../login.php?success=account_created");
+        exit();
+    } else {
+        header("Location: ../signin.php?error=registration_failed");
+        exit();
+    }
 } else {
-    header("Location: ../signin.php");
+    header("Location: ../signin.php?error=account_exists");
+    exit();
 }

@@ -32,6 +32,10 @@
             <input type="password" id="pass" name="pass" placeholder="Votre mot de passe..." />
             </p>
 
+            <?php if (isset($_GET['error']) && $_GET['error'] == "account_denied") { ?>
+                <p id="error">Un utilisateur à ce nom existe déjà.</p>
+            <?php } ?>
+
             <input type="submit" id="btn" value="Créer mon compte" />
         </form>
     </div>

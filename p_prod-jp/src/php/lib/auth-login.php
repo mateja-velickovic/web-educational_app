@@ -7,7 +7,6 @@ include "database.php";
 $username = $_POST['user'];
 $password = $_POST['pass'];
 
-// Requête pour vérifier qu'un utilisateur existe à ce nom (nom unique)
 $sql = "SELECT * FROM t_user WHERE useUsername = :username";
 $result = $pdo->prepare($sql);
 $result->bindParam(':username', $username);
@@ -16,7 +15,6 @@ $result->execute();
 if ($result->rowCount() > 0) {
     $user = $result->fetch();
 
-    // Le
     if (password_verify($password, $user['usePassword'])) {
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $user['useUsername'];
@@ -29,6 +27,6 @@ if ($result->rowCount() > 0) {
         exit();
     }
 } else {
-    header("Location: ../login.php?error=incorrect_password");
+    header("Location: ../login.php?error=user_not_found");
     exit();
 }
