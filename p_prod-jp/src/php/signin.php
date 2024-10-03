@@ -21,7 +21,8 @@
     </header>
 
     <div id="form">
-        <form name="login" action="lib/auth-login.php" onsubmit="return validation()" method="POST">
+        <form name="login" action="lib/auth-signin.php" onsubmit="return validation()" method="POST">
+            <h2>Création d'un nouveau compte</h2><br>
             <p>
             <p>Nom d'utilisateur</p>
             <input type="text" id="user" name="user" placeholder="Votre nom d'utilisateur..." />
@@ -30,10 +31,9 @@
             <p>Mot de passe</p>
             <input type="password" id="pass" name="pass" placeholder="Votre mot de passe..." />
             </p>
-            <input type="submit" id="btn" value="Connexion" /><br>
-            <a href="signin.php">Créer un compte</a>
-    </div>
-    </form>
+
+            <input type="submit" id="btn" value="Créer mon compte" />
+        </form>
     </div>
     <script>
         function validation() {

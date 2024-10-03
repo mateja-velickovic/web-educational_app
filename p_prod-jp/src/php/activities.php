@@ -1,7 +1,7 @@
 <?php
 function getInscriptionsCount($pdo, $idActivite)
 {
-    $sql = "SELECT COUNT(*) AS insc FROM t_inscription WHERE fkActivite = :id";
+    $sql = "SELECT COUNT(*) AS insc FROM t_registration WHERE fkActivity = :id";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':id', $idActivite, PDO::PARAM_INT);
@@ -10,5 +10,10 @@ function getInscriptionsCount($pdo, $idActivite)
     $count = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $count['insc'];
+}
+
+function hasUserJoined($pdo, $idUser)
+{
+
 }
 ?>

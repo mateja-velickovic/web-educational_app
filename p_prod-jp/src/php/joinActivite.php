@@ -14,7 +14,7 @@ if ($_POST['id'] == null) {
 } else {
 
     if (isset($pdo)) {
-        $getActQuery = "SELECT * FROM t_activite WHERE idActivite = '$_POST[id]'";
+        $getActQuery = "SELECT * FROM t_activity WHERE idActivite = '$_POST[id]'";
         $getAct = $pdo->prepare($getActQuery);
         $getAct->execute();
         $actResult = $getAct->fetchAll(PDO::FETCH_ASSOC);
@@ -24,10 +24,10 @@ if ($_POST['id'] == null) {
 
     foreach ($actResult as $a) {
         ?>
-        <p>Vous avez chosi <?php echo $a['actLibelle'] ?> qui aura lieu le <?php echo $a['actDate'] ?> à
-            <?php echo $a['actLieu'] ?>.
-        </p>
-        <?php
+                <p>Vous avez chosi <?php echo $a['actName'] ?> qui aura lieu le <?php echo $a['actDate'] ?> à
+                    <?php echo $a['actPlace'] ?>.
+                </p>
+                <?php
     }
 
 }

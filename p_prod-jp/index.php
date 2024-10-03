@@ -55,13 +55,13 @@ include "src/php/lib/database.php";
 
                         <?php
                         $inscriptions = getInscriptionsCount($pdo, $row['idActivite']);
-                        $hasUserJoined = hasUserJoined($pdo, $id['idActivite']);
+                        // $hasUserJoined = hasUserJoined($pdo, $id['idActivite']);
                         ?>
 
-                        <p><?php echo $row['actLibelle'] ?></p>
+                        <p><?php echo $row['actName'] ?></p>
                         <p><?php echo $row['actDate'] ?></p>
-                        <p><?php echo $inscriptions ?>/<?php echo $row['actCapacite'] ?> place(s) restante(s)</p>
-                        <p><?php echo $row['actLieu'] ?></p>
+                        <p><?php echo $inscriptions ?>/<?php echo $row['actCapacity'] ?> place(s) restante(s)</p>
+                        <p><?php echo $row['actPlace'] ?></p>
 
                         <form action="src/php/joinActivite.php" method="POST">
                             <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
