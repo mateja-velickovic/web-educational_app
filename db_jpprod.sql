@@ -100,7 +100,7 @@ INSERT INTO `t_role` (`idRole`, `rolName`) VALUES
 CREATE TABLE `t_user` (
   `idUser` int NOT NULL,
   `useUsername` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `usePassword` text NOT NULL,
+  `usePassword` varchar(255) NOT NULL,
   `fkRole` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
