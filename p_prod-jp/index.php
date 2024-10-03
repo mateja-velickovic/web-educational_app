@@ -63,10 +63,17 @@ include "src/php/lib/database.php";
                         <p><?php echo $inscriptions ?>/<?php echo $row['actCapacity'] ?> place(s) restante(s)</p>
                         <p><?php echo $row['actPlace'] ?></p>
 
-                        <form action="src/php/joinActivite.php" method="POST">
-                            <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
-                            <button type="submit">REJOINDRE<br>L'ACTIVITÉ</button>
-                        </form>
+                        <?php if ($inscriptions >= $row['actCapacity']) { ?>
+                            <form action="src/php/joinActivite.php" method="POST">
+                                <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
+                                <button>SE METTRE<br>EN ATTENTE</button>
+                            </form>
+                        <?php } else { ?>
+                            <form action="src/php/joinActivite.php" method="POST">
+                                <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
+                                <button type="submit">REJOINDRE<br>L'ACTIVITÉ</button>
+                            </form>
+                        <?php } ?>
                     </div>
 
                 <?php } ?>

@@ -1,12 +1,13 @@
 <?php
 session_start();
-
 require "../config.php";
 include "database.php";
 
-$username = $_POST['user'];
-$password = $_POST['pass'];
+// Récupération du nom d'utilisateur et mot de passe
+$username = trim($_POST['user']);
+$password = trim($_POST['pass']);
 
+// Rechercher si l'utilisateur n'existe pas
 $sql = "SELECT * FROM t_user WHERE useUsername = :username";
 $result = $pdo->prepare($sql);
 $result->bindParam(':username', $username);

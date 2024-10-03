@@ -24,10 +24,10 @@ if ($_POST['id'] == null) {
 
     foreach ($actResult as $a) {
         ?>
-                <p>Vous avez chosi <?php echo $a['actName'] ?> qui aura lieu le <?php echo $a['actDate'] ?> à
-                    <?php echo $a['actPlace'] ?>.
-                </p>
-                <?php
+        <p>Vous avez chosi <?php echo $a['actName'] ?> qui aura lieu le <?php echo $a['actDate'] ?> à
+            <?php echo $a['actPlace'] ?>.
+        </p>
+        <?php
     }
 
 }

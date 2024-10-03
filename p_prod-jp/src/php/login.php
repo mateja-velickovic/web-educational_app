@@ -30,42 +30,27 @@
             <p>Mot de passe</p>
             <input type="password" id="pass" name="pass" placeholder="Votre mot de passe..." />
 
+            <!-- Si le mot de passe est incorrect -->
             <?php if (isset($_GET['error']) && $_GET['error'] == "incorrect_password") { ?>
-                <p id="error">Identifiants incorrects</p>
+                <p id="error">Identifiants incorrects.</p>
             <?php } ?>
 
+            <!-- Si l'utilisateur n'existe pas -->
+            <?php if (isset($_GET['error']) && $_GET['error'] == "user_not_found") { ?>
+                <p id="error">Utilisateur inexistant.</p>
+            <?php } ?>
+
+            <!-- Message de succès -->
             <?php if (isset($_GET['success']) && $_GET['success'] == "account_created") { ?>
                 <p id="success">Compte créé avec succès. Connectez-vous.</p>
             <?php } ?>
-
             </p>
 
             <input type="submit" id="btn" value="Connexion" /><br>
             <a href="signin.php">Créer un compte</a>
-
     </div>
     </form>
     </div>
-    <script>
-        function validation() {
-            var id = document.login.user.value;
-            var ps = document.login.pass.value;
-            if (id.length == "" && ps.length == "") {
-                alert("Veuillez remplir les champs avant d'envoyer le formulaire.")
-                return false;
-            }
-            else {
-                if (id.length == "") {
-                    alert("Veuillez saisir un nom d'utilisateur.");
-                    return false;
-                }
-                if (ps.length == "") {
-                    alert("Veuillez saisir un mot de passe.");
-                    return false;
-                }
-            }
-        }  
-    </script>
 </body>
 
 </html>
