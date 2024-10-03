@@ -55,10 +55,10 @@ include "src/php/lib/database.php";
 
                         <?php
                         $inscriptions = getInscriptionsCount($pdo, $row['idActivite']);
-                        // $hasUserJoined = hasUserJoined($pdo, $id['idActivite']);
+                        $hasUserJoined = hasUserJoined($pdo, $row['idActivite'], $_SESSION['userid']);
                         ?>
 
-                        <p><?php echo $row['actName'] ?></p>
+                        <p style="font-weight: bold;"><?php echo $row['actName'] ?></p>
                         <p><?php echo $row['actDate'] ?></p>
                         <p><?php echo $inscriptions ?>/<?php echo $row['actCapacity'] ?> place(s) restante(s)</p>
                         <p><?php echo $row['actPlace'] ?></p>
@@ -66,13 +66,18 @@ include "src/php/lib/database.php";
                         <?php if ($inscriptions >= $row['actCapacity']) { ?>
                             <form action="src/php/joinActivite.php" method="POST">
                                 <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
-                                <button>SE METTRE<br>EN ATTENTE</button>
+                                <button id="waiting_list">SE METTRE<br>EN ATTENTE</button>
                             </form>
+                        <?php } else if ($hasUserJoined >= 1) { ?>
+                                <form action="src/php/joinActivite.php" method="POST">
+                                    <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
+                                    <button id="leave_activity">QUITTER<br>L'ACTIVITÉ</button>
+                                </form>
                         <?php } else { ?>
-                            <form action="src/php/joinActivite.php" method="POST">
-                                <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
-                                <button type="submit">REJOINDRE<br>L'ACTIVITÉ</button>
-                            </form>
+                                <form action="src/php/joinActivite.php" method="POST">
+                                    <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
+                                    <button type="submit">REJOINDRE<br>L'ACTIVITÉ</button>
+                                </form>
                         <?php } ?>
                     </div>
 
