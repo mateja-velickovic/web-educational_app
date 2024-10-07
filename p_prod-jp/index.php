@@ -63,7 +63,7 @@ include "src/php/lib/database.php";
                         <p><?php echo $inscriptions ?>/<?php echo $row['actCapacity'] ?> place(s) restante(s)</p>
                         <p><?php echo $row['actPlace'] ?></p>
 
-                        <?php if ($inscriptions >= $row['actCapacity']) { ?>
+                        <?php if ($inscriptions >= $row['actCapacity'] && $hasUserJoined < 1) { ?>
                             <form action="src/php/joinActivite.php" method="POST">
                                 <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
                                 <button id="waiting_list">SE METTRE<br>EN ATTENTE</button>
