@@ -89,7 +89,8 @@ CREATE TABLE `t_role` (
 --
 
 INSERT INTO `t_role` (`idRole`, `rolName`) VALUES
-(1, 'user');
+(1, 'user'),
+(2, 'admin');
 
 -- --------------------------------------------------------
 
