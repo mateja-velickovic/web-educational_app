@@ -9,7 +9,10 @@
  */
 function isUserAdmin(PDO $pdo, int $idUser): bool
 {
-    $sql = "SELECT * FROM t_user WHERE idUser = :id";
+    $sql = "SELECT r.rolName 
+            FROM t_user AS u
+            JOIN t_role AS r ON u.fkRole = r.idRole
+            WHERE u.idUser = :id";
 
     $query = $pdo->prepare($sql);
     $query->bindParam(':id', $idUser, PDO::PARAM_INT);
@@ -21,6 +24,5 @@ function isUserAdmin(PDO $pdo, int $idUser): bool
         return false;
     }
 
-
-    return $result == "admin";
+    return $result['rolName'] === 'admin';
 }

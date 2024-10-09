@@ -71,21 +71,15 @@ header .login:hover,
 }
 
 header .logout {
-  text-decoration: none;
-  color: white;
   background-color: var(--main-red);
-  padding: 5px 10px 5px 10px;
-  font-size: 1rem;
-  border-radius: 20px;
 }
 
 header .acc {
-  text-decoration: none;
-  color: white;
   background-color: var(--main-orange);
-  padding: 5px 10px 5px 10px;
-  font-size: 1rem;
-  border-radius: 20px;
+}
+
+header .btn-admin {
+  background-color: var(--main-blue);
 }
 
 header .links {
@@ -175,16 +169,16 @@ main {
 }
 
 .activite {
-  position: relative; /* Nécessaire pour le positionnement absolu du pseudo-élément */
+  position: relative;
   margin: 15px;
   color: aliceblue;
   border-radius: 15px;
   padding: 10px 0px 70px 0px;
-  overflow: hidden; /* Pour cacher les débordements */
+  overflow: hidden;
 }
 
 .activite::before {
-  content: ""; /* Nécessaire pour afficher le pseudo-élément */
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -198,8 +192,8 @@ main {
 
 .activite > p,
 h2 {
-  position: relative; /* Positionner le contenu au-dessus du pseudo-élément */
-  z-index: 1; /* S'assurer que le contenu est au-dessus de l'image floue */
+  position: relative;
+  z-index: 1;
 }
 
 .activite button {
@@ -281,6 +275,24 @@ p {
 #form #success {
   color: rgb(32, 161, 0);
   margin-bottom: 10px;
+}
+
+/* Administration page */
+.admin {
+  margin: auto;
+  margin-top: 40px;
+}
+
+.admin thead tr th {
+  background-color: var(--main-blue);
+  color: white;
+}
+
+.admin tbody tr td {
+  background-color: rgba(73, 73, 73, 0.664);
+  color: white;
+  margin-right: 10px;
+  padding: 5px;
 }
 
 /* Footer */

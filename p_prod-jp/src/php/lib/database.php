@@ -15,9 +15,9 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 try {
 
     $actQuery = "SELECT * FROM t_activity";
-    $getActivities = $pdo->prepare($actQuery);
-    $getActivities->execute();
-    $result = $getActivities->fetchAll(PDO::FETCH_ASSOC);
+    $getactivities = $pdo->prepare($actQuery);
+    $getactivities->execute();
+    $result = $getactivities->fetchAll(PDO::FETCH_ASSOC);
 
 } catch (PDOException $e) {
     echo "Erreur de connexion : " . $e->getMessage();

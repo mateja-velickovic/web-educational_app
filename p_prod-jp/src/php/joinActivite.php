@@ -3,7 +3,7 @@ session_start();
 
 include "lib/config.php";
 include "lib/database.php";
-include "activities.php";
+include "functions/activities.php";
 
 
 $pdo = new PDO($dsn, $user, $password);

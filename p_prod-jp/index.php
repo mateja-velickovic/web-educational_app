@@ -2,9 +2,7 @@
 session_start();
 require "src/php/lib/config.php";
 require "src/php/lib/database.php";
-require "src/php/administration.php";
-
-
+require "src/php/functions/administration.php";
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +24,9 @@ require "src/php/administration.php";
                 <a class="login" href="src/php/login.php">SE CONNECTER AU SITE</a>
             <?php } else { ?>
                 <p id="connected">Connecté en tant que <?php echo $_SESSION['username'] ?></p>
-                <a class="logout" href="src/php/logout.php">SE DÉCONNECTER</a>
+                <a class="logout" href="src/php/functions/logout.php">SE DÉCONNECTER</a>
                 <?php if (isUserAdmin($pdo, $_SESSION['userid'])) { ?>
-                    <a class="btn-admin" href="src/php/logout.php">PAGE D'ADMINISTRATION</a>
+                    <a class="btn-admin" href="src/php/admin.php">PAGE D'ADMINISTRATION</a>
                 <?php } ?>
             <?php } ?>
         </div>
@@ -38,7 +36,7 @@ require "src/php/administration.php";
         <main>
             <div class="grp-activite">
                 <?php
-                require "./src/php/activities.php";
+                require "./src/php/functions/activities.php";
                 foreach ($result as $row):
                     $inscriptions = getInscriptionsCount($pdo, $row['idActivite']);
                     $hasUserJoined = hasUserJoined($pdo, $row['idActivite'], $_SESSION['userid']);
