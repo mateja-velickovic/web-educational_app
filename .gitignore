@@ -1,3 +1,2 @@
-loop.loo
-.env
-.github/
+*.loo
+*.env
