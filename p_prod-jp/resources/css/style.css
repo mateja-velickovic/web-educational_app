@@ -11,8 +11,8 @@
 :root {
   --main-blue: rgb(9, 21, 133);
   --second-blue: rgb(180, 187, 255);
-  --main-green: rgb(13, 170, 78);
-  --main-red: rgb(170, 13, 39);
+  --main-green: rgb(15, 190, 88);
+  --main-red: rgb(182, 15, 43);
   --main-orange: rgb(192, 85, 13);
 }
 
@@ -49,7 +49,8 @@ header #connected {
 
 header .login,
 .logout,
-.acc {
+.acc,
+.btn-admin {
   text-decoration: none;
   color: white;
   background-color: var(--main-green);
@@ -62,7 +63,8 @@ header .login,
 
 header .login:hover,
 .logout:hover,
-.acc:hover {
+.acc:hover,
+.btn-admin:hover {
   transition: 0.1s ease;
   box-shadow: none;
   font-size: 1.05rem;
@@ -173,13 +175,31 @@ main {
 }
 
 .activite {
-  background: url("../images/logo.png");
+  position: relative; /* Nécessaire pour le positionnement absolu du pseudo-élément */
   margin: 15px;
   color: aliceblue;
   border-radius: 15px;
   padding: 10px 0px 70px 0px;
-  box-shadow: 1px 1px 5px rgb(107, 107, 107);
-  position: relative;
+  overflow: hidden; /* Pour cacher les débordements */
+}
+
+.activite::before {
+  content: ""; /* Nécessaire pour afficher le pseudo-élément */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../images/etml.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(0.5px);
+}
+
+.activite > p,
+h2 {
+  position: relative; /* Positionner le contenu au-dessus du pseudo-élément */
+  z-index: 1; /* S'assurer que le contenu est au-dessus de l'image floue */
 }
 
 .activite button {
@@ -189,10 +209,16 @@ main {
   font-size: 1rem;
   width: 100%;
   border: 0;
-  border-radius: 0px 0px 15px 15px;
   position: absolute;
   bottom: 0;
   left: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.activite button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .activite h2,

@@ -1,8 +1,10 @@
 <?php
 session_start();
+require "src/php/lib/config.php";
+require "src/php/lib/database.php";
+require "src/php/administration.php";
 
-require "src/php/config.php";
-include "src/php/lib/database.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -19,70 +21,50 @@ include "src/php/lib/database.php";
 
     <header>
         <h1 id="t1">ETML - Journée Pédagogique <?php echo date("Y") ?></h1>
-        <?php if (!isset($_SESSION['loggedin'])) { ?>
-            </p>
-            <div class="log">
-            <?php } ?>
+        <div class="log">
             <?php if (!isset($_SESSION['loggedin'])) { ?>
                 <a class="login" href="src/php/login.php">SE CONNECTER AU SITE</a>
-            <?php } ?>
-            <?php if (!isset($_SESSION['loggedin'])) { ?>
-            </div>
-        <?php } ?>
-        <?php if (isset($_SESSION['loggedin'])) { ?>
-            <p id="connected">Connecté en tant que
-                <?php echo $_SESSION['username'] ?>
-            </p>
-            <?php if (isset($_SESSION['loggedin'])) { ?>
+            <?php } else { ?>
+                <p id="connected">Connecté en tant que <?php echo $_SESSION['username'] ?></p>
                 <a class="logout" href="src/php/logout.php">SE DÉCONNECTER</a>
+                <?php if (isUserAdmin($pdo, $_SESSION['userid'])) { ?>
+                    <a class="btn-admin" href="src/php/logout.php">PAGE D'ADMINISTRATION</a>
+                <?php } ?>
             <?php } ?>
-        <?php } ?>
+        </div>
     </header>
 
-    <?php if (isset($_SESSION['loggedin'])) { ?>
+    <?php if (isset($_SESSION['loggedin'])): ?>
         <main>
             <div class="grp-activite">
                 <?php
-                require "./src/php/config.php";
-                require "./src/php/lib/database.php";
                 require "./src/php/activities.php";
-                foreach ($result as $row) { ?>
+                foreach ($result as $row):
+                    $inscriptions = getInscriptionsCount($pdo, $row['idActivite']);
+                    $hasUserJoined = hasUserJoined($pdo, $row['idActivite'], $_SESSION['userid']);
+                    ?>
                     <div class="activite">
+                        <h2><?php echo htmlspecialchars($row['actName']); ?></h2>
+                        <p><?php echo htmlspecialchars($row['actDate']); ?></p>
+                        <p><?php echo htmlspecialchars($inscriptions) . '/' . htmlspecialchars($row['actCapacity']) . ' place(s) restante(s)'; ?>
+                        </p>
+                        <p><?php echo htmlspecialchars($row['actPlace']); ?></p>
 
-                        <?php
-                        $inscriptions = getInscriptionsCount($pdo, $row['idActivite']);
-                        $hasUserJoined = hasUserJoined($pdo, $row['idActivite'], $_SESSION['userid']);
-                        ?>
-
-                        <h2><?php echo $row['actName'] ?></h2>
-                        <p><?php echo $row['actDate'] ?></p>
-                        <p><?php echo $inscriptions ?>/<?php echo $row['actCapacity'] ?> place(s) restante(s)</p>
-                        <p><?php echo $row['actPlace'] ?></p>
-
-                        <?php if ($inscriptions >= $row['actCapacity'] && !$hasUserJoined) { ?>
-                            <form action="src/php/joinActivite.php" method="POST">
-                                <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
+                        <form action="src/php/joinActivite.php" method="POST">
+                            <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['idActivite']); ?>">
+                            <?php if ($inscriptions >= $row['actCapacity'] && !$hasUserJoined): ?>
                                 <button id="waiting_list">SE METTRE<br>EN ATTENTE</button>
-                            </form>
-                        <?php } else if ($hasUserJoined) { ?>
-                                <form action="src/php/joinActivite.php" method="POST">
-                                    <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
-                                    <button id="leave_activity">QUITTER<br>L'ACTIVITÉ</button>
-                                </form>
-                        <?php } else { ?>
-                                <form action="src/php/joinActivite.php" method="POST">
-                                    <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
-                                    <button type="submit">REJOINDRE<br>L'ACTIVITÉ</button>
-                                </form>
-                        <?php } ?>
+                            <?php elseif ($hasUserJoined): ?>
+                                <button id="leave_activity">QUITTER<br>L'ACTIVITÉ</button>
+                            <?php else: ?>
+                                <button type="submit">REJOINDRE<br>L'ACTIVITÉ</button>
+                            <?php endif; ?>
+                        </form>
                     </div>
-
-                <?php } ?>
+                <?php endforeach; ?>
             </div>
         </main>
-    <?php } ?>
-
-    <?php if (!isset($_SESSION['loggedin'])) { ?>
+    <?php else: ?>
         <div class="infoacc">
             <h1>Les thèmes abordés par la journée pédagogique...</h1>
             <div class="grp-info">
@@ -114,7 +96,7 @@ include "src/php/lib/database.php";
                     Prenons soin de nous pour mieux accompagner nos élèves dans leur parcours scolaire."</p>
             </div>
         </div>
-    <?php } ?>
+    <?php endif; ?>
 
     <footer>Réalisé par Velickovic Mateja - Septembre 2024</footer>
 

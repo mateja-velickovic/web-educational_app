@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include "config.php";
+include "lib/config.php";
 include "lib/database.php";
 include "activities.php";
 

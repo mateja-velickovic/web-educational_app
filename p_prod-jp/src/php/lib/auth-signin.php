@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "../config.php";
+require "config.php";
 include "database.php";
 
 // Récupération du nom d'utilisateur et mot de passe
