@@ -18,17 +18,13 @@ include "src/php/lib/database.php";
 <body>
 
     <header>
-        <p id="t1">ETML - Journée Pédagogique</p>
+        <h1 id="t1">ETML - Journée Pédagogique <?php echo date("Y") ?></h1>
         <?php if (!isset($_SESSION['loggedin'])) { ?>
-            <p id="info">Bienvenue sur le site de la Journée Pédagogique de l'ETML. Connectez-vous pour avoir accès au reste
-                du
-                site.
-            <p>
             </p>
             <div class="log">
             <?php } ?>
             <?php if (!isset($_SESSION['loggedin'])) { ?>
-                <a class="login" href="src/php/login.php">SE CONNECTER</a>
+                <a class="login" href="src/php/login.php">SE CONNECTER AU SITE</a>
             <?php } ?>
             <?php if (!isset($_SESSION['loggedin'])) { ?>
             </div>
@@ -58,17 +54,17 @@ include "src/php/lib/database.php";
                         $hasUserJoined = hasUserJoined($pdo, $row['idActivite'], $_SESSION['userid']);
                         ?>
 
-                        <p style="font-weight: bold;"><?php echo $row['actName'] ?></p>
+                        <h2><?php echo $row['actName'] ?></h2>
                         <p><?php echo $row['actDate'] ?></p>
                         <p><?php echo $inscriptions ?>/<?php echo $row['actCapacity'] ?> place(s) restante(s)</p>
                         <p><?php echo $row['actPlace'] ?></p>
 
-                        <?php if ($inscriptions >= $row['actCapacity'] && $hasUserJoined < 1) { ?>
+                        <?php if ($inscriptions >= $row['actCapacity'] && !$hasUserJoined) { ?>
                             <form action="src/php/joinActivite.php" method="POST">
                                 <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
                                 <button id="waiting_list">SE METTRE<br>EN ATTENTE</button>
                             </form>
-                        <?php } else if ($hasUserJoined >= 1) { ?>
+                        <?php } else if ($hasUserJoined) { ?>
                                 <form action="src/php/joinActivite.php" method="POST">
                                     <input type="hidden" name="id" value="<?php echo $row['idActivite'] ?>">
                                     <button id="leave_activity">QUITTER<br>L'ACTIVITÉ</button>
@@ -88,7 +84,7 @@ include "src/php/lib/database.php";
 
     <?php if (!isset($_SESSION['loggedin'])) { ?>
         <div class="infoacc">
-            <h1>La journée pédagogique en quelques phrases...</h1>
+            <h1>Les thèmes abordés par la journée pédagogique...</h1>
             <div class="grp-info">
                 <img src="resources/images/amp.png" alt="">
                 <p>"L'enseignement évolue constamment, et il est essentiel d'adopter des méthodes innovantes pour capter
@@ -120,7 +116,7 @@ include "src/php/lib/database.php";
         </div>
     <?php } ?>
 
-
+    <footer>Réalisé par Velickovic Mateja - Septembre 2024</footer>
 
 </body>
 

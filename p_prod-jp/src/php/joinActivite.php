@@ -1,33 +1,48 @@
 <?php
+session_start();
 
 include "config.php";
 include "lib/database.php";
+include "activities.php";
 
 
 $pdo = new PDO($dsn, $user, $password);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if ($_POST['id'] == null) {
-    // Redirect the user if id is null
-    header('Location: ../../../index.php');
+
+$hasUserJoined = hasUserJoined($pdo, $_POST['id'], $_SESSION['userid']);
+$isActivityFull = isActivityFull($pdo, $_POST['id']);
+
+
+if (isset($pdo)) {
+    // Si l'utilisateur n'a pas rejoint l'activité alors
+    if (!$hasUserJoined && !$isActivityFull) {
+        $joinActQuery = "INSERT INTO `t_registration` (`fkUser`, `fkActivity`) VALUES (:fkUser, :fkActivity)";
+
+        $joinAct = $pdo->prepare($joinActQuery);
+
+        $joinAct->bindParam(':fkUser', $_SESSION['userid'], PDO::PARAM_INT);
+        $joinAct->bindParam(':fkActivity', $_POST['id'], PDO::PARAM_INT);
+
+        // Exécuter la requête
+        $joinAct->execute();
+
+    }
+    // Si l'utilisateur a déjà rejoint l'activité alors
+    if ($hasUserJoined) {
+        $leaveActQuery = "DELETE FROM `t_registration` WHERE fkUser = :fkUser AND fkActivity = :fkActivity";
+
+        $leaveAct = $pdo->prepare($leaveActQuery);
+
+        $leaveAct->bindParam(':fkUser', $_SESSION['userid'], PDO::PARAM_INT);
+        $leaveAct->bindParam(':fkActivity', $_POST['id'], PDO::PARAM_INT);
+
+        // Exécuter la requête
+        $leaveAct->execute();
+    }
+    header("Location: ../../../index.php");
+
 } else {
-
-    if (isset($pdo)) {
-        $getActQuery = "SELECT * FROM t_activity WHERE idActivite = '$_POST[id]'";
-        $getAct = $pdo->prepare($getActQuery);
-        $getAct->execute();
-        $actResult = $getAct->fetchAll(PDO::FETCH_ASSOC);
-    } else {
-        echo "Connecteur PDO non-trouvé.";
-    }
-
-    foreach ($actResult as $a) {
-        ?>
-        <p>Vous avez chosi <?php echo $a['actName'] ?> qui aura lieu le <?php echo $a['actDate'] ?> à
-            <?php echo $a['actPlace'] ?>.
-        </p>
-        <?php
-    }
-
+    echo "Connecteur PDO non trouvé.";
 }
