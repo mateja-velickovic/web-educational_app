@@ -287,11 +287,6 @@ p {
   border-spacing: 0;
 }
 
-.admin h2 {
-  background-color: red;
-  padding: 200px;
-}
-
 .admin thead tr th {
   background-color: var(--main-blue);
   color: white;
@@ -308,13 +303,17 @@ p {
   width: 25px;
 }
 
-.admin tbody tr #rm button {
+.admin tbody tr button {
   background: none;
   border: none;
   font: inherit;
   cursor: pointer;
 }
 
+/* Edit Activity */
+.admin form.editact {
+  background-color: red;
+}
 
 /* Footer */
 footer {

@@ -2,6 +2,11 @@
 session_start();
 require "./functions/activities.php";
 require "./functions/administration.php";
+
+// If the user isn't an admin, redirect on the home page
+if ($_SESSION['userrole'] != 2) {
+    header('Location: ../../../index.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,23 +35,24 @@ require "./functions/administration.php";
         <?php if (Count($result) == 0) { ?>
             <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Aucune activité n'est actuellement créée.
             </h2>
-        <?php } else {
+        <?php } else { ?>
+
+            <!-- Titles of activities array -->
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Date</th>
+                    <th>Lieu</th>
+                    <th>Capacité</th>
+                    <th> </th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <?php
             foreach ($result as $row) {
                 $registrations = getInscriptionsCount($pdo, $row['idActivite']); ?>
-
-                <!-- Titles of activities array -->
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nom</th>
-                        <th>Date</th>
-                        <th>Lieu</th>
-                        <th>Capacité</th>
-                        <th> </th>
-                        <th> </th>
-                        <th> </th>
-                    </tr>
-                </thead>
 
                 <tbody>
                     <tr>
@@ -63,12 +69,15 @@ require "./functions/administration.php";
                                         alt="Corbeille pour la supression d'une activité dans la page d'administration"></button>
                             </td>
                         </form>
+
                         <!-- Edit the activity -->
-                        <!-- <form action="src/php/functions/administration.php" method="POST">
-                        <input type="hidden" name="edit" value="<?php echo $row['idActivite']; ?>">
-                        <td id="ed"><a href=""><img src="../../resources/images/ed.png"
-                                    alt="Stylo pour la modification d'une activité dans la page d'administration"></a></td>
-                    </form> -->
+                        <form action="./edit.php" method="POST">
+                            <input type="hidden" name="edit" value="<?php echo $row['idActivite']; ?>">
+                            <td id="ed"><button type="submit"><img src="../../resources/images/ed.png"
+                                        alt="Stylo pour la modification d'une activité dans la page d'administration"></button>
+                            </td>
+                        </form>
+
                     </tr>
                 <?php }
         } ?>

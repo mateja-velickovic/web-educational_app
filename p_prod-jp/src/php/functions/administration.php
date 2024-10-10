@@ -53,4 +53,6 @@ if (isset($_POST['delete'])) {
     require "../lib/database.php";
 
     deleteActivity($pdo);
+} else if (isset($_POST['delete'])) {
+
 }

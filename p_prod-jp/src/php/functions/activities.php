@@ -68,3 +68,23 @@ function hasUserJoined(PDO $pdo, int $idActivity, int $idUser)
 
     return $result['count'] > 0;
 }
+
+
+/**
+ * Get the activity by an id.
+ *
+ * @param PDO $pdo The database connection object.
+ * @param int $idActivity The ID of the activity.
+ */
+function getActivityByID(PDO $pdo, int $idActivity)
+{
+    $sql = "SELECT * FROM t_activity WHERE idActivite = :idActivite";
+
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':idActivite', $idActivity, PDO::PARAM_INT);
+    $query->execute();
+
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+}
