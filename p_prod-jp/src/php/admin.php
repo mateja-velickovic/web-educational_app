@@ -25,47 +25,53 @@ require "./functions/administration.php";
     <?php require "lib/database.php"; ?>
 
     <table class="admin">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Date</th>
-                <th>Lieu</th>
-                <th>Capacité</th>
-                <th> </th>
-                <th> </th>
-                <th> </th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($result as $row) {
-                $registrations = getInscriptionsCount($pdo, $row['idActivite']);
-                ?>
 
-                <tr>
-                    <td><?php echo $row['idActivite'] ?></td>
-                    <td><?php echo $row['actName']; ?></td>
-                    <td><?php echo $row['actDate']; ?></td>
-                    <td><?php echo $row['actPlace']; ?></td>
-                    <td><?php echo $registrations . '/' . $row['actCapacity'] ?></td>
+        <!-- If any activity exist -->
+        <?php if (Count($result) == 0) { ?>
+            <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Aucune activité n'est actuellement créée.
+            </h2>
+        <?php } else {
+            foreach ($result as $row) {
+                $registrations = getInscriptionsCount($pdo, $row['idActivite']); ?>
 
-                    <!-- Delete the activity -->
-                    <form action="./functions/administration.php" method="POST">
-                        <input type="hidden" name="delete" value="<?php echo $row['idActivite']; ?>">
-                        <td id="rm"><button type="submit"><img src="../../resources/images/rm.png"
-                                    alt="Corbeille pour la supression d'une activité dans la page d'administration"></button>
-                        </td>
-                    </form>
-                    <!-- Edit the activity -->
-                    <!-- <form action="src/php/functions/administration.php" method="POST">
+                <!-- Titles of activities array -->
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Date</th>
+                        <th>Lieu</th>
+                        <th>Capacité</th>
+                        <th> </th>
+                        <th> </th>
+                        <th> </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><?php echo $row['idActivite'] ?></td>
+                        <td><?php echo $row['actName']; ?></td>
+                        <td><?php echo $row['actDate']; ?></td>
+                        <td><?php echo $row['actPlace']; ?></td>
+                        <td><?php echo $registrations . '/' . $row['actCapacity'] ?></td>
+
+                        <!-- Delete the activity -->
+                        <form action="./functions/administration.php" method="POST">
+                            <input type="hidden" name="delete" value="<?php echo $row['idActivite']; ?>">
+                            <td id="rm"><button type="submit"><img src="../../resources/images/rm.png"
+                                        alt="Corbeille pour la supression d'une activité dans la page d'administration"></button>
+                            </td>
+                        </form>
+                        <!-- Edit the activity -->
+                        <!-- <form action="src/php/functions/administration.php" method="POST">
                         <input type="hidden" name="edit" value="<?php echo $row['idActivite']; ?>">
                         <td id="ed"><a href=""><img src="../../resources/images/ed.png"
                                     alt="Stylo pour la modification d'une activité dans la page d'administration"></a></td>
                     </form> -->
-                </tr>
-
-
-            <?php } ?>
+                    </tr>
+                <?php }
+        } ?>
 
         </tbody>
     </table>

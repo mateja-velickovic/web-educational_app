@@ -287,6 +287,11 @@ p {
   border-spacing: 0;
 }
 
+.admin h2 {
+  background-color: red;
+  padding: 200px;
+}
+
 .admin thead tr th {
   background-color: var(--main-blue);
   color: white;
