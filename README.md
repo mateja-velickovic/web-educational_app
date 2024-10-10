@@ -1,24 +1,27 @@
-# 🧑🏽‍🏫 Create a web application for teacher registration to professional development days
+# 🧑🏽‍🏫 Créer une application web pour l'inscription des enseignants aux journées pédagogiques
 
-## Objective
-- Develop a functional web application.
-- Display the workshops offered for the PD with the number of available seats.
-- If the workshop is full, allow users to join the waiting list.
-- View the location, date, and time of the workshop.
-- Option to unsubscribe from a workshop.
+## Objectif
+- Développer une application web fonctionnelle.
+- Afficher les ateliers proposés pour la journée pédagogique avec le nombre de places disponibles.
+- Si l'atelier est complet, permettre aux utilisateurs de rejoindre la liste d'attente.
+- Visualiser l'emplacement, la date et l'heure de l'atelier.
+- Option de se désinscrire d'un atelier.
 
-### As a site administrator:
-- Manage events (create, delete, modify).
-- Modify participants (exclude, add).
+### En tant qu'administrateur du site :
+- Gérer les événements (créer, supprimer, modifier).
+- Modifier les participants (exclure, ajouter).
 
-## Technologies used
-The following technologies will be used during this project:
+## Technologies utilisées
+Les technologies suivantes seront utilisées dans ce projet :
 - Docker
 - HTML5
 - CSS3
 - PHP
 - SQL
 
-## Advanced features
-- Be able to log in to the application via Office 365.
-
+## Installation
+- Avoir [Docker](https://docs.docker.com/engine/install/) de lancé sur son poste
+- Télécharger le repo `git clone https://github.com/mateja-velickovic/web-educational_app.git`
+- Se rendre dans le répertoire `cd web-educational_app`
+- Initaliser le projet `sh init.sh`
+- Profiter de l'application
