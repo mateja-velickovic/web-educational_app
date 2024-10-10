@@ -96,7 +96,7 @@ require "src/php/functions/administration.php";
         </div>
     <?php endif; ?>
 
-    <footer>Réalisé par Velickovic Mateja - Septembre 2024</footer>
+    <footer>Réalisé par Velickovic Mateja - Septembre 2024 - Icônes <a href="www.flaticon.com">Flaticon</a></footer>
 
 </body>
 

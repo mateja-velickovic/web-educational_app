@@ -44,6 +44,8 @@
         </form>
     </div>
 
+    <footer>Réalisé par Velickovic Mateja - Septembre 2024 - Icônes <a href="www.flaticon.com">Flaticon</a></footer>
+
     <script>
         function validation() {
             var username = document.login.user.value.trim();

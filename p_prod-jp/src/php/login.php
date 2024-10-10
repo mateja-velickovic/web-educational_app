@@ -46,6 +46,9 @@
             <p><a href="signin.php">Créer un compte</a></p>
         </form>
     </div>
+    
+    <footer>Réalisé par Velickovic Mateja - Septembre 2024 - Icônes <a href="www.flaticon.com">Flaticon</a></footer>
+
 </body>
 
 </html>

@@ -43,16 +43,47 @@ function deleteActivity(PDO $pdo): void
         $query = $pdo->prepare($sql);
         $query->bindParam(':idActivite', $_POST['delete'], PDO::PARAM_INT);
         $query->execute();
-        header('Location: ../admin.php');
-    } else {
-        echo "Vous n'êtes pas autorisé à effectuer cette action";
     }
+    header('Location: ../admin.php');
 }
+
+/**
+ * Create a new activity.
+ *
+ * @param PDO $pdo The database connection object.
+ */
+function createActivity(PDO $pdo): void
+{
+    session_start();
+
+    if ($_SESSION['userrole'] == 2) {
+        $sql = "INSERT INTO t_activity (actName, actDate, actPlace, actCapacity) 
+                VALUES (:name, :date, :place, :capacity)";
+
+        // Préparer la requête
+        $query = $pdo->prepare($sql);
+
+        $query->bindParam(':name', $_POST['name'], PDO::PARAM_STR);
+        $query->bindParam(':date', $_POST['date'], PDO::PARAM_STR);
+        $query->bindParam(':place', $_POST['place'], PDO::PARAM_STR);
+        $query->bindParam(':capacity', $_POST['capacity'], PDO::PARAM_INT);
+
+        $query->execute();
+
+    }
+    header('Location: ../admin.php');
+}
+
+
 
 if (isset($_POST['delete'])) {
     require "../lib/database.php";
 
     deleteActivity($pdo);
-} else if (isset($_POST['delete'])) {
+}
 
+if (isset($_POST['add'])) {
+    require "../lib/database.php";
+
+    createActivity($pdo);
 }

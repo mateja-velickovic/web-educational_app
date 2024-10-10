@@ -190,7 +190,7 @@ main {
   filter: blur(0.5px);
 }
 
-.activite>p,
+.activite > p,
 h2 {
   position: relative;
   z-index: 1;
@@ -310,6 +310,22 @@ p {
   cursor: pointer;
 }
 
+.insert-act {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.insert-act img {
+  width: 25px;
+}
+
+.insert-act button {
+  border: 0;
+  cursor: pointer;
+}
 /* Edit Activity */
 .admin form.editact {
   background-color: red;

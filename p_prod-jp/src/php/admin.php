@@ -82,11 +82,28 @@ if ($_SESSION['userrole'] != 2) {
                 <?php }
         } ?>
 
+
         </tbody>
+
     </table>
 
+    <form class="insert-act" action="./functions/administration.php" method="POST">
 
-    </div>
+        <input type="hidden" name="add">
+
+        <input type="text" name="name" placeholder="Nom de l'activité" maxlength="30" required>
+        <input type="datetime-local" name="date">
+        <input type="text" name="place" placeholder="Lieu" maxlength="50" required>
+        <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000" required>
+
+        <button type="submit">
+            <img src="../../resources/images/add.png" alt="Flèche verte pour créer une nouvelle activité.">
+        </button>
+
+    </form>
+
+    <footer>Réalisé par Velickovic Mateja - Septembre 2024 - Icônes <a href="www.flaticon.com">Flaticon</a></footer>
+
 </body>
 
 </html>
