@@ -20,6 +20,7 @@ if ($result->rowCount() > 0) {
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $user['useUsername'];
         $_SESSION['userid'] = $user['idUser'];
+        $_SESSION['userrole'] = $user['fkRole'];
 
         header("Location: ../../../index.php");
         exit();

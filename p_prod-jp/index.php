@@ -42,14 +42,14 @@ require "src/php/functions/administration.php";
                     $hasUserJoined = hasUserJoined($pdo, $row['idActivite'], $_SESSION['userid']);
                     ?>
                     <div class="activite">
-                        <h2><?php echo htmlspecialchars($row['actName']); ?></h2>
-                        <p><?php echo htmlspecialchars($row['actDate']); ?></p>
-                        <p><?php echo htmlspecialchars($inscriptions) . '/' . htmlspecialchars($row['actCapacity']) . ' place(s) restante(s)'; ?>
+                        <h2><?php echo $row['actName']; ?></h2>
+                        <p><?php echo $row['actDate']; ?></p>
+                        <p><?php echo $inscriptions . '/' . $row['actCapacity'] . ' place(s) restante(s)'; ?>
                         </p>
-                        <p><?php echo htmlspecialchars($row['actPlace']); ?></p>
+                        <p><?php echo $row['actPlace']; ?></p>
 
                         <form action="src/php/joinActivite.php" method="POST">
-                            <input type="hidden" name="id" value="<?php echo htmlspecialchars($row['idActivite']); ?>">
+                            <input type="hidden" name="id" value="<?php echo $row['idActivite']; ?>">
                             <?php if ($inscriptions >= $row['actCapacity'] && !$hasUserJoined): ?>
                                 <button id="waiting_list">SE METTRE<br>EN ATTENTE</button>
                             <?php elseif ($hasUserJoined): ?>
