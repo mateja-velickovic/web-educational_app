@@ -92,7 +92,7 @@ if ($_SESSION['userrole'] != 2) {
         <input type="hidden" name="add">
 
         <input type="text" name="name" placeholder="Nom de l'activité" maxlength="30" required>
-        <input type="datetime-local" name="date">
+        <input type="datetime-local" name="date" required>
         <input type="text" name="place" placeholder="Lieu" maxlength="50" required>
         <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000" required>
 
