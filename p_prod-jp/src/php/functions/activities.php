@@ -88,3 +88,27 @@ function getActivityByID(PDO $pdo, int $idActivity)
 
     return $result;
 }
+
+/**
+ * Get all the users who are in an activity.
+ *
+ * @param PDO $pdo The database connection object.
+ * @param int $idActivity The ID of the activity.
+ */
+function getUsersByActivityID(PDO $pdo, int $idActivity)
+{
+    $sql = "
+        SELECT u.*
+        FROM t_registration a
+        INNER JOIN t_user u ON a.fkUser = u.idUser
+        WHERE a.fkActivity = :idActivite
+    ";
+
+    $query = $pdo->prepare($sql);
+    $query->bindParam(':idActivite', $idActivity, PDO::PARAM_INT);
+    $query->execute();
+
+    $result = $query->fetchAll(PDO::FETCH_ASSOC); // fetchAll for multiple users
+
+    return $result;
+}

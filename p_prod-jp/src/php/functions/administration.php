@@ -87,3 +87,9 @@ if (isset($_POST['add'])) {
 
     createActivity($pdo);
 }
+
+if (isset($_POST['edit'])) {
+    require "../lib/database.php";
+
+    createActivity($pdo);
+}

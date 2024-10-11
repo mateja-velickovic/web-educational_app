@@ -1,9 +1,8 @@
 <?php
 session_start();
-require "./functions/activities.php";
-require "./functions/administration.php";
-require "./lib/database.php";
 
+require "./functions/activities.php";
+require "./lib/database.php";
 
 // If the user isn't an admin, redirect on the home page
 if ($_SESSION['userrole'] != 2) {
@@ -18,41 +17,58 @@ if ($_SESSION['userrole'] != 2) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modification - Journée Pédagogique</title>
-    <link rel="stylesheet" href="../../../resources/css/style.css">
+    <link rel="stylesheet" href="../../resources/css/style.css">
 </head>
 
 <body>
     <header>
         <h1 id="t1">ETML - Journée Pédagogique <?php echo date("Y") ?></h1>
         <div class="log">
-            <a class="acc" href="../../../index.php">REVENIR À LA PAGE D'ACCUEIL</a>
+            <a class="btn-admin" href="admin.php">REVENIR À LA PAGE D'ADMINISTRATION</a>
         </div>
     </header>
 
-    <?php require "lib/database.php"; ?>
+    <?php $activity = getActivityByID($pdo, $_POST['edit']); ?>
 
-    <table class="admin">
+        <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Modifiez l'activité n° <?php echo $activity['idActivite']?>.
 
-        <!-- If any activity exist -->
-        <?php if (Count($result) == 0) { ?>
-            <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Aucune activité n'est actuellement créée.
-            </h2>
-        <?php } ?>
+        <form class="edit-act" action="./functions/administration.php" method="POST">
 
-        <form class="editact" action="">
+        
+            <input type="hidden" name="add">
+            <input type="text" name="name" placeholder="Nom de l'activité"  maxlength="30" value="<?php echo $activity['actName'] ?>" required>
+            <input type="datetime-local" name="date" value="<?php echo $activity['actDate'] ?>" required>
+            <input type="text" name="place" placeholder="Lieu" maxlength="50" value="<?php echo $activity['actPlace'] ?>" required >
+            <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000" value="<?php echo $activity['actCapacity'] ?>" required >
 
-            <?php $activity = getActivityByID($pdo, $_POST['edit']); ?>
-            <input type="text" name="name" value="<?php echo $activity['actName'] ?>">
-            <input type="text" name="date" value="<?php echo $activity['actDate'] ?>">
-            <input type="text" name="place" value="<?php echo $activity['actPlace'] ?>">
-            <input type="text" name="capacity" value="<?php echo $activity['actCapacity'] ?>">
+            <button type="submit">
+                <img src="../../resources/images/ed.png" alt="Flèche verte pour créer une nouvelle activité.">
+            </button>
 
         </form>
 
+        <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Participants de l'activité n° <?php echo $activity['idActivite']?>.
 
-        </tbody>
-    </table>
-    
+        <form class="disp-par" action="./functions/administration.php" method="POST">
+
+        <?php $result = getUsersByActivityID($pdo, $activity['idActivite']) ?>
+
+        <?php foreach($result as $row) {?>
+
+        <div class="participant">
+
+            
+            <p style="font-size: 1.2rem"><?php echo $row['idUser'] . ' ' . $row['useUsername']?></p>
+            <button type="submit">
+                <img src="../../resources/images/rm.png" alt="Flèche verte pour créer une nouvelle activité.">
+            </button>
+
+        </div>
+        <?php }?>
+
+
+        </form>
+
     <footer>Réalisé par Velickovic Mateja - Septembre 2024 - Icônes <a href="www.flaticon.com">Flaticon</a></footer>
 
 </body>

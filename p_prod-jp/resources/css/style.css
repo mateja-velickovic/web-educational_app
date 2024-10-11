@@ -326,9 +326,27 @@ p {
   border: 0;
   cursor: pointer;
 }
+
 /* Edit Activity */
-.admin form.editact {
-  background-color: red;
+.edit-act {
+  display: flex;
+  margin: auto;
+  text-align: center;  
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px
+}
+
+.edit-act button {
+  border: none;
+}
+
+.edit-act button img {
+  width: 25px;
+}
+
+.edit-act .participant {
+  display: inline-block;
 }
 
 /* Footer */
@@ -339,6 +357,7 @@ footer {
   width: 100%;
   background-color: rgba(128, 128, 128, 0.555);
   color: white;
+  font-size: 1rem;
 }
 
 footer a {

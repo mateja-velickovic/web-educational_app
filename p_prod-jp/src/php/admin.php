@@ -87,6 +87,8 @@ if ($_SESSION['userrole'] != 2) {
 
     </table>
 
+    <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Ajoutez une nouvelle activité.
+
     <form class="insert-act" action="./functions/administration.php" method="POST">
 
         <input type="hidden" name="add">
