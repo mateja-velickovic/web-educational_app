@@ -24,4 +24,4 @@ Les technologies suivantes seront utilisées dans ce projet :
 - Télécharger le repo `git clone https://github.com/mateja-velickovic/web-educational_app.git`
 - Se rendre dans le répertoire `cd web-educational_app`
 - Initaliser le projet `sh init.sh`
-- Profiter de l'application
+- Profiter de l'application dans votre navigateur à l’adresse localhost:8080 
