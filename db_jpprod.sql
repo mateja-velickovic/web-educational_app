@@ -96,8 +96,9 @@ INSERT INTO `t_role` (`idRole`, `rolName`) VALUES
 DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
   `idUser` int NOT NULL,
-  `useUsername` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `usePassword` varchar(255) NOT NULL,
+  `useEmail` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `useName` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `useSurname` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `fkRole` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-include "lib/config.php";
 include "lib/database.php";
 include "functions/activities.php";
 

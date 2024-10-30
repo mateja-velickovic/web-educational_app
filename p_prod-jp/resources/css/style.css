@@ -232,53 +232,6 @@ p {
   cursor: pointer;
 }
 
-/* Login */
-#form form {
-  margin-top: 50px;
-  display: block;
-  text-align: center;
-}
-
-#form form input {
-  margin-bottom: 20px;
-  padding: 5px 25px 5px 25px;
-  border: 3px solid #555;
-  font-size: 1.1rem;
-}
-
-#form form input[type="submit"] {
-  background-color: var(--main-green);
-  color: white;
-  border: 0;
-}
-
-#form form input[type="submit"]:hover {
-  cursor: pointer;
-}
-
-#form form input:focus {
-  border: 3px solid #555;
-  border-radius: 0px;
-}
-
-#form p {
-  font-size: 1.2rem;
-}
-
-#form a {
-  color: var(--main-green);
-}
-
-#form #error {
-  color: rgb(161, 0, 0);
-  margin-bottom: 10px;
-}
-
-#form #success {
-  color: rgb(32, 161, 0);
-  margin-bottom: 10px;
-}
-
 /* Administration page */
 .admin {
   margin: auto;
@@ -331,10 +284,10 @@ p {
 .edit-act {
   display: flex;
   margin: auto;
-  text-align: center;  
+  text-align: center;
   justify-content: center;
   gap: 10px;
-  margin-top: 20px
+  margin-top: 20px;
 }
 
 .edit-act button {

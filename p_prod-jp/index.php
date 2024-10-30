@@ -1,6 +1,5 @@
 <?php
 session_start();
-require "src/php/lib/config.php";
 require "src/php/lib/database.php";
 require "src/php/functions/administration.php";
 ?>
@@ -21,7 +20,7 @@ require "src/php/functions/administration.php";
         <h1 id="t1">ETML - Journée Pédagogique <?php echo date("Y") ?></h1>
         <div class="log">
             <?php if (!isset($_SESSION['loggedin'])) { ?>
-                <a class="login" href="src/php/authentication/login-redirect.php">SE CONNECTER AU
+                <a class="login" href="src/php/msal_authentication/login-redirect.php">SE CONNECTER AU
                     SITE</a>
             <?php } else { ?>
                 <p id="connected">Connecté en tant que <?php echo $_SESSION['username'] ?></p>
