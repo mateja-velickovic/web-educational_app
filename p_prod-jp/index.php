@@ -21,7 +21,8 @@ require "src/php/functions/administration.php";
         <h1 id="t1">ETML - Journée Pédagogique <?php echo date("Y") ?></h1>
         <div class="log">
             <?php if (!isset($_SESSION['loggedin'])) { ?>
-                <a class="login" href="src/php/login.php">SE CONNECTER AU SITE</a>
+                <a class="login" href="src/php/authentication/login-redirect.php">SE CONNECTER AU
+                    SITE</a>
             <?php } else { ?>
                 <p id="connected">Connecté en tant que <?php echo $_SESSION['username'] ?></p>
                 <a class="logout" href="src/php/functions/logout.php">SE DÉCONNECTER</a>
