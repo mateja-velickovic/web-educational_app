@@ -20,10 +20,12 @@ Les technologies suivantes seront utilisées dans ce projet :
 - SQL
 
 ## Installation
-- Avoir [Docker](https://docs.docker.com/engine/install/) de lancé sur son poste
-- Télécharger le repo `git clone https://github.com/mateja-velickovic/web-educational_app.git`
-- Se rendre dans le répertoire `cd web-educational_app`
-- Ajouter votre clé API dans `web-educational_app\p_prod-jp\src\php\authentication\config.ini.php`
-- Si besoin, ajouter votre adresse mail dans la liste des utilisateurs admin dans `web-educational_app\p_prod-jp\src\php\authentication\login.php:23`.
-- Initaliser le projet `sh init.sh`
-- Profiter de l'application dans votre navigateur à l’adresse localhost:8080 
+- Avoir [Docker](https://docs.docker.com/engine/install/) de lancé sur son poste.
+- Télécharger le repo `git clone https://github.com/mateja-velickovic/web-educational_app.git`.
+- Se rendre dans le répertoire `cd web-educational_app`.
+- Ajouter votre clé API dans `\p_prod-jp\src\php\authentication\config.ini.php`.
+- Initaliser le projet `sh init.sh`.
+- Profiter de l'application dans votre navigateur à l’adresse `localhost:8080`.
+
+### Si besoin
+Ajouter votre adresse mail dans la liste des utilisateurs admin dans `\p_prod-jp\src\php\authentication\login.php:23`.
