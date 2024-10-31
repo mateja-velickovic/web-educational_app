@@ -46,11 +46,14 @@ require "src/php/functions/administration.php";
                     $hasUserJoined = hasUserJoined($pdo, $row['idActivite'], $_SESSION['userid']);
                     ?>
                     <div class="activite">
-                        <h2><?php echo $row['actName']; ?></h2>
-                        <p><?php echo $row['actDate']; ?></p>
-                        <p><?php echo $inscriptions . '/' . $row['actCapacity'] . ' place(s) restante(s)'; ?>
+
+                        <h2><?php echo $row['actName']; ?><a href=""><img class="info" src="resources/images/info.png"
+                                    alt=""></a></h2>
+                        <p><img id="icon-info" src="resources/images/time.png" alt=""><?php echo $row['actDate']; ?></p>
+                        <p><img id="icon-info" src="resources/images/capacity.png"
+                                alt=""><?php echo $inscriptions . '/' . $row['actCapacity'] . ' place(s) restante(s)'; ?>
                         </p>
-                        <p><?php echo $row['actPlace']; ?></p>
+                        <p><img id="icon-info" src="resources/images/place.png" alt=""><?php echo $row['actPlace']; ?></p>
 
                         <form action="src/php/joinActivite.php" method="POST">
                             <input type="hidden" name="id" value="<?php echo $row['idActivite']; ?>">
@@ -68,7 +71,6 @@ require "src/php/functions/administration.php";
         </main>
     <?php else: ?>
         <div class="infoacc">
-            <h1>Les thèmes abordés par la journée pédagogique...</h1>
             <div class="grp-info">
                 <img src="resources/images/amp.png" alt="">
                 <p>"L'enseignement évolue constamment, et il est essentiel d'adopter des méthodes innovantes pour capter
@@ -100,9 +102,9 @@ require "src/php/functions/administration.php";
         </div>
     <?php endif; ?>
 
-    <footer>Réalisé par Velickovic Mateja - Septembre 2024 - Icônes <a href="https://www.flaticon.com"
-            target="_blank">Flaticon</a></footer>
-
+    <footer><a href="https://github.com/mateja-velickovic" target="_blank"><img id="icon-info"
+                src="resources/images/github.png" alt=""></a>Réalisé par Velickovic Mateja -
+        Septembre 2024 - Icônes <a href="https://www.flaticon.com" target="_blank">Flaticon</a></footer>
 </body>
 
 </html>

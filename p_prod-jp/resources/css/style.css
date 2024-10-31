@@ -22,7 +22,6 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  margin-bottom: 62px;
 }
 
 /* Header */
@@ -176,7 +175,16 @@ main {
   background-color: #e0e0e0;
   overflow: hidden;
   font-weight: 200;
-  text-shadow: 1px 1px 2px rgba(113, 113, 113, 0.458);
+}
+
+.activite .info {
+  width: 20px;
+  margin-left: 20px;
+}
+
+.activite #icon-info {
+  width: 20px;
+  margin-right: 10px;
 }
 
 .activite::before {
@@ -306,18 +314,21 @@ p {
 
 /* Footer */
 footer {
-  position: fixed;
-  bottom: 0;
   text-align: center;
-  width: 100%;
-  background-color: rgba(128, 128, 128, 0.555);
+  position: sticky;
+  margin: 20px 0px 20px 0px;
   color: white;
   font-size: 1rem;
+  z-index: 500;
 }
 
 footer a {
-  color: var(--main-blue);
-  text-decoration: none;
+  color: white;
+}
+
+footer a img {
+  width: 15px;
+  margin-right: 5px;
 }
 
 /* Responsive */

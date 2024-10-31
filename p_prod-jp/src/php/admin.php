@@ -104,9 +104,9 @@ if ($_SESSION['userrole'] != 2) {
 
         </form>
 
-        <footer>Réalisé par Velickovic Mateja - Septembre 2024 - Icônes <a href="https://www.flaticon.com"
-                target="_blank">Flaticon</a>
-        </footer>
+        <footer><a href="https://github.com/mateja-velickovic" target="_blank"><img id="icon-info"
+                    src="resources/images/github.png" alt=""></a>Réalisé par Velickovic Mateja -
+            Septembre 2024 - Icônes <a href="https://www.flaticon.com" target="_blank">Flaticon</a></footer>
 
 </body>
 
