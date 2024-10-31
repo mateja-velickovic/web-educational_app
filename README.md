@@ -1,5 +1,5 @@
-# 🧑🏽‍🏫 Créer une application web pour l'inscription des enseignants aux journées pédagogiques
-
+# 🏫 Créer une application web pour l'inscription des enseignants aux journées pédagogiques
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
 ## Objectif
 - Développer une application web fonctionnelle.
 - Afficher les ateliers proposés pour la journée pédagogique avec le nombre de places disponibles.
