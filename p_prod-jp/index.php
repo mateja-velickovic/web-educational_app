@@ -17,17 +17,21 @@ require "src/php/functions/administration.php";
 <body>
 
     <header>
-        <h1 id="t1">ETML - Journée Pédagogique <?php echo date("Y") ?></h1>
+        <div>
+            <h1 id="t1">Journée Pédagogique <?php echo date("Y") ?></h1>
+            <?php if (isset($_SESSION['loggedin'])) { ?>
+                <p>Connecté en tant que <?php echo $_SESSION['name'] . " " . $_SESSION['surname'] ?></a>
+                <?php } ?>
+        </div>
         <div class="log">
             <?php if (!isset($_SESSION['loggedin'])) { ?>
                 <a class="login" href="src/php/msal_authentication/login-redirect.php">SE CONNECTER AU
                     SITE</a>
             <?php } else { ?>
-                <p id="connected">Bonjour <?php echo $_SESSION['name'] . " " . $_SESSION['surname'] ?></p>
-                <a class="logout" href="src/php/functions/logout.php">SE DÉCONNECTER</a>
                 <?php if (isUserAdmin($pdo, $_SESSION['userid'])) { ?>
-                    <a class="btn-admin" href="src/php/admin.php">PAGE D'ADMINISTRATION</a>
+                    <a class="btn-admin" href="src/php/admin.php">Dashboard</a>
                 <?php } ?>
+                <a class="logout" href="src/php/functions/logout.php">Déconnexion</a>
             <?php } ?>
         </div>
     </header>
@@ -51,11 +55,11 @@ require "src/php/functions/administration.php";
                         <form action="src/php/joinActivite.php" method="POST">
                             <input type="hidden" name="id" value="<?php echo $row['idActivite']; ?>">
                             <?php if ($inscriptions >= $row['actCapacity'] && !$hasUserJoined): ?>
-                                <button id="waiting_list">SE METTRE<br>EN ATTENTE</button>
+                                <button id="waiting_list">SE METTRE EN ATTENTE</button>
                             <?php elseif ($hasUserJoined): ?>
-                                <button id="leave_activity">QUITTER<br>L'ACTIVITÉ</button>
+                                <button id="leave_activity">QUITTER L'ACTIVITÉ</button>
                             <?php else: ?>
-                                <button type="submit">REJOINDRE<br>L'ACTIVITÉ</button>
+                                <button type="submit">REJOINDRE L'ACTIVITÉ</button>
                             <?php endif; ?>
                         </form>
                     </div>

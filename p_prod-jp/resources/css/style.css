@@ -9,38 +9,43 @@
 
 /* Variables */
 :root {
-  --main-blue: rgb(9, 21, 133);
-  --second-blue: rgb(180, 187, 255);
-  --main-green: rgb(15, 190, 88);
+  --main-blue: #0050AC;
+  --main-green: #009A17;
   --main-red: rgb(182, 15, 43);
   --main-orange: rgb(192, 85, 13);
 }
 
 /* Body */
 body {
-  background-color: #eeeeee;
+  background: url("../images/background.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin-bottom: 62px;
 }
 
 /* Header */
 header {
-  text-align: center;
   padding: 40px;
   font-size: 1.4rem;
   align-items: center;
-  color: white;
-  background: url("../images/etml.jpg");
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0px 2px 5px rgba(94, 94, 94, 0.644);
+  color: #CCCCCC;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
 }
 
 header #t1 {
   font-size: 2rem;
+  font-weight: 200;
   margin-bottom: 5px;
 }
 
-header .log {
-  text-align: center;
+header p {
+  font-weight: 200;
+  margin: 0;
+  padding: 0;
 }
 
 header #connected {
@@ -54,20 +59,12 @@ header .login,
   text-decoration: none;
   color: white;
   background-color: var(--main-green);
-  padding: 5px 10px 5px 10px;
-  font-size: 1rem;
+  padding: 10px 20px 10px 20px;
+  font-size: 1.3rem;
   border-radius: 10px;
+  margin-left: 20px;
   transition: 0.1s ease;
-  box-shadow: 0px 4px 5px rgba(94, 94, 94, 0.644);
-}
-
-header .login:hover,
-.logout:hover,
-.acc:hover,
-.btn-admin:hover {
-  transition: 0.1s ease;
-  box-shadow: none;
-  font-size: 1.05rem;
+  box-shadow: 1px 1px 5px black;
 }
 
 header .logout {
@@ -165,16 +162,21 @@ main {
 
 .grp-activite {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  margin-left: 241px;
+  transition: .1s ease;
+  margin-right: 241px;
 }
 
 .activite {
   position: relative;
   margin: 15px;
-  color: aliceblue;
   border-radius: 15px;
   padding: 10px 0px 70px 0px;
+  background-color: #e0e0e0;
   overflow: hidden;
+  font-weight: 200;
+  text-shadow: 1px 1px 2px rgba(113, 113, 113, 0.458);
 }
 
 .activite::before {
@@ -184,15 +186,14 @@ main {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("../images/etml.jpg");
-  background-size: cover;
-  background-position: center;
+  color: black;
   filter: blur(0.5px);
 }
 
-.activite > p,
+.activite>p,
 h2 {
   position: relative;
+  font-weight: 200;
   z-index: 1;
 }
 
@@ -200,7 +201,7 @@ h2 {
   text-decoration: none;
   color: white;
   background-color: var(--main-green);
-  font-size: 1rem;
+  font-size: 1.2rem;
   width: 100%;
   border: 0;
   position: absolute;
@@ -208,6 +209,7 @@ h2 {
   left: 0;
   transition: transform 0.2s ease, box-shadow 0.2s ease,
     background-color 0.2s ease;
+  padding: 10px 0px 10px 0px;
 }
 
 .activite button:hover {
@@ -319,9 +321,13 @@ footer a {
 }
 
 /* Responsive */
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .grp-activite {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    margin: auto;
+    margin-right: 100px;
+    margin-left: 100px;
+    transition: .1s ease;
   }
 
   .infoacc .grp-info img {
@@ -329,20 +335,53 @@ footer a {
   }
 }
 
-@media (max-width: 873px) {
+@media (max-width: 1000px) {
   .grp-activite {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 683px) {
-  .grp-activite {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 432px) {
-  .grp-activite {
+    margin: auto;
+    margin-right: 50px;
+    margin-left: 50px;
+    transition: .1s ease;
     grid-template-columns: repeat(1, 1fr);
   }
+}
+
+@media (max-width: 900px) {
+  header {
+    flex-direction: column;
+  }
+
+  header div #t1 {
+    margin-bottom: 20px;
+  }
+
+  header .login,
+  .logout,
+  .acc,
+  .btn-admin {
+    padding: 5px 10px 5px 10px;
+    transition: .1s ease;
+  }
+}
+
+@media (max-width: 425px) {
+  header {
+    flex-direction: column;
+  }
+
+  header div #t1 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  header .log {
+    flex-direction: column;
+    display: flex;
+  }
+
+  header,
+  .logout {
+    transition: .1s ease;
+    margin-top: 10px;
+  }
+
 }
