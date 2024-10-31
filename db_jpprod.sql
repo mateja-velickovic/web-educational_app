@@ -43,7 +43,7 @@ CREATE TABLE `t_activity` (
 -- Dumping data for table `t_activity`
 --
 
-INSERT INTO `t_activity` (`idActivite`, `actName`, `actDate`, `actPlace`, `actCapacity`) VALUES
+INSERT INTO `t_activity` (`idActivite`, `actName`, `actDesc`,  `actDate`, `actPlace`, `actCapacity`) VALUES
 (1, 'Randonnée en montagne', 'Description de lactivité', '2024-10-15 09:00:00', 'Alpes Suisses', 30),
 (2, 'Atelier de cuisine', 'Description de lactivité', '2024-10-20 14:00:00', 'Lausanne', 20),
 (3, 'Conférence sur IA', 'Description de lactivité', '2024-10-25 10:30:00', 'EPFL', 100),
