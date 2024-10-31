@@ -33,6 +33,7 @@ DROP TABLE IF EXISTS `t_activity`;
 CREATE TABLE `t_activity` (
   `idActivite` int NOT NULL,
   `actName` varchar(50) NOT NULL,
+  `actDesc` varchar(50) NOT NULL,
   `actDate` timestamp NOT NULL,
   `actPlace` varchar(50) NOT NULL,
   `actCapacity` int NOT NULL
@@ -43,16 +44,16 @@ CREATE TABLE `t_activity` (
 --
 
 INSERT INTO `t_activity` (`idActivite`, `actName`, `actDate`, `actPlace`, `actCapacity`) VALUES
-(1, 'Randonnée en montagne', '2024-10-15 09:00:00', 'Alpes Suisses', 30),
-(2, 'Atelier de cuisine', '2024-10-20 14:00:00', 'Lausanne', 20),
-(3, 'Conférence sur IA', '2024-10-25 10:30:00', 'EPFL', 100),
-(4, 'Tournoi de football', '2024-11-01 15:00:00', 'Stade de Genève', 50),
-(5, 'Séance de yoga', '2024-10-18 08:00:00', 'Parc de Lausanne', 25),
-(6, 'Concert de musique', '2024-11-05 19:00:00', 'Palais de Beaulieu', 200),
-(7, 'Atelier de peinture', '2024-11-10 11:00:00', 'Galerie art de Vevey', 15),
-(8, 'Compétition de natation', '2024-11-12 17:00:00', 'Piscine de Pully', 40),
-(9, 'Cours de photographie', '2024-11-18 13:00:00', 'Montreux', 12),
-(10, 'Marathon de Genève', '2024-11-25 07:00:00', 'Genève', 300);
+(1, 'Randonnée en montagne', 'Description de lactivité', '2024-10-15 09:00:00', 'Alpes Suisses', 30),
+(2, 'Atelier de cuisine', 'Description de lactivité', '2024-10-20 14:00:00', 'Lausanne', 20),
+(3, 'Conférence sur IA', 'Description de lactivité', '2024-10-25 10:30:00', 'EPFL', 100),
+(4, 'Tournoi de football', 'Description de lactivité', '2024-11-01 15:00:00', 'Stade de Genève', 50),
+(5, 'Séance de yoga', 'Description de lactivité', '2024-10-18 08:00:00', 'Parc de Lausanne', 25),
+(6, 'Concert de musique', 'Description de lactivité', '2024-11-05 19:00:00', 'Palais de Beaulieu', 200),
+(7, 'Atelier de peinture', 'Description de lactivité', '2024-11-10 11:00:00', 'Galerie art de Vevey', 15),
+(8, 'Compétition de natation', 'Description de lactivité', '2024-11-12 17:00:00', 'Piscine de Pully', 40),
+(9, 'Cours de photographie', 'Description de lactivité', '2024-11-18 13:00:00', 'Montreux', 12),
+(10, 'Marathon de Genève', 'Description de lactivité', '2024-11-25 07:00:00', 'Genève', 300);
 
 -- --------------------------------------------------------
 
