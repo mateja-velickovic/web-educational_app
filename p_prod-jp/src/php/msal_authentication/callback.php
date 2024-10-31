@@ -1,7 +1,7 @@
 <?php
 
 require_once 'lib-sso.php';
-include "../lib/auth-signin.php";
+include "login.php";
 
 $cid = $_SESSION[SESSION_SSO_KEY];
 $ssoResult = RetrieveSSOLoginInfos(API_KEY, $cid);
@@ -13,13 +13,15 @@ if ($ssoResult->IsSuccess()) {
     $email = $ssoResult->email;
 
     InitiateUser($email);
-    $id = GetUserID($email);
-    $role = GetUserRole($email);
+
+    $userData = GetUserData($email);
 
     $_SESSION['loggedin'] = true;
-    $_SESSION['username'] = $email;
-    $_SESSION['userid'] = $id;
-    $_SESSION['userrole'] = $role;
+
+    $_SESSION['userid'] = $userData['idUser'];
+    $_SESSION['name'] = $userData['useName'];
+    $_SESSION['surname'] = $userData['useSurname'];
+    $_SESSION['userrole'] = $userData['fkRole'];
 
     header('Location: ../../../');
 

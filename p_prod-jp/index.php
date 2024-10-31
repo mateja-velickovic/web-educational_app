@@ -23,7 +23,7 @@ require "src/php/functions/administration.php";
                 <a class="login" href="src/php/msal_authentication/login-redirect.php">SE CONNECTER AU
                     SITE</a>
             <?php } else { ?>
-                <p id="connected">Connecté en tant que <?php echo $_SESSION['username'] ?></p>
+                <p id="connected">Bonjour <?php echo $_SESSION['name'] . " " . $_SESSION['surname'] ?></p>
                 <a class="logout" href="src/php/functions/logout.php">SE DÉCONNECTER</a>
                 <?php if (isUserAdmin($pdo, $_SESSION['userid'])) { ?>
                     <a class="btn-admin" href="src/php/admin.php">PAGE D'ADMINISTRATION</a>
@@ -96,7 +96,8 @@ require "src/php/functions/administration.php";
         </div>
     <?php endif; ?>
 
-    <footer>Réalisé par Velickovic Mateja - Septembre 2024 - Icônes <a href="www.flaticon.com">Flaticon</a></footer>
+    <footer>Réalisé par Velickovic Mateja - Septembre 2024 - Icônes <a href="https://www.flaticon.com"
+            target="_blank">Flaticon</a></footer>
 
 </body>
 

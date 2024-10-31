@@ -30,16 +30,20 @@ if ($_SESSION['userrole'] != 2) {
 
     <?php $activity = getActivityByID($pdo, $_POST['edit']); ?>
 
-        <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Modifiez l'activité n° <?php echo $activity['idActivite']?>.
+    <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Modifiez l'activité n°
+        <?php echo $activity['idActivite'] ?>.
 
         <form class="edit-act" action="./functions/administration.php" method="POST">
 
-        
+
             <input type="hidden" name="add">
-            <input type="text" name="name" placeholder="Nom de l'activité"  maxlength="30" value="<?php echo $activity['actName'] ?>" required>
+            <input type="text" name="name" placeholder="Nom de l'activité" maxlength="30"
+                value="<?php echo $activity['actName'] ?>" required>
             <input type="datetime-local" name="date" value="<?php echo $activity['actDate'] ?>" required>
-            <input type="text" name="place" placeholder="Lieu" maxlength="50" value="<?php echo $activity['actPlace'] ?>" required >
-            <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000" value="<?php echo $activity['actCapacity'] ?>" required >
+            <input type="text" name="place" placeholder="Lieu" maxlength="50"
+                value="<?php echo $activity['actPlace'] ?>" required>
+            <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000"
+                value="<?php echo $activity['actCapacity'] ?>" required>
 
             <button type="submit">
                 <img src="../../resources/images/ed.png" alt="Flèche verte pour créer une nouvelle activité.">
@@ -47,29 +51,31 @@ if ($_SESSION['userrole'] != 2) {
 
         </form>
 
-        <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Participants de l'activité n° <?php echo $activity['idActivite']?>.
+        <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Participants de l'activité n°
+            <?php echo $activity['idActivite'] ?>.
 
-        <form class="disp-par" action="./functions/administration.php" method="POST">
+            <form class="disp-par" action="./functions/administration.php" method="POST">
 
-        <?php $result = getUsersByActivityID($pdo, $activity['idActivite']) ?>
+                <?php $result = getUsersByActivityID($pdo, $activity['idActivite']) ?>
 
-        <?php foreach($result as $row) {?>
+                <?php foreach ($result as $row) { ?>
 
-        <div class="participant">
-
-            
-            <p style="font-size: 1.2rem"><?php echo $row['idUser'] . ' ' . $row['useUsername']?></p>
-            <button type="submit">
-                <img src="../../resources/images/rm.png" alt="Flèche verte pour créer une nouvelle activité.">
-            </button>
-
-        </div>
-        <?php }?>
+                    <div class="participant">
 
 
-        </form>
+                        <p style="font-size: 1.2rem"><?php echo $row['idUser'] . ' ' . $row['useUsername'] ?></p>
+                        <button type="submit">
+                            <img src="../../resources/images/rm.png" alt="Flèche verte pour créer une nouvelle activité.">
+                        </button>
 
-    <footer>Réalisé par Velickovic Mateja - Septembre 2024 - Icônes <a href="www.flaticon.com">Flaticon</a></footer>
+                    </div>
+                <?php } ?>
+
+
+            </form>
+
+            <footer>Réalisé par Velickovic Mateja - Septembre 2024 - Icônes <a href="https://www.flaticon.com"
+                    target="_blank">Flaticon</a></footer>
 
 </body>
 
