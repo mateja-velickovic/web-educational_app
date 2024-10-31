@@ -58,6 +58,7 @@ header .login,
 .calendar {
   text-decoration: none;
   color: white;
+  text-align: center;
   background-color: var(--main-green);
   padding: 10px 20px 10px 20px;
   font-size: 1.3rem;
@@ -287,6 +288,7 @@ p {
   margin: auto;
   justify-content: center;
   gap: 10px;
+  width: 60%;
   margin-top: 20px;
 }
 
@@ -385,10 +387,11 @@ footer a img {
   .calendar {
     padding: 5px 10px 5px 10px;
     transition: .1s ease;
+    text-align: center;
   }
 }
 
-@media (max-width: 606px) {
+@media (max-width: 616px) {
   header {
     flex-direction: column;
   }

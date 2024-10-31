@@ -1,6 +1,10 @@
 <?php
 
-/// Récupération du nom et prénom de l'utilisateur grâce à son email et mise en forme de ces derniers
+/**
+ * Récupération du nom et prénom de l'utilisateur grâce à son email et mise en forme de ces derniers
+ *
+ * @param string $email Email de l'utilisateur 
+ */
 function GetNameAndSurname($email)
 {
     list($prenom, $nom) = explode('.', explode('@', $email)[0]);
@@ -14,7 +18,11 @@ function GetNameAndSurname($email)
     ];
 }
 
-/// Insertion du compte de l'utilisateur avec ses informations dans la base de données
+/**
+ * Insertion du compte de l'utilisateur avec ses informations dans la base de données
+ *
+ * @param string $email Email de l'utilisateur 
+ */
 function InitiateUser($email)
 {
     include "../lib/database.php";
@@ -31,8 +39,10 @@ function InitiateUser($email)
 
     $name = $data['prenom'];
     $surname = $data['nom'];
-    $adminRole = 2;
-    $userRole = 1;
+
+    // Rôles constants
+    $ADMIN_ROLE = 2;
+    $USER_ROLE = 1;
 
     if ($result->rowCount() == 0) {
         $sql_create = "INSERT INTO `t_user`(`useEmail`, `useName`, `useSurname`, `fkRole`) VALUES (?, ?, ?, ?)";
@@ -42,9 +52,9 @@ function InitiateUser($email)
         $result_create->bindParam(3, $surname);
 
         if (in_array($email, $adminUsers)) {
-            $result_create->bindParam(4, $adminRole);
+            $result_create->bindParam(4, $ADMIN_ROLE);
         } else {
-            $result_create->bindParam(4, $userRole);
+            $result_create->bindParam(4, $USER_ROLE);
         }
 
         $result_create->execute();
@@ -52,7 +62,11 @@ function InitiateUser($email)
 
 }
 
-/// Récupération des informations des utilisateurs
+/**
+ * Récupération des informations des utilisateurs
+ *
+ * @param string $email Email de l'utilisateur 
+ */
 function GetUserData($email)
 {
     include "../lib/database.php";

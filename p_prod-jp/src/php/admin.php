@@ -21,10 +21,15 @@ if ($_SESSION['userrole'] != 2) {
 
 <body>
     <header>
-        <h1 id="t1">ETML - Journée Pédagogique <?php echo date("Y") ?></h1>
-        <div class="log">
-            <a class="acc" href="../../../index.php">REVENIR À LA PAGE D'ACCUEIL</a>
+        <div>
+            <h1 id="t1">Journée Pédagogique <?php echo date("Y") ?></h1>
+            <p>Connecté en tant que <?php echo $_SESSION['name'] . " " . $_SESSION['surname'] ?></a>
         </div>
+        <div class="log">
+            <a class="acc" href="../../../index.php">Revenir à la page d'accueil</a>
+            <a class="logout" href="src/php/functions/logout.php">Déconnexion</a>
+        </div>
+        
     </header>
 
     <?php require "lib/database.php"; ?>
@@ -33,7 +38,7 @@ if ($_SESSION['userrole'] != 2) {
 
         <!-- If any activity exist -->
         <?php if (Count($result) == 0) { ?>
-            <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Aucune activité n'est actuellement créée.
+            <h2 style="color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Aucune activité n'est actuellement créée.
             </h2>
         <?php } else { ?>
 
@@ -42,6 +47,7 @@ if ($_SESSION['userrole'] != 2) {
                 <tr>
                     <th>ID</th>
                     <th>Nom</th>
+                    <th>Description</th>
                     <th>Date</th>
                     <th>Lieu</th>
                     <th>Capacité</th>
@@ -58,6 +64,7 @@ if ($_SESSION['userrole'] != 2) {
                     <tr>
                         <td><?php echo $row['idActivite'] ?></td>
                         <td><?php echo $row['actName']; ?></td>
+                        <td><?php echo $row['actDesc']; ?></td>
                         <td><?php echo $row['actDate']; ?></td>
                         <td><?php echo $row['actPlace']; ?></td>
                         <td><?php echo $registrations . '/' . $row['actCapacity'] ?></td>
@@ -87,13 +94,15 @@ if ($_SESSION['userrole'] != 2) {
 
     </table>
 
-    <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Ajoutez une nouvelle activité.
+        <h2 style="color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Ajoutez une nouvelle activité.
 
         <form class="insert-act" action="./functions/administration.php" method="POST">
 
+            <br>
             <input type="hidden" name="add">
 
             <input type="text" name="name" placeholder="Nom de l'activité" maxlength="30" required>
+            <input type="text" name="desc" placeholder="Description de l'activité" maxlength="30" required>
             <input type="datetime-local" name="date" required>
             <input type="text" name="place" placeholder="Lieu" maxlength="50" required>
             <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000" required>
