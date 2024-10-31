@@ -29,7 +29,7 @@ if ($_SESSION['userrole'] != 2) {
             <a class="acc" href="../../../index.php">Revenir à la page d'accueil</a>
             <a class="logout" href="src/php/functions/logout.php">Déconnexion</a>
         </div>
-        
+
     </header>
 
     <?php require "lib/database.php"; ?>
@@ -38,63 +38,64 @@ if ($_SESSION['userrole'] != 2) {
 
         <!-- If any activity exist -->
         <?php if (Count($result) == 0) { ?>
-            <h2 style="color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Aucune activité n'est actuellement créée.
+            <h2 style="color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Aucune activité n'est
+                actuellement créée.
             </h2>
         <?php } else { ?>
 
             <!-- Titles of activities array -->
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                    <th>Lieu</th>
-                    <th>Capacité</th>
-                    <th> </th>
-                    <th> </th>
-                    <th> </th>
-                </tr>
-            </thead>
-            <?php
-            foreach ($result as $row) {
-                $registrations = getInscriptionsCount($pdo, $row['idActivite']); ?>
-
-                <tbody>
+            <div class="admin-array">
+                <thead>
                     <tr>
-                        <td><?php echo $row['idActivite'] ?></td>
-                        <td><?php echo $row['actName']; ?></td>
-                        <td><?php echo $row['actDesc']; ?></td>
-                        <td><?php echo $row['actDate']; ?></td>
-                        <td><?php echo $row['actPlace']; ?></td>
-                        <td><?php echo $registrations . '/' . $row['actCapacity'] ?></td>
-
-                        <!-- Delete the activity -->
-                        <form action="./functions/administration.php" method="POST">
-                            <input type="hidden" name="delete" value="<?php echo $row['idActivite']; ?>">
-                            <td id="rm"><button type="submit"><img src="../../resources/images/rm.png"
-                                        alt="Corbeille pour la supression d'une activité dans la page d'administration"></button>
-                            </td>
-                        </form>
-
-                        <!-- Edit the activity -->
-                        <form action="./edit.php" method="POST">
-                            <input type="hidden" name="edit" value="<?php echo $row['idActivite']; ?>">
-                            <td id="ed"><button type="submit"><img src="../../resources/images/ed.png"
-                                        alt="Stylo pour la modification d'une activité dans la page d'administration"></button>
-                            </td>
-                        </form>
-
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Lieu</th>
+                        <th>Capacité</th>
+                        <th> </th>
+                        <th> </th>
+                        <th> </th>
                     </tr>
-                <?php }
+                </thead>
+                <?php
+                foreach ($result as $row) {
+                    $registrations = getInscriptionsCount($pdo, $row['idActivite']); ?>
+
+                    <tbody>
+                        <tr>
+                            <td><?php echo $row['idActivite'] ?></td>
+                            <td><?php echo $row['actName']; ?></td>
+                            <td><?php echo $row['actDesc']; ?></td>
+                            <td><?php echo $row['actDate']; ?></td>
+                            <td><?php echo $row['actPlace']; ?></td>
+                            <td><?php echo $registrations . '/' . $row['actCapacity'] ?></td>
+
+                            <!-- Delete the activity -->
+                            <form action="./functions/administration.php" method="POST">
+                                <input type="hidden" name="delete" value="<?php echo $row['idActivite']; ?>">
+                                <td id="rm"><button type="submit"><img src="../../resources/images/rm.png"
+                                            alt="Corbeille pour la supression d'une activité dans la page d'administration"></button>
+                                </td>
+                            </form>
+
+                            <!-- Edit the activity -->
+                            <form action="./edit.php" method="POST">
+                                <input type="hidden" name="edit" value="<?php echo $row['idActivite']; ?>">
+                                <td id="ed"><button type="submit"><img src="../../resources/images/ed.png"
+                                            alt="Stylo pour la modification d'une activité dans la page d'administration"></button>
+                                </td>
+                            </form>
+
+                        </tr>
+                    <?php }
         } ?>
-
-
-        </tbody>
+            </tbody>
+        </div>
 
     </table>
 
-        <h2 style="color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Ajoutez une nouvelle activité.
+    <h2 style="color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Créez une nouvelle activité.
 
         <form class="insert-act" action="./functions/administration.php" method="POST">
 
@@ -102,19 +103,28 @@ if ($_SESSION['userrole'] != 2) {
             <input type="hidden" name="add">
 
             <input type="text" name="name" placeholder="Nom de l'activité" maxlength="30" required>
-            <input type="text" name="desc" placeholder="Description de l'activité" maxlength="30" required>
+            <input type="text" name="desc" placeholder="Description" maxlength="50" required>
             <input type="datetime-local" name="date" required>
             <input type="text" name="place" placeholder="Lieu" maxlength="50" required>
-            <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000" required>
+            <input type="number" name="capacity" placeholder="Places" min="0" max="1000" required>
 
             <button type="submit">
                 <img src="../../resources/images/add.png" alt="Flèche verte pour créer une nouvelle activité.">
             </button>
 
+
         </form>
 
+        <?php if (isset($_GET['error']) && $_GET['error'] == "create") { ?>
+            <p style="color: rgb(161, 0, 0); font-size: 1.2rem; text-align: center; font-weight: normal; margin-top: 20px;">
+                Échec de la
+                création de l'activité, veuillez réessayer.
+            </p>
+        <?php } else {
+        } ?>
+
         <footer><a href="https://github.com/mateja-velickovic" target="_blank"><img id="icon-info"
-                    src="resources/images/github.png" alt=""></a>Réalisé par Velickovic Mateja -
+                    src="../../resources/images/github.png" alt=""></a>Réalisé par Velickovic Mateja -
             Septembre 2024 - Icônes <a href="https://www.flaticon.com" target="_blank">Flaticon</a></footer>
 
 </body>

@@ -22,15 +22,21 @@ if ($_SESSION['userrole'] != 2) {
 
 <body>
     <header>
-        <h1 id="t1">ETML - Journée Pédagogique <?php echo date("Y") ?></h1>
-        <div class="log">
-            <a class="btn-admin" href="admin.php">REVENIR À LA PAGE D'ADMINISTRATION</a>
+        <div>
+            <h1 id="t1">Journée Pédagogique <?php echo date("Y") ?></h1>
+            <p>Connecté en tant que <?php echo $_SESSION['name'] . " " . $_SESSION['surname'] ?></a>
         </div>
+
+        <div class="log">
+            <a class="btn-admin" href="admin.php">Revenir à la page d'accueil</a>
+            <a class="logout" href="src/php/functions/logout.php">Déconnexion</a>
+        </div>
+
     </header>
 
     <?php $activity = getActivityByID($pdo, $_POST['edit']); ?>
 
-    <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Modifiez l'activité n°
+    <h2 style="color: #cccccc; text-align: center; font-weight: normal; margin-top: 20px;">Modifiez l'activité n°
         <?php echo $activity['idActivite'] ?>.
 
         <form class="edit-act" action="./functions/administration.php" method="POST">
@@ -39,6 +45,8 @@ if ($_SESSION['userrole'] != 2) {
             <input type="hidden" name="add">
             <input type="text" name="name" placeholder="Nom de l'activité" maxlength="30"
                 value="<?php echo $activity['actName'] ?>" required>
+            <input type="text" name="desc" placeholder="Description" maxlength="50"
+                value="<?php echo $activity['actDesc'] ?>" required>
             <input type="datetime-local" name="date" value="<?php echo $activity['actDate'] ?>" required>
             <input type="text" name="place" placeholder="Lieu" maxlength="50"
                 value="<?php echo $activity['actPlace'] ?>" required>
@@ -51,7 +59,8 @@ if ($_SESSION['userrole'] != 2) {
 
         </form>
 
-        <h2 style="text-align: center; font-weight: normal; margin-top: 20px;">Participants de l'activité n°
+        <h2 style="color: #cccccc; text-align: center; font-weight: normal; margin-top: 20px;">Participants de
+            l'activité n°
             <?php echo $activity['idActivite'] ?>.
 
             <form class="disp-par" action="./functions/administration.php" method="POST">
@@ -75,7 +84,7 @@ if ($_SESSION['userrole'] != 2) {
             </form>
 
             <footer><a href="https://github.com/mateja-velickovic" target="_blank"><img id="icon-info"
-                        src="resources/images/github.png" alt=""></a>Réalisé par Velickovic Mateja -
+                        src="../../resources/images/github.png" alt=""></a>Réalisé par Velickovic Mateja -
                 Septembre 2024 - Icônes <a href="https://www.flaticon.com" target="_blank">Flaticon</a></footer>
 </body>
 

@@ -9,8 +9,8 @@
 
 /* Variables */
 :root {
-  --main-blue: #0050AC;
-  --main-green: #009A17;
+  --main-blue: #0050ac;
+  --main-green: #009a17;
   --main-red: rgb(182, 15, 43);
   --main-orange: rgb(192, 85, 13);
 }
@@ -22,6 +22,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  margin-bottom: 60px;
 }
 
 /* Header */
@@ -29,7 +30,7 @@ header {
   padding: 40px;
   font-size: 1.4rem;
   align-items: center;
-  color: #CCCCCC;
+  color: #cccccc;
   text-align: left;
   display: flex;
   justify-content: space-between;
@@ -64,8 +65,17 @@ header .login,
   font-size: 1.3rem;
   border-radius: 10px;
   margin-left: 20px;
-  transition: 0.1s ease;
+  transition: 0.3s ease;
   box-shadow: 1px 1px 5px black;
+}
+
+header .login:hover,
+.logout:hover,
+.acc:hover,
+.btn-admin:hover,
+.calendar:hover {
+  transition: 0.3s ease;
+  opacity: 50%;
 }
 
 header .logout {
@@ -169,7 +179,7 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-left: 241px;
-  transition: .1s ease;
+  transition: 0.1s ease;
   perspective: 600px;
   margin-right: 241px;
 }
@@ -205,7 +215,7 @@ main {
   filter: blur(0.5px);
 }
 
-.activite>p,
+.activite > p,
 h2 {
   position: relative;
   font-weight: 200;
@@ -249,15 +259,14 @@ p {
   cursor: pointer;
 }
 
-/* Retournement de la carte pour afficher les infos de celle-ci */
-
-
 /* Administration page */
 .admin {
   margin: auto;
   margin-top: 40px;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-spacing: 0;
+  margin-bottom: 5%;
 }
 
 .admin thead tr th {
@@ -292,12 +301,24 @@ p {
   margin-top: 20px;
 }
 
+.insert-act input {
+  width: 130px;
+  padding-left: 3px;
+  border: 0;
+  background-color: #cccccc;
+}
+
+.insert-act input::placeholder {
+  color: #000;
+}
+
 .insert-act img {
   width: 25px;
 }
 
 .insert-act button {
   border: 0;
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -309,9 +330,11 @@ p {
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .edit-act button {
+  background-color: transparent;
   border: none;
 }
 
@@ -326,7 +349,11 @@ p {
 /* Footer */
 footer {
   text-align: center;
-  position: sticky;
+  text-shadow: 1px 1px 5px black;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  bottom: 0;
   margin: 20px 0px 20px 0px;
   color: white;
   font-size: 1rem;
@@ -339,6 +366,7 @@ footer a {
 
 footer a img {
   width: 15px;
+  filter: drop-shadow(1px 1px 5px black);
   margin-right: 5px;
 }
 
@@ -349,7 +377,7 @@ footer a img {
     margin: auto;
     margin-right: 100px;
     margin-left: 100px;
-    transition: .1s ease;
+    transition: 0.1s ease;
   }
 
   .infoacc .grp-info img {
@@ -362,7 +390,7 @@ footer a img {
     margin: auto;
     margin-right: 50px;
     margin-left: 50px;
-    transition: .1s ease;
+    transition: 0.1s ease;
     grid-template-columns: repeat(1, 1fr);
   }
 }
@@ -386,7 +414,7 @@ footer a img {
   .btn-admin,
   .calendar {
     padding: 5px 10px 5px 10px;
-    transition: .1s ease;
+    transition: 0.1s ease;
     text-align: center;
   }
 }
@@ -394,6 +422,7 @@ footer a img {
 @media (max-width: 616px) {
   header {
     flex-direction: column;
+    text-align: center;
   }
 
   header div #t1 {
@@ -413,8 +442,7 @@ footer a img {
   header,
   .logout,
   .calendar {
-    transition: .1s ease;
+    transition: 0.1s ease;
     margin-top: 10px;
   }
-
 }

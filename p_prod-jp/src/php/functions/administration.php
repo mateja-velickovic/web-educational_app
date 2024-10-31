@@ -56,22 +56,29 @@ function createActivity(PDO $pdo): void
 {
     session_start();
 
-    if ($_SESSION['userrole'] == 2) {
-        $sql = "INSERT INTO t_activity (actName, actDate, actPlace, actCapacity) 
-                VALUES (:name, :date, :place, :capacity)";
+    try {
+        if ($_SESSION['userrole'] == 2) {
+            $sql = "INSERT INTO t_activity (actName, actDesc, actDate, actPlace, actCapacity) 
+                VALUES (:name, :desc, :date, :place, :capacity)";
 
-        // Préparer la requête
-        $query = $pdo->prepare($sql);
+            // Préparer la requête
+            $query = $pdo->prepare($sql);
 
-        $query->bindParam(':name', $_POST['name'], PDO::PARAM_STR);
-        $query->bindParam(':date', $_POST['date'], PDO::PARAM_STR);
-        $query->bindParam(':place', $_POST['place'], PDO::PARAM_STR);
-        $query->bindParam(':capacity', $_POST['capacity'], PDO::PARAM_INT);
+            $query->bindParam(':name', $_POST['name'], PDO::PARAM_STR);
+            $query->bindParam(':desc', $_POST['desc'], PDO::PARAM_STR);
+            $query->bindParam(':date', $_POST['date'], PDO::PARAM_STR);
+            $query->bindParam(':place', $_POST['place'], PDO::PARAM_STR);
+            $query->bindParam(':capacity', $_POST['capacity'], PDO::PARAM_INT);
 
-        $query->execute();
+            $query->execute();
+        }
 
+        header('Location: ../admin.php');
+
+    } catch (Exception $e) {
+        header('Location: ../admin.php?error=create');
     }
-    header('Location: ../admin.php');
+
 }
 
 
