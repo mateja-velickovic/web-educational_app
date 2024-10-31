@@ -54,7 +54,8 @@ header #connected {
 header .login,
 .logout,
 .acc,
-.btn-admin {
+.btn-admin,
+.calendar {
   text-decoration: none;
   color: white;
   background-color: var(--main-green);
@@ -70,12 +71,16 @@ header .logout {
   background-color: var(--main-red);
 }
 
+header .calendar {
+  background-color: var(--main-blue);
+}
+
 header .acc {
   background-color: var(--main-orange);
 }
 
 header .btn-admin {
-  background-color: var(--main-blue);
+  background-color: var(--main-orange);
 }
 
 header .links {
@@ -164,6 +169,7 @@ main {
   grid-template-columns: repeat(3, 1fr);
   margin-left: 241px;
   transition: .1s ease;
+  perspective: 600px;
   margin-right: 241px;
 }
 
@@ -241,6 +247,9 @@ p {
 .activite button:hover {
   cursor: pointer;
 }
+
+/* Retournement de la carte pour afficher les infos de celle-ci */
+
 
 /* Administration page */
 .admin {
@@ -356,25 +365,30 @@ footer a img {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1150px) {
   header {
     flex-direction: column;
   }
 
   header div #t1 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+  }
+
+  header div p {
+    margin-bottom: 15px;
   }
 
   header .login,
   .logout,
   .acc,
-  .btn-admin {
+  .btn-admin,
+  .calendar {
     padding: 5px 10px 5px 10px;
     transition: .1s ease;
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 606px) {
   header {
     flex-direction: column;
   }
@@ -384,13 +398,18 @@ footer a img {
     text-align: center;
   }
 
+  header div p {
+    text-align: center;
+  }
+
   header .log {
     flex-direction: column;
     display: flex;
   }
 
   header,
-  .logout {
+  .logout,
+  .calendar {
     transition: .1s ease;
     margin-top: 10px;
   }

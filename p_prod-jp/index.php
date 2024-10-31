@@ -31,6 +31,7 @@ require "src/php/functions/administration.php";
                 <?php if (isUserAdmin($pdo, $_SESSION['userid'])) { ?>
                     <a class="btn-admin" href="src/php/admin.php">Dashboard</a>
                 <?php } ?>
+                <a class="calendar" href="">Mon planning</a>
                 <a class="logout" href="src/php/functions/logout.php">Déconnexion</a>
             <?php } ?>
         </div>
@@ -45,8 +46,9 @@ require "src/php/functions/administration.php";
                     $inscriptions = getInscriptionsCount($pdo, $row['idActivite']);
                     $hasUserJoined = hasUserJoined($pdo, $row['idActivite'], $_SESSION['userid']);
                     ?>
-                    <div class="activite">
 
+
+                    <div class="activite">
                         <h2><?php echo $row['actName']; ?><a href=""><img class="info" src="resources/images/info.png"
                                     alt=""></a></h2>
                         <p><img id="icon-info" src="resources/images/time.png" alt=""><?php echo $row['actDate']; ?></p>
@@ -54,7 +56,6 @@ require "src/php/functions/administration.php";
                                 alt=""><?php echo $inscriptions . '/' . $row['actCapacity'] . ' place(s) restante(s)'; ?>
                         </p>
                         <p><img id="icon-info" src="resources/images/place.png" alt=""><?php echo $row['actPlace']; ?></p>
-
                         <form action="src/php/joinActivite.php" method="POST">
                             <input type="hidden" name="id" value="<?php echo $row['idActivite']; ?>">
                             <?php if ($inscriptions >= $row['actCapacity'] && !$hasUserJoined): ?>
@@ -66,8 +67,12 @@ require "src/php/functions/administration.php";
                             <?php endif; ?>
                         </form>
                     </div>
+
                 <?php endforeach; ?>
             </div>
+
+            <script>
+            </script>
         </main>
     <?php else: ?>
         <div class="infoacc">
