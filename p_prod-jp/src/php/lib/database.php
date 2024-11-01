@@ -1,10 +1,10 @@
 <?php
 
-$host = "pprod-db.mysql.database.azure.com";
+$host = "db";
 $port = "3306";
 $db = "db_jpprod";
-$user = "matvelickov";
-$password = getenv('DB_PASSWORD');
+$user = "root";
+$password = "root";
 
 $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=UTF8";
 
