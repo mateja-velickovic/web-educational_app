@@ -10,6 +10,7 @@
 /* Variables */
 :root {
   --main-blue: #0050ac;
+  --background-blue: #0050ac42;
   --main-green: #009a17;
   --main-red: rgb(182, 15, 43);
   --main-orange: rgb(192, 85, 13);
@@ -276,7 +277,7 @@ table {
 }
 
 .admin tbody:nth-child(odd) {
-  background-color: #0050ac27;
+  background-color: var(--background-blue);
 }
 
 .admin thead tr {
@@ -286,7 +287,6 @@ table {
 .admin thead tr th {
   background-color: var(--main-blue);
   color: white;
-  padding: 5px;
 }
 
 .admin tbody tr td {

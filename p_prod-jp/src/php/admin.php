@@ -37,14 +37,11 @@ if ($_SESSION['userrole'] != 2) {
     <div style="overflow-x:auto;">
         <table class="admin">
 
-            <!-- Si aucune activité n'est présente -->
             <?php if (Count($result) == 0) { ?>
-                <h2 style=" color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Aucune activité
-                    n'est
-                    actuellement créée.
-                </h2>
+                <!-- Si aucune activité n'est présente -->
             <?php } else { ?>
-
+                <h2 style=" color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Liste des activités.
+                </h2>
                 <div class="admin-array">
                     <thead>
                         <tr>
