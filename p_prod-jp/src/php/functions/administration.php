@@ -36,16 +36,22 @@ function deleteActivity(PDO $pdo): void
 {
     session_start();
 
-    if ($_SESSION['userrole'] == 2) {
+    try {
 
-        $sql = "DELETE from t_activity WHERE idActivite = :idActivite ";
+        if ($_SESSION['userrole'] == 2) {
 
-        $query = $pdo->prepare($sql);
-        $query->bindParam(':idActivite', $_POST['delete'], PDO::PARAM_INT);
-        $query->execute();
+            $sql = "DELETE from t_activity WHERE idActivite = :idActivite ";
+
+            $query = $pdo->prepare($sql);
+            $query->bindParam(':idActivite', $_POST['delete'], PDO::PARAM_INT);
+            $query->execute();
+        }
+
+        header('Location: ../admin.php');
+
+    } catch (Exception $e) {
+        // header('Location: ../admin.php?error=delete');
     }
-
-    header('Location: ../admin.php');
 }
 
 /**
@@ -58,6 +64,7 @@ function createActivity(PDO $pdo): void
     session_start();
 
     try {
+
         if ($_SESSION['userrole'] == 2) {
             $sql = "INSERT INTO t_activity (actName, actDesc, actDate, actPlace, actCapacity) 
                 VALUES (:name, :desc, :date, :place, :capacity)";
@@ -92,6 +99,7 @@ function editActivity(PDO $pdo): void
     session_start();
 
     try {
+
         if ($_SESSION['userrole'] == 2) {
             $edit_activity = "UPDATE t_activity 
                     SET actName = :name, actDesc = :desc, actDate = :date, 
@@ -114,7 +122,7 @@ function editActivity(PDO $pdo): void
         header('Location: ../admin.php');
 
     } catch (Exception $e) {
-        header('Location: ../admin.php?error=create');
+        // header('Location: ../admin.php?error=edit');
     }
 
 }

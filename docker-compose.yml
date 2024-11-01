@@ -25,7 +25,7 @@ services:
       - jpnetwork
 
   web:
-    image: matap
+    image: matap:edu.1.0
     container_name: web
     volumes:
       - ./p_prod-jp:/var/www/html

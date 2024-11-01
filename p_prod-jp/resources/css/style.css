@@ -260,8 +260,14 @@ p {
 }
 
 /* Administration page */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
 .admin {
-  margin: auto;
   margin-top: 40px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -269,20 +275,30 @@ p {
   margin-bottom: 5%;
 }
 
+.admin tbody:nth-child(odd) {
+  background-color: #0050ac27;
+}
+
+.admin thead tr {
+  padding: 5px;
+}
+
 .admin thead tr th {
   background-color: var(--main-blue);
   color: white;
+  padding: 5px;
 }
 
 .admin tbody tr td {
   color: black;
   margin-right: 10px;
-  padding: 5px;
+  padding: 5px 10px 5px 10px;
 }
 
 .admin tbody tr #rm img,
 .admin tbody tr #ed img {
   width: 25px;
+  padding: 0px 5px 0px 5px;
 }
 
 .admin tbody tr button {

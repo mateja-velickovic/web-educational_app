@@ -1,5 +1,6 @@
 <?php
 
+// Informations de connexion
 $host = "db";
 $port = "3306";
 $db = "db_jpprod";

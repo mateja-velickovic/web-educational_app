@@ -16,6 +16,7 @@ require "src/php/functions/administration.php";
 
 <body>
 
+
     <header>
         <div>
             <h1 id="t1">Journée Pédagogique <?php echo date("Y") ?></h1>
@@ -37,6 +38,7 @@ require "src/php/functions/administration.php";
         </div>
     </header>
 
+    <!-- Si l'utilisateur est connecté -->
     <?php if (isset($_SESSION['loggedin'])): ?>
         <main>
             <div class="grp-activite">
@@ -74,6 +76,8 @@ require "src/php/functions/administration.php";
             <script>
             </script>
         </main>
+
+        <!-- Si l'utilisateur n'est pas connecté -->
     <?php else: ?>
         <div class="infoacc">
             <div class="grp-info">
