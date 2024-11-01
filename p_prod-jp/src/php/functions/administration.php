@@ -81,6 +81,40 @@ function createActivity(PDO $pdo): void
 
 }
 
+/**
+ * Edit an activity.
+ *
+ * @param PDO $pdo The database connection object.
+ */
+function editActivity(PDO $pdo): void
+{
+    session_start();
+
+    try {
+        if ($_SESSION['userrole'] == 2) {
+            $sql = "UPDATE t_activity SET actName = ':name', actDesc = 'desc', actDate = 'date', actPlace = 'place', actCapacity = 'capacity' WHERE idActivity = :id"; 
+
+            // Préparer la requête
+            $query = $pdo->prepare($sql);
+
+            $query->bindParam(':name', $_POST['name'], PDO::PARAM_STR);
+            $query->bindParam(':desc', $_POST['desc'], PDO::PARAM_STR);
+            $query->bindParam(':date', $_POST['date'], PDO::PARAM_STR);
+            $query->bindParam(':place', $_POST['place'], PDO::PARAM_STR);
+            $query->bindParam(':capacity', $_POST['capacity'], PDO::PARAM_INT);
+            $query->bindParam(':id', $_POST['edit'], PDO::PARAM_INT);
+
+            $query->execute();
+        }
+
+        // header('Location: ../admin.php');
+
+    } catch (Exception $e) {
+        // header('Location: ../admin.php?error=create');
+    }
+
+}
+
 
 
 if (isset($_POST['delete'])) {
@@ -98,5 +132,5 @@ if (isset($_POST['add'])) {
 if (isset($_POST['edit'])) {
     require "../lib/database.php";
 
-    createActivity($pdo);
+    editActivity($pdo);
 }

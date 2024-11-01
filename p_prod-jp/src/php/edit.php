@@ -39,8 +39,9 @@ if ($_SESSION['userrole'] != 2) {
     <h2 style="color: #cccccc; text-align: center; font-weight: normal; margin-top: 20px;">Modifiez l'activité n°
         <?php echo $activity['idActivite'] ?>.
 
-        <form class="edit-act" action="./functions/administration.php" method="POST">
-
+        <!-- Editer une activier existante -->
+        <form class="edit-act" action="./functions/administration.php" method="POST" >
+            <input type="hidden" name="edit" value="<?php echo $row['idActivite']; ?>">
 
             <input type="hidden" name="add">
             <input type="text" name="name" placeholder="Nom de l'activité" maxlength="30"
@@ -54,7 +55,7 @@ if ($_SESSION['userrole'] != 2) {
                 value="<?php echo $activity['actCapacity'] ?>" required>
 
             <button type="submit">
-                <img src="../../resources/images/ed.png" alt="Flèche verte pour créer une nouvelle activité.">
+                <img src="../../resources/images/ed.png" alt="Flèche verte pour modifier une activité existante.">
             </button>
 
         </form>
