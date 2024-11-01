@@ -8,11 +8,10 @@ $password = getenv('DB_PASSWORD');
 
 $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=UTF8";
 
-$pdo = new PDO($dsn, $user, $password);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 try {
+    $pdo = new PDO($dsn, $user, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 
     $actQuery = "SELECT * FROM t_activity";
     $getactivities = $pdo->prepare($actQuery);
