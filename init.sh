@@ -8,5 +8,5 @@ fi
 docker stop pma db web && docker rm pma db web && \
 docker volume rm web-educational_app_dbdata pprod_dbdata educational_dbdata
 docker image rm matap
-docker build -t matap .
+docker build -t matap:edu.1.0 .
 docker compose up -d
