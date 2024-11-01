@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Get the number of registrations for a specific activity.
+ * Obtenir le nombre d'inscrits à une acitivité.
  *
- * @param PDO $pdo The database connection object.
- * @param int $idActivite The ID of the activity.
- * @return int The number of registrations for the activity.
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idActivity ID de l'activité.
+ * @return int On retourne le nombre d'inscrits à l'activité.
  */
 function getInscriptionsCount(PDO $pdo, int $idActivite): int
 {
@@ -21,11 +21,11 @@ function getInscriptionsCount(PDO $pdo, int $idActivite): int
 }
 
 /**
- * Check if an activity is full or not.
+ * Vérifier si une activité est pleine ou pas.
  *
- * @param PDO $pdo The database connection object.
- * @param int $idActivity The ID of the activity.
- * @return bool True if the user has joined the activity, otherwise false.
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idActivity ID de l'activité.
+ * @return bool On retourne vrai si l'activité est pleine.
  */
 function isActivityFull(PDO $pdo, int $idActivity): bool
 {
@@ -48,12 +48,12 @@ function isActivityFull(PDO $pdo, int $idActivity): bool
 
 
 /**
- * Check if a specific user has joined a specific activity.
+ * Vérifier si un utilisater a rejoint une activité avec son ID.
  *
- * @param PDO $pdo The database connection object.
- * @param int $idActivity The ID of the activity.
- * @param int $idUser The ID of the user.
- * @return bool True if the user has joined the activity, otherwise false.
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idActivity ID de l'activité.
+ * @param int $idUser ID de l'utilisateur.
+ * @return bool On retourne vrai si l'utilisateur a rejoint l'activité.
  */
 function hasUserJoined(PDO $pdo, int $idActivity, int $idUser)
 {
@@ -71,10 +71,10 @@ function hasUserJoined(PDO $pdo, int $idActivity, int $idUser)
 
 
 /**
- * Get the activity by an id.
+ * Obtenir une activité avec son ID.
  *
- * @param PDO $pdo The database connection object.
- * @param int $idActivity The ID of the activity.
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idActivity ID de l'activité.
  */
 function getActivityByID(PDO $pdo, int $idActivity)
 {
@@ -90,10 +90,10 @@ function getActivityByID(PDO $pdo, int $idActivity)
 }
 
 /**
- * Get all the users who are in an activity.
+ * Obtenir les participants d'une activités.
  *
- * @param PDO $pdo The database connection object.
- * @param int $idActivity The ID of the activity.
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idActivity ID de l'activité.
  */
 function getUsersByActivityID(PDO $pdo, int $idActivity)
 {
@@ -108,7 +108,7 @@ function getUsersByActivityID(PDO $pdo, int $idActivity)
     $query->bindParam(':idActivite', $idActivity, PDO::PARAM_INT);
     $query->execute();
 
-    $result = $query->fetchAll(PDO::FETCH_ASSOC); // fetchAll for multiple users
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
     return $result;
 }

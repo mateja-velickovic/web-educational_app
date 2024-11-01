@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Check if the user is an administrator.
+ * Vérifier si l'utilisateur est un administrateur.
  *
- * @param PDO $pdo The database connection object.
- * @param int $idUser The ID of the user.
- * @return bool Return true if the user's admin.
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idUser ID de l'utilisateur.
+ * @return bool Si l'utilisateur est admin, on retourne vrai.
  */
 function isUserAdmin(PDO $pdo, int $idUser): bool
 {
@@ -28,9 +28,9 @@ function isUserAdmin(PDO $pdo, int $idUser): bool
 }
 
 /**
- * Delete the activity selected by the administrator.
+ * Supprimer une activité.
  *
- * @param PDO $pdo The database connection object.
+ * @param PDO $pdo Objet de connexion à la base de données.
  */
 function deleteActivity(PDO $pdo): void
 {
@@ -49,9 +49,9 @@ function deleteActivity(PDO $pdo): void
 }
 
 /**
- * Create a new activity.
+ * Créer une nouvelle activité.
  *
- * @param PDO $pdo The database connection object.
+ * @param PDO $pdo Objet de connexion à la base de données.
  */
 function createActivity(PDO $pdo): void
 {
@@ -83,9 +83,9 @@ function createActivity(PDO $pdo): void
 }
 
 /**
- * Edit an activity.
+ * Modifier une activité.
  *
- * @param PDO $pdo The database connection object.
+ * @param PDO $pdo Objet de connexion à la base de données.
  */
 function editActivity(PDO $pdo): void
 {

@@ -39,7 +39,7 @@ if ($_SESSION['userrole'] != 2) {
     <h2 style="color: #cccccc; text-align: center; font-weight: normal; margin-top: 20px;">Modifiez l'activité n°
         <?php echo $activity['idActivite'] ?>.
 
-        <!-- Editer une activité existante -->
+        <!-- Bouton pour confimer l'édition de l''activité -->
         <form class="edit-act" action="./functions/administration.php" method="POST">
             <input type="hidden" name="edit" value="<?php echo $activity['idActivite']; ?>">
 
@@ -63,6 +63,7 @@ if ($_SESSION['userrole'] != 2) {
             l'activité n°
             <?php echo $activity['idActivite'] ?>.
 
+            <!-- Liste des participants de l'activité -->
             <form class="disp-par" action="./functions/administration.php" method="POST">
 
                 <?php $result = getUsersByActivityID($pdo, $activity['idActivite']) ?>

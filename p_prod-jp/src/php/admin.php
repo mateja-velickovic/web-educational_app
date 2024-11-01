@@ -3,7 +3,7 @@ session_start();
 require "./functions/activities.php";
 require "./functions/administration.php";
 
-// If the user isn't an admin, redirect on the home page
+// On vérifie que l'utilisateur est administrateur
 if ($_SESSION['userrole'] != 2) {
     header('Location: ../../../index.php');
 }
@@ -36,14 +36,13 @@ if ($_SESSION['userrole'] != 2) {
 
     <table class="admin">
 
-        <!-- If any activity exist -->
+        <!-- Si aucune activité n'est présente -->
         <?php if (Count($result) == 0) { ?>
             <h2 style="color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Aucune activité n'est
                 actuellement créée.
             </h2>
         <?php } else { ?>
 
-            <!-- Titles of activities array -->
             <div class="admin-array">
                 <thead>
                     <tr>
@@ -59,6 +58,7 @@ if ($_SESSION['userrole'] != 2) {
                     </tr>
                 </thead>
                 <?php
+                // Tableau qui affiche toutes les activités
                 foreach ($result as $row) {
                     $registrations = getInscriptionsCount($pdo, $row['idActivite']); ?>
 
@@ -71,7 +71,7 @@ if ($_SESSION['userrole'] != 2) {
                             <td><?php echo $row['actPlace']; ?></td>
                             <td><?php echo $registrations . '/' . $row['actCapacity'] ?></td>
 
-                            <!-- Delete the activity -->
+                            <!-- Supprimer une activité -->
                             <form action="./functions/administration.php" method="POST">
                                 <input type="hidden" name="delete" value="<?php echo $row['idActivite']; ?>">
                                 <td id="rm"><button type="submit"><img src="../../resources/images/rm.png"
@@ -79,7 +79,7 @@ if ($_SESSION['userrole'] != 2) {
                                 </td>
                             </form>
 
-                            <!-- Edit the activity -->
+                            <!-- Modifier une activité -->
                             <form action="./edit.php" method="POST">
                                 <input type="hidden" name="edit" value="<?php echo $row['idActivite']; ?>">
                                 <td id="ed"><button type="submit"><img src="../../resources/images/ed.png"
@@ -95,6 +95,7 @@ if ($_SESSION['userrole'] != 2) {
 
     </table>
 
+    <!-- Créer une nouvelle activité -->
     <h2 style="color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Créez une nouvelle activité.
 
         <form class="insert-act" action="./functions/administration.php" method="POST">
@@ -115,6 +116,7 @@ if ($_SESSION['userrole'] != 2) {
 
         </form>
 
+        
         <?php if (isset($_GET['error']) && $_GET['error'] == "create") { ?>
             <p style="color: rgb(161, 0, 0); font-size: 1.2rem; text-align: center; font-weight: normal; margin-top: 20px;">
                 Échec de la
