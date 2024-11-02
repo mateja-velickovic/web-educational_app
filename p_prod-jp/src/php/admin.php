@@ -75,7 +75,9 @@ if ($_SESSION['userrole'] != 2) {
                                 <!-- Supprimer une activité -->
                                 <form action="./functions/administration.php" method="POST">
                                     <input type="hidden" name="delete" value="<?php echo $row['idActivite']; ?>">
-                                    <td id="rm"><button type="submit"><img src="../../resources/images/rm.png"
+                                    <td id="rm"><button type="submit"
+                                            onclick="return confirm('Voulez-vous vraiment supprimer l\'activité n°<?php echo $row['idActivite']; ?>');"><img
+                                                src="../../resources/images/rm.png"
                                                 alt="Corbeille pour la supression d'une activité dans la page d'administration"></button>
                                     </td>
                                 </form>
@@ -89,7 +91,6 @@ if ($_SESSION['userrole'] != 2) {
                                 </form>
 
                                 <p>
-
 
                             </tr>
                         <?php }
@@ -108,7 +109,7 @@ if ($_SESSION['userrole'] != 2) {
             <br>
             <input type="hidden" name="add">
 
-            <input type="text" name="name" placeholder="Nom de l'activité" maxlength="30" required>
+            <input type="text" name="name" placeholder="Nom de l'activité" maxlength="50" required>
             <input type="text" name="desc" placeholder="Description" maxlength="50" required>
             <input type="datetime-local" name="date" required>
             <input type="text" name="place" placeholder="Lieu" maxlength="50" required>

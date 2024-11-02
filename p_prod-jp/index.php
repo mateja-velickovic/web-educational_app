@@ -49,7 +49,6 @@ require "src/php/functions/administration.php";
                     $hasUserJoined = hasUserJoined($pdo, $row['idActivite'], $_SESSION['userid']);
                     ?>
 
-
                     <div class="activite">
                         <h2><?php echo $row['actName']; ?><a href=""><img class="info" src="resources/images/info.png"
                                     alt=""></a></h2>

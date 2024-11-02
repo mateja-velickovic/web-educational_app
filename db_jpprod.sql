@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS `t_activity`;
 CREATE TABLE `t_activity` (
   `idActivite` int NOT NULL,
   `actName` varchar(50) NOT NULL,
-  `actDesc` varchar(50) NOT NULL,
+  `actDesc` varchar(100) NOT NULL,
   `actDate` timestamp NOT NULL,
   `actPlace` varchar(50) NOT NULL,
   `actCapacity` int NOT NULL

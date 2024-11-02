@@ -189,6 +189,7 @@ main {
   position: relative;
   margin: 15px;
   border-radius: 15px;
+  word-wrap: break-word;
   padding: 10px 0px 70px 0px;
   background-color: #e0e0e0;
   overflow: hidden;
@@ -340,13 +341,30 @@ table {
 
 /* Edit Activity */
 .edit-act {
-  display: flex;
+  display: grid;
   margin: auto;
   text-align: center;
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
   margin-top: 20px;
   flex-wrap: wrap;
+}
+
+.edit-act textarea {
+  padding: 5px 20px 5px 20px;
+  text-align: center;
+  min-width: 187px;
+  min-height: 20px;
+  justify-content: center;
+}
+
+.edit-act #ed-info {
+  font-size: 1.2rem;
+}
+.edit-act input {
+  padding: 5px 20px 5px 20px;
+  margin: auto;
+  max-width: 187px;
 }
 
 .edit-act button {
@@ -356,12 +374,35 @@ table {
 
 .edit-act button img {
   width: 25px;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
-.edit-act .participant {
-  display: inline-block;
+/* Liste des participants */
+.disp-par {
+  margin: auto;
+  width: 100%;
+  text-align: center;
 }
 
+.disp-par .participant {
+  margin: auto;
+  display: flex;
+  text-align: center;
+  color: white;
+}
+
+.disp-par .participant button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  width: 25px;
+}
+
+.disp-par .participant button img {
+  width: 25px;
+  margin-left: 5px;
+}
 /* Footer */
 footer {
   text-align: center;
