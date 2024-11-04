@@ -36,57 +36,58 @@ if ($_SESSION['userrole'] != 2) {
 
     <?php $activity = getActivityByID($pdo, $_POST['edit']); ?>
 
-    <h2 style="color: #cccccc; text-align: center; font-weight: normal; margin-top: 20px;">Modifiez l'activité n°
-        <?php echo $activity['idActivite'] ?>.
+    <!-- Modifier une activité -->
+    <div class="edit-main">
+        <div class="edit-left">
+            <form class="edit-act" action="./functions/administration.php" method="POST">
+                <input type="hidden" name="edit" value="<?php echo $activity['idActivite']; ?>">
 
-        <!-- Modifier une activité -->
-        <form class="edit-act" action="./functions/administration.php" method="POST">
-            <input type="hidden" name="edit" value="<?php echo $activity['idActivite']; ?>">
-
-            <p id="ed-info">Nom de l'activité</p>
-            <input type="text" name="name" maxlength="50" value="<?php echo $activity['actName'] ?>" required>
+                <p id="ed-info">Nom de l'activité</p>
+                <textarea style="max-height: 100px;" type="text" name="name" maxlength="50"><?php echo $activity['actName'] ?></textarea required>
             <p id="ed-info">Description</p>
-            <textarea type="text" name="desc" maxlength="100"><?php echo $activity['actDesc'] ?>
-                 </textarea required>
-            <p id="ed-info">Date</p>
-            <input type="datetime-local" name="date" value="<?php echo $activity['actDate'] ?>" required>
-            <p id="ed-info">Lieu</p>
-            <input type="text" name="place" placeholder="Lieu" maxlength="50"
-                value="<?php echo $activity['actPlace'] ?>" required>
-            <p id="ed-info">Capacité</p>
-            <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000"
-                value="<?php echo $activity['actCapacity'] ?>" required>
+            <textarea style="max-height: 125px;" type="text" name="desc" maxlength="100"><?php echo $activity['actDesc'] ?>
+                     </textarea required>
+                <p id="ed-info">Date</p>
+                <input type="datetime-local" name="date" value="<?php echo $activity['actDate'] ?>" required>
+                <p id="ed-info">Lieu</p>
+                <textarea style="max-height: 100px;" type="text" name="place" maxlength="50"><?php echo $activity['actPlace'] ?></textarea required>
+                <p id="ed-info">Capacité</p>
+                <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000"
+                    value="<?php echo $activity['actCapacity'] ?>" required>
+    
+                <button type="submit" onclick="return confirm('Voulez-vous vraiment modifier l\'activité n°<?php echo $activity['idActivite']; ?>');" >
+                    <img src="../../resources/images/ed.png" alt="Flèche verte pour modifier une activité existante.">
+                </button>
+    
+            </form>
+     </div>
 
-            <button type="submit" onclick="return confirm('Voulez-vous vraiment modifier l\'activité n°<?php echo $activity['idActivite']; ?>');" >
-                <img src="../../resources/images/ed.png" alt="Flèche verte pour modifier une activité existante.">
-            </button>
-
-        </form>
-
-        <h2 style="color: #cccccc; text-align: center; font-weight: normal; margin-top: 20px;">Participants de
-            l'activité n°<?php echo $activity['idActivite'] ?>.</h2>
+    <div class="edit-right">
+            <h2 style="color: #cccccc; text-align: center; font-weight: normal; margin-top: 20px;">Participants de l'activité n°<?php echo $activity['idActivite'] ?>.</h2>
             
-
+            
             <!-- Liste des participants de l'activité -->
             <form class="disp-par" action="./functions/administration.php" method="POST">
-
+            
                 <?php $result = getUsersByActivityID($pdo, $activity['idActivite']) ?>
-
+            
                 <?php foreach ($result as $row) { ?>
+            
+                        <div class="participant">
 
+                            <p style="font-size: 1.2rem"><?php echo $row['idUser'] . ' ' . $row['useName'] . ' ' . $row['useSurname'] ?></p>
+                            <button type="submit">
+                                <img src="../../resources/images/rm.png" alt="Flèche verte pour créer une nouvelle activité.">
+                            </button>
 
-                    <div class="participant" >
-
-                        <p style="font-size: 1.2rem"><?php echo $row['idUser'] . ' ' . $row['useName'] . ' ' . $row['useSurname'] ?></p>
-                        <button type="submit">
-                            <img src="../../resources/images/rm.png" alt="Flèche verte pour créer une nouvelle activité.">
-                        </button>
-
-                    </div>
-                    
+                        </div>
+            
                 <?php } ?>
-
+            
             </form>
+    </div>
+     </div>
+
 
             <footer><a href="https://github.com/mateja-velickovic" target="_blank"><img id="icon-info"
                         src="../../resources/images/github.png" alt=""></a>Réalisé par Velickovic Mateja -

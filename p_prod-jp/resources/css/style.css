@@ -14,6 +14,7 @@
   --main-green: #009a17;
   --main-red: rgb(182, 15, 43);
   --main-orange: rgb(192, 85, 13);
+  --background-orange: rgba(192, 85, 13, 0.432);
 }
 
 /* Body */
@@ -217,7 +218,7 @@ main {
   filter: blur(0.5px);
 }
 
-.activite > p,
+.activite>p,
 h2 {
   position: relative;
   font-weight: 200;
@@ -244,8 +245,7 @@ h2 {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.activite h2,
-p {
+.activite h2 {
   padding-left: 10px;
 }
 
@@ -348,23 +348,59 @@ table {
   gap: 5px;
   margin-top: 20px;
   flex-wrap: wrap;
+  color: white;
+}
+
+.edit-main {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 50px;
+  margin-right: 50px;
+  width: 100%;
+}
+
+.edit-left {
+  width: 50%;
+}
+
+.edit-right {
+  width: 50%;
 }
 
 .edit-act textarea {
   padding: 5px 20px 5px 20px;
-  text-align: center;
-  min-width: 187px;
-  min-height: 20px;
+  text-align: left;
+  min-width: 250px;
+  max-width: 250px;
+  width: 250px;
+  max-height: 150px;
   justify-content: center;
+  border: 0;
+  background-color: #cccccc;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 5px black;
+  font-size: 1.1rem;
 }
 
 .edit-act #ed-info {
   font-size: 1.2rem;
 }
+
 .edit-act input {
   padding: 5px 20px 5px 20px;
   margin: auto;
-  max-width: 187px;
+  min-width: 250px;
+  max-width: 250px;
+  width: 250px;
+  border: 0;
+  background-color: #cccccc;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  box-shadow: 1px 1px 5px black;
+  margin-bottom: 10px;
 }
 
 .edit-act button {
@@ -403,6 +439,7 @@ table {
   width: 25px;
   margin-left: 5px;
 }
+
 /* Footer */
 footer {
   text-align: center;
