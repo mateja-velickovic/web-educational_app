@@ -218,11 +218,15 @@ main {
   filter: blur(0.5px);
 }
 
-.activite>p,
+.activite > p,
 h2 {
   position: relative;
   font-weight: 200;
   z-index: 1;
+}
+
+.activite p {
+  margin-left: 10px;
 }
 
 .activite button {
