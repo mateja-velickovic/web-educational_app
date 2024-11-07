@@ -32,7 +32,7 @@ require "src/php/functions/administration.php";
                 <?php if (isUserAdmin($pdo, $_SESSION['userid'])) { ?>
                     <a class="btn-admin" href="src/php/admin.php">Dashboard</a>
                 <?php } ?>
-                <a class="calendar" href="">Mon planning</a>
+                <a class="calendar" href="src/php/planning.php">Mon planning</a>
                 <a class="logout" href="src/php/functions/logout.php">Déconnexion</a>
             <?php } ?>
         </div>
@@ -59,16 +59,22 @@ require "src/php/functions/administration.php";
                         </p>
                         <p><img id="icon-info" src="resources/images/place.png"
                                 alt="Logo pour représenter l'épingle d'une carte"><?php echo $row['actPlace']; ?></p>
+
                         <form action="src/php/joinActivite.php" method="POST">
                             <input type="hidden" name="id" value="<?php echo $row['idActivite']; ?>">
+
                             <?php if ($inscriptions >= $row['actCapacity'] && !$hasUserJoined): ?>
                                 <button id="waiting_list">SE METTRE EN ATTENTE</button>
+
                             <?php elseif ($hasUserJoined): ?>
                                 <button id="leave_activity">QUITTER L'ACTIVITÉ</button>
+
                             <?php else: ?>
                                 <button type="submit">REJOINDRE L'ACTIVITÉ</button>
+
                             <?php endif; ?>
                         </form>
+
                     </div>
 
                 <?php endforeach; ?>

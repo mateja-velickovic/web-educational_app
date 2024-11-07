@@ -16,7 +16,7 @@ $isActivityFull = isActivityFull($pdo, $_POST['id']);
 
 if (isset($pdo)) {
 
-    // Si l'utilisateur n'a pas rejoint l'activité alors
+    // Si l'utilisateur n'a pas rejoint l'activité et qu'elle est pas pleine alors : Rejoindre
     if (!$hasUserJoined && !$isActivityFull) {
         $joinActQuery = "INSERT INTO `t_registration` (`fkUser`, `fkActivity`) VALUES (:fkUser, :fkActivity)";
 
@@ -30,7 +30,7 @@ if (isset($pdo)) {
 
     }
 
-    // Si l'utilisateur a déjà rejoint l'activité alors
+    // Si l'utilisateur a déjà rejoint l'activité alors : Quitter
     if ($hasUserJoined) {
         $leaveActQuery = "DELETE FROM `t_registration` WHERE fkUser = :fkUser AND fkActivity = :fkActivity";
 
@@ -41,6 +41,19 @@ if (isset($pdo)) {
 
         // Exécuter la requête
         $leaveAct->execute();
+    }
+
+    // Si l'utilisateur n'a pas rejoint l'acitivité et qu'elle est pleine : File d'attente
+    if (!$hasUserJoined && $isActivityFull) {
+        $joinActQuery = "INSERT INTO `t_waiting` (`fkUser`, `fkActivity`) VALUES (:fkUser, :fkActivity)";
+
+        $joinAct = $pdo->prepare($joinActQuery);
+
+        $joinAct->bindParam(':fkUser', $_SESSION['userid'], PDO::PARAM_INT);
+        $joinAct->bindParam(':fkActivity', $_POST['id'], PDO::PARAM_INT);
+
+        // Exécuter la requête
+        $joinAct->execute();
     }
 
     header("Location: ../../../index.php");
