@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: db
--- Generation Time: Oct 10, 2024 at 08:15 AM
--- Server version: 8.0.30
--- PHP Version: 8.0.27
+-- Hôte : db
+-- Généré le : jeu. 07 nov. 2024 à 08:52
+-- Version du serveur : 8.0.30
+-- Version de PHP : 8.0.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_jpprod`
+-- Base de données : `db_jpprod`
 --
 CREATE DATABASE IF NOT EXISTS `db_jpprod` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
 USE `db_jpprod`;
@@ -26,7 +26,7 @@ USE `db_jpprod`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_activity`
+-- Structure de la table `t_activity`
 --
 
 DROP TABLE IF EXISTS `t_activity`;
@@ -40,12 +40,12 @@ CREATE TABLE `t_activity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `t_activity`
+-- Déchargement des données de la table `t_activity`
 --
 
-INSERT INTO `t_activity` (`idActivite`, `actName`, `actDesc`,  `actDate`, `actPlace`, `actCapacity`) VALUES
-(1, 'Randonnée en montagne', 'Description de lactivité', '2024-10-15 09:00:00', 'Alpes Suisses', 30),
-(2, 'Atelier de cuisine', 'Description de lactivité', '2024-10-20 14:00:00', 'Lausanne', 20),
+INSERT INTO `t_activity` (`idActivite`, `actName`, `actDesc`, `actDate`, `actPlace`, `actCapacity`) VALUES
+(1, 'Randonée en montagne', 'Description de lactivité ', '2024-11-07 08:51:56', 'Lausanne', 20),
+(2, 'Atelier de cuisine', 'Description de lactivité ', '2024-10-20 14:00:00', 'Lausanne', 20),
 (3, 'Conférence sur IA', 'Description de lactivité', '2024-10-25 10:30:00', 'EPFL', 100),
 (4, 'Tournoi de football', 'Description de lactivité', '2024-11-01 15:00:00', 'Stade de Genève', 50),
 (5, 'Séance de yoga', 'Description de lactivité', '2024-10-18 08:00:00', 'Parc de Lausanne', 25),
@@ -58,7 +58,7 @@ INSERT INTO `t_activity` (`idActivite`, `actName`, `actDesc`,  `actDate`, `actPl
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_registration`
+-- Structure de la table `t_registration`
 --
 
 DROP TABLE IF EXISTS `t_registration`;
@@ -71,7 +71,7 @@ CREATE TABLE `t_registration` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_role`
+-- Structure de la table `t_role`
 --
 
 DROP TABLE IF EXISTS `t_role`;
@@ -81,7 +81,7 @@ CREATE TABLE `t_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Dumping data for table `t_role`
+-- Déchargement des données de la table `t_role`
 --
 
 INSERT INTO `t_role` (`idRole`, `rolName`) VALUES
@@ -91,7 +91,7 @@ INSERT INTO `t_role` (`idRole`, `rolName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_user`
+-- Structure de la table `t_user`
 --
 
 DROP TABLE IF EXISTS `t_user`;
@@ -104,17 +104,17 @@ CREATE TABLE `t_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `t_activity`
+-- Index pour la table `t_activity`
 --
 ALTER TABLE `t_activity`
   ADD PRIMARY KEY (`idActivite`);
 
 --
--- Indexes for table `t_registration`
+-- Index pour la table `t_registration`
 --
 ALTER TABLE `t_registration`
   ADD PRIMARY KEY (`idRegistration`),
@@ -122,14 +122,14 @@ ALTER TABLE `t_registration`
   ADD KEY `fkActivity` (`fkActivity`);
 
 --
--- Indexes for table `t_role`
+-- Index pour la table `t_role`
 --
 ALTER TABLE `t_role`
   ADD PRIMARY KEY (`idRole`),
   ADD UNIQUE KEY `idRole` (`idRole`);
 
 --
--- Indexes for table `t_user`
+-- Index pour la table `t_user`
 --
 ALTER TABLE `t_user`
   ADD PRIMARY KEY (`idUser`),
@@ -137,35 +137,46 @@ ALTER TABLE `t_user`
   ADD KEY `fkRole` (`fkRole`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `t_activity`
+-- AUTO_INCREMENT pour la table `t_activity`
 --
 ALTER TABLE `t_activity`
   MODIFY `idActivite` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `t_registration`
+-- AUTO_INCREMENT pour la table `t_registration`
 --
 ALTER TABLE `t_registration`
-  MODIFY `idRegistration` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idRegistration` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `t_role`
+-- AUTO_INCREMENT pour la table `t_role`
 --
 ALTER TABLE `t_role`
   MODIFY `idRole` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `t_user`
+-- AUTO_INCREMENT pour la table `t_user`
 --
 ALTER TABLE `t_user`
-  MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for table `t_user`
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `t_registration`
+--
+ALTER TABLE `t_registration`
+  ADD CONSTRAINT `t_registration_ibfk_1` FOREIGN KEY (`fkActivity`) REFERENCES `t_activity` (`idActivite`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `t_registration_ibfk_2` FOREIGN KEY (`fkUser`) REFERENCES `t_user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `t_user`
 --
 ALTER TABLE `t_user`
   ADD CONSTRAINT `t_user_ibfk_1` FOREIGN KEY (`fkRole`) REFERENCES `t_role` (`idRole`);
