@@ -35,25 +35,25 @@ if ($_SESSION['userrole'] != 2) {
     <?php require "lib/database.php"; ?>
 
     <div style="overflow-x:auto;">
+
         <table class="admin">
 
             <?php if (Count($result) == 0) { ?>
                 <!-- Si aucune activité n'est présente -->
             <?php } else { ?>
-                <h2 style=" color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Liste des activités.
+            
+                <h2 style=" color: white; text-align: center; font-weight: normal; margin-top: 20px;">Liste des activités.
                 </h2>
+
                 <div class="admin-array">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nom</th>
                             <th>Description</th>
                             <th>Date</th>
-                            <th>Lieu</th>
                             <th>Capacité</th>
-                            <th> </th>
-                            <th> </th>
-                            <th> </th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
                         </tr>
                     </thead>
                     <?php
@@ -65,11 +65,9 @@ if ($_SESSION['userrole'] != 2) {
                         <tbody>
                             <tr>
 
-                                <td><?php echo $row['idActivite'] ?></td>
                                 <td><?php echo $row['actName']; ?></td>
                                 <td><?php echo $row['actDesc']; ?></td>
                                 <td><?php echo $row['actDate']; ?></td>
-                                <td><?php echo $row['actPlace']; ?></td>
                                 <td><?php echo $registrations . '/' . $row['actCapacity'] ?></td>
 
                                 <!-- Modifier une activité -->
@@ -102,23 +100,28 @@ if ($_SESSION['userrole'] != 2) {
     </div>
 
     <!-- Créer une nouvelle activité -->
-    <h2 style="color: #CCCCCC; text-align: center; font-weight: normal; margin-top: 20px;">Créez une nouvelle
-        activité.
+    <h2 style="color: white; text-align: center; font-weight: normal; margin-top: 10px; margin-bottom: 20px;">Créez une nouvelle
+        activité.</h2>
 
         <form class="insert-act" action="./functions/administration.php" method="POST">
-            <br>
-            <input type="hidden" name="add">
+                
+                <input type="hidden" name="add">
 
-            <input type="text" name="name" placeholder="Nom de l'activité" maxlength="50" required>
-            <input type="text" name="desc" placeholder="Description" maxlength="50" required>
-            <input type="datetime-local" name="date" required>
-            <input type="text" name="place" placeholder="Lieu" maxlength="50" required>
-            <input type="number" name="capacity" placeholder="Places" min="0" max="1000" required>
-
-            <button type="submit">
+                <textarea style="max-height: 100px; min-height: 40px;" type="text" placeholder="Nom de l'activité (max 50c)" name="name" maxlength="50"></textarea required>
+            
+                <textarea style="max-height: 175px; min-height: 40px;" type="text" placeholder="Description (max 100c)" name="desc" maxlength="100"></textarea required>
+                
+                <input type="datetime-local" name="date" required>
+                
+                <textarea style="max-height: 100px; min-height: 40px;" placeholder="Lieu" type="text" name="place" maxlength="50"></textarea required>
+                
+                <input type="number" name="capacity" min="0" max="1000" placeholder="Capacité" required>
+    
+                <button type="submit">
                 <img src="../../resources/images/add.png" alt="Flèche verte pour créer une nouvelle activité.">
-            </button>
-        </form>
+                </button>
+    
+            </form>
 
 
         <?php if (isset($_GET['error']) && $_GET['error'] == "create") { ?>

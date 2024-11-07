@@ -48,7 +48,7 @@ if ($_SESSION['userrole'] != 2) {
                 <textarea style="max-height: 100px; min-height: 40px;" type="text" name="name" maxlength="50"><?php echo $activity['actName'] ?></textarea required>
             
                 <p id="ed-info">Description</p>
-                <textarea style="max-height: 150px; min-height: 40px;" type="text" name="desc" maxlength="100"><?php echo $activity['actDesc'] ?> </textarea required>
+                <textarea style="max-height: 175px; min-height: 40px;" type="text" name="desc" maxlength="100"><?php echo $activity['actDesc'] ?> </textarea required>
                 
                 <p id="ed-info">Date</p>
                 <input type="datetime-local" name="date" value="<?php echo $activity['actDate'] ?>" required>
@@ -77,6 +77,7 @@ if ($_SESSION['userrole'] != 2) {
                     <?php foreach ($result as $row) { ?>
 
                     <input type="hidden" name="delete_user" value="<?php echo $row['idUser']; ?>">
+                    <input type="hidden" name="delete_user_act" value="<?php echo $activity['idActivite']; ?>">
 
                         <div class="participant">
                             <p style="font-size: 1.2rem"><?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?></p>
