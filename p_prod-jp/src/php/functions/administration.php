@@ -127,22 +127,54 @@ function editActivity(PDO $pdo): void
 
 }
 
+/**
+ * Supprimer un utilisateur.
+ *
+ * @param PDO $pdo Objet de connexion à la base de données.
+ */
+function deletUser(PDO $pdo): void
+{
+
+    session_start();
+
+    try {
+
+        if ($_SESSION['userrole'] == 2) {
+            $delete_user = "DELETE FROM `t_registration` WHERE fKuser = :id";
+
+            // Préparer la requête
+            $query = $pdo->prepare($delete_user);
+
+            $query->bindParam(':id', $_POST['delete_user'], PDO::PARAM_INT);
+
+            $query->execute();
+        }
+
+        header('Location: ../admin.php');
+
+    } catch (Exception $e) {
+        // header('Location: ../admin.php?error=delete_user');
+    }
+
+}
 
 
 if (isset($_POST['delete'])) {
     require "../lib/database.php";
-
     deleteActivity($pdo);
 }
 
 if (isset($_POST['add'])) {
     require "../lib/database.php";
-
     createActivity($pdo);
 }
 
 if (isset($_POST['edit'])) {
     require "../lib/database.php";
-
     editActivity($pdo);
+}
+
+if (isset($_POST['delete_user'])) {
+    require "../lib/database.php";
+    deletUser($pdo);
 }

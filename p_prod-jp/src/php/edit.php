@@ -71,17 +71,20 @@ if ($_SESSION['userrole'] != 2) {
             
             <!-- Liste des participants de l'activité avec la possibilité de les supprimer-->
             <form class="disp-par" action="./functions/administration.php" method="POST">
-            
+
                 <?php $result = getUsersByActivityID($pdo, $activity['idActivite']); ?>
-            
-                <?php foreach ($result as $row) { ?>
-                    <div class="participant">
-                        <p style="font-size: 1.2rem"><?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?></p>
-                        <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur : <?php echo $row['useName'] . ' ' . $row['useSurname']; ?>');">
-                            <img src="../../resources/images/rm.png" alt="Flèche verte pour créer une nouvelle activité.">
-                        </button>
-                    </div>
-                <?php } ?>
+                
+                    <?php foreach ($result as $row) { ?>
+
+                    <input type="hidden" name="delete_user" value="<?php echo $row['idUser']; ?>">
+
+                        <div class="participant">
+                            <p style="font-size: 1.2rem"><?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?></p>
+                            <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur : <?php echo $row['useName'] . ' ' . $row['useSurname']; ?>');">
+                                <img src="../../resources/images/rm.png" alt="Flèche verte pour créer une nouvelle activité.">
+                            </button>
+                        </div>
+                    <?php } ?>
             
             </form>
     </div>
