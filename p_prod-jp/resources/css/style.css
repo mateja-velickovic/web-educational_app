@@ -280,7 +280,6 @@ table {
   margin-bottom: 5%;
 }
 
-
 .admin tbody {
   background-color: white;
 }
@@ -308,19 +307,19 @@ table {
 .admin tbody tr #rm img,
 .admin tbody tr #ed img {
   width: 25px;
-  transition: .3s ease;
+  transition: 0.3s ease;
   cursor: pointer;
   padding: 0px 5px 0px 5px;
   filter: drop-shadow(1px 1px 1px transparent);
 }
 
 .admin tbody tr #ed img:hover {
-  transition: .3s ease;
+  transition: 0.3s ease;
   filter: drop-shadow(1px 1px 1px var(--main-orange));
 }
 
 .admin tbody tr #rm img:hover {
-  transition: .3s ease;
+  transition: 0.3s ease;
   filter: drop-shadow(1px 1px 1px var(--main-red));
 }
 
@@ -362,16 +361,17 @@ table {
 
 .insert-act button img {
   filter: drop-shadow(1px 1px 1px transparent);
-  transition: .3s ease;
+  transition: 0.3s ease;
 }
 
 .insert-act button img:hover {
   filter: drop-shadow(1px 1px 1px var(--main-green));
-  transition: .3s ease;
+  transition: 0.3s ease;
 }
 
 /* Create & edit Activity */
-.edit-act, .insert-act {
+.edit-act,
+.insert-act {
   display: grid;
   margin: auto;
   text-align: center;
@@ -396,7 +396,8 @@ table {
   width: 50%;
 }
 
-.edit-act textarea, .insert-act textarea {
+.edit-act textarea,
+.insert-act textarea {
   padding: 5px 20px 5px 20px;
   text-align: left;
   min-width: 250px;
@@ -418,7 +419,8 @@ table {
   font-size: 1.2rem;
 }
 
-.edit-act input, .insert-act input {
+.edit-act input,
+.insert-act input {
   padding: 5px 20px 5px 20px;
   margin: auto;
   color: var(--main-blue);
@@ -439,21 +441,24 @@ table {
   color: var(--main-blue);
 }
 
-.edit-act button, .insert-act  button {
+.edit-act button,
+.insert-act button {
   background-color: transparent;
   border: none;
 }
 
-.edit-act button img, .insert-act button img {
+.edit-act button img,
+.insert-act button img {
   width: 25px;
   margin-top: 10px;
   filter: drop-shadow(1px 1px 1px transparent);
-  transition: .3s ease;
+  transition: 0.3s ease;
   cursor: pointer;
 }
 
-.edit-act button img:hover, .insert-act button img:hover {
-  transition: .3s ease;
+.edit-act button img:hover,
+.insert-act button img:hover {
+  transition: 0.3s ease;
   filter: drop-shadow(1px 1px 1px var(--main-green));
 }
 
@@ -468,7 +473,7 @@ table {
   justify-content: center;
   width: 100%;
   border-radius: 10px;
-  transition: .3s ease;
+  transition: 0.3s ease;
   cursor: pointer;
   color: var(--main-blue);
   align-items: center;
@@ -481,7 +486,7 @@ table {
   box-shadow: 1px 1px 5px black;
   background-color: white;
   border-radius: 10px;
-  transition: .3s ease;
+  transition: 0.3s ease;
 }
 
 .disp-par .participant button {
@@ -493,17 +498,22 @@ table {
 .disp-par .participant button img {
   width: 25px;
   filter: drop-shadow(1px 1px 1px transparent);
-  transition: .3s ease;
+  transition: 0.3s ease;
   margin-left: 10px;
   border-radius: 10px;
   padding-left: 10px;
   padding: 5px 5px 5px 8px;
 }
 
-.disp-par .participant button img:hover  {
+.disp-par .participant button img:hover {
   filter: drop-shadow(1px 1px 1px var(--main-red));
   border-radius: 10px;
-  transition: .3s ease;
+  transition: 0.3s ease;
+}
+
+/* Planning */
+.planning {
+  color: white;
 }
 
 /* Footer */
@@ -578,7 +588,7 @@ footer a img {
   }
 }
 
-@media (max-width: 840px){
+@media (max-width: 840px) {
   .edit-main {
     flex-direction: column;
   }
@@ -586,10 +596,10 @@ footer a img {
   .edit-left {
     width: 100%;
   }
-  
+
   .edit-right {
     width: 100%;
-  } 
+  }
 
   table {
     width: 100%;
