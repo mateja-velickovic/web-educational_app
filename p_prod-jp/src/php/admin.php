@@ -72,6 +72,14 @@ if ($_SESSION['userrole'] != 2) {
                                 <td><?php echo $row['actPlace']; ?></td>
                                 <td><?php echo $registrations . '/' . $row['actCapacity'] ?></td>
 
+                                <!-- Modifier une activité -->
+                                <form action="./edit.php" method="POST">
+                                    <input type="hidden" name="edit" value="<?php echo $row['idActivite']; ?>">
+                                    <td id="ed"><button type="submit"><img src="../../resources/images/ed.png"
+                                                alt="Stylo pour la modification d'une activité dans la page d'administration"></button>
+                                    </td>
+                                </form>
+
                                 <!-- Supprimer une activité -->
                                 <form action="./functions/administration.php" method="POST">
                                     <input type="hidden" name="delete" value="<?php echo $row['idActivite']; ?>">
@@ -79,14 +87,6 @@ if ($_SESSION['userrole'] != 2) {
                                             onclick="return confirm('Voulez-vous vraiment supprimer l\'activité n°<?php echo $row['idActivite']; ?>');"><img
                                                 src="../../resources/images/rm.png"
                                                 alt="Corbeille pour la supression d'une activité dans la page d'administration"></button>
-                                    </td>
-                                </form>
-
-                                <!-- Modifier une activité -->
-                                <form action="./edit.php" method="POST">
-                                    <input type="hidden" name="edit" value="<?php echo $row['idActivite']; ?>">
-                                    <td id="ed"><button type="submit"><img src="../../resources/images/ed.png"
-                                                alt="Stylo pour la modification d'une activité dans la page d'administration"></button>
                                     </td>
                                 </form>
 

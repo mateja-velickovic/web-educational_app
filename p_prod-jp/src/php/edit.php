@@ -38,50 +38,49 @@ if ($_SESSION['userrole'] != 2) {
 
     <!-- Modifier une activité -->
     <div class="edit-main">
+        
         <div class="edit-left">
             <form class="edit-act" action="./functions/administration.php" method="POST">
+                
                 <input type="hidden" name="edit" value="<?php echo $activity['idActivite']; ?>">
 
                 <p id="ed-info">Nom de l'activité</p>
                 <textarea style="max-height: 100px; min-height: 40px;" type="text" name="name" maxlength="50"><?php echo $activity['actName'] ?></textarea required>
-            <p id="ed-info">Description</p>
-            <textarea style="max-height: 150px; min-height: 40px;" type="text" name="desc" maxlength="100"><?php echo $activity['actDesc'] ?>
-                     </textarea required>
+            
+                <p id="ed-info">Description</p>
+                <textarea style="max-height: 150px; min-height: 40px;" type="text" name="desc" maxlength="100"><?php echo $activity['actDesc'] ?> </textarea required>
+                
                 <p id="ed-info">Date</p>
                 <input type="datetime-local" name="date" value="<?php echo $activity['actDate'] ?>" required>
+                
                 <p id="ed-info">Lieu</p>
                 <textarea style="max-height: 100px; min-height: 40px;" type="text" name="place" maxlength="50"><?php echo $activity['actPlace'] ?></textarea required>
+                
                 <p id="ed-info">Capacité</p>
-                <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000"
-                    value="<?php echo $activity['actCapacity'] ?>" required>
+                <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000" value="<?php echo $activity['actCapacity'] ?>" required>
     
                 <button type="submit" onclick="return confirm('Voulez-vous vraiment modifier l\'activité n°<?php echo $activity['idActivite']; ?>');" >
-                    <img src="../../resources/images/ed.png" alt="Flèche verte pour modifier une activité existante.">
+                    <img src="../../resources/images/validate.png" alt="Flèche verte pour modifier une activité existante.">
                 </button>
     
             </form>
      </div>
 
     <div class="edit-right">
-            <h2 style="color: #cccccc; text-align: center; font-weight: normal; margin-top: 20px;">Participants de l'activité n°<?php echo $activity['idActivite'] ?>.</h2>
+            <h2 style="color: white; text-align: center; font-weight: normal; margin: 20px 0px 20px 0px;">Participants de l'activité n°<?php echo $activity['idActivite'] ?>.</h2>
             
-            
-            <!-- Liste des participants de l'activité -->
+            <!-- Liste des participants de l'activité avec la possibilité de les supprimer-->
             <form class="disp-par" action="./functions/administration.php" method="POST">
             
-                <?php $result = getUsersByActivityID($pdo, $activity['idActivite']) ?>
+                <?php $result = getUsersByActivityID($pdo, $activity['idActivite']); ?>
             
                 <?php foreach ($result as $row) { ?>
-            
-                                    <div class="participant">
-
-                                        <p style="font-size: 1.2rem"><?php echo $row['idUser'] . ' ' . $row['useName'] . ' ' . $row['useSurname'] ?></p>
-                                        <button type="submit">
-                                            <img src="../../resources/images/rm.png" alt="Flèche verte pour créer une nouvelle activité.">
-                                        </button>
-
-                                    </div>
-            
+                    <div class="participant">
+                        <p style="font-size: 1.2rem"><?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?></p>
+                        <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur : <?php echo $row['useName'] . ' ' . $row['useSurname']; ?>');">
+                            <img src="../../resources/images/rm.png" alt="Flèche verte pour créer une nouvelle activité.">
+                        </button>
+                    </div>
                 <?php } ?>
             
             </form>
