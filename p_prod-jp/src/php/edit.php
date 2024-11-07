@@ -38,10 +38,10 @@ if ($_SESSION['userrole'] != 2) {
 
     <!-- Modifier une activité -->
     <div class="edit-main">
-        
+
         <div class="edit-left">
             <form class="edit-act" action="./functions/administration.php" method="POST">
-                
+
                 <input type="hidden" name="edit" value="<?php echo $activity['idActivite']; ?>">
 
                 <p id="ed-info">Nom de l'activité</p>
@@ -60,7 +60,7 @@ if ($_SESSION['userrole'] != 2) {
                 <input type="number" name="capacity" placeholder="Capacité" min="0" max="1000" value="<?php echo $activity['actCapacity'] ?>" required>
     
                 <button type="submit" onclick="return confirm('Voulez-vous vraiment modifier l\'activité n°<?php echo $activity['idActivite']; ?>');" >
-                    <img src="../../resources/images/validate.png" alt="Flèche verte pour modifier une activité existante.">
+                    <img src="../../resources/images/validate.png" alt="Stylo orange pour modifier l'activité sélectionnée.">
                 </button>
     
             </form>
@@ -76,15 +76,15 @@ if ($_SESSION['userrole'] != 2) {
                 
                     <?php foreach ($result as $row) { ?>
 
-                    <input type="hidden" name="delete_user" value="<?php echo $row['idUser']; ?>">
-                    <input type="hidden" name="delete_user_act" value="<?php echo $activity['idActivite']; ?>">
+                                        <input type="hidden" name="delete_user" value="<?php echo $row['idUser']; ?>">
+                                        <input type="hidden" name="delete_user_act" value="<?php echo $activity['idActivite']; ?>">
 
-                        <div class="participant">
-                            <p style="font-size: 1.2rem"><?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?></p>
-                            <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur : <?php echo $row['useName'] . ' ' . $row['useSurname']; ?>');">
-                                <img src="../../resources/images/rm.png" alt="Flèche verte pour créer une nouvelle activité.">
-                            </button>
-                        </div>
+                                            <div class="participant">
+                                                <p style="font-size: 1.2rem"><?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?></p>
+                                                <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur : <?php echo $row['useName'] . ' ' . $row['useSurname']; ?>');">
+                                                    <img src="../../resources/images/rm.png" alt="Corbeille rouge pour supprimer un utilisateur.">
+                                                </button>
+                                            </div>
                     <?php } ?>
             
             </form>
@@ -93,7 +93,7 @@ if ($_SESSION['userrole'] != 2) {
 
 
             <footer><a href="https://github.com/mateja-velickovic" target="_blank"><img id="icon-info"
-                        src="../../resources/images/github.png" alt=""></a>Réalisé par Velickovic Mateja -
+                        src="../../resources/images/github.png" alt="Logo de GitHub"></a>Réalisé par Velickovic Mateja -
                 Septembre 2024 - Icônes <a href="https://www.flaticon.com" target="_blank">Flaticon</a></footer>
 </body>
 

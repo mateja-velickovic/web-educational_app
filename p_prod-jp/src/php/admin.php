@@ -41,7 +41,7 @@ if ($_SESSION['userrole'] != 2) {
             <?php if (Count($result) == 0) { ?>
                 <!-- Si aucune activité n'est présente -->
             <?php } else { ?>
-            
+
                 <h2 style=" color: white; text-align: center; font-weight: normal; margin-top: 20px;">Liste des activités.
                 </h2>
 
@@ -100,14 +100,16 @@ if ($_SESSION['userrole'] != 2) {
     </div>
 
     <!-- Créer une nouvelle activité -->
-    <h2 style="color: white; text-align: center; font-weight: normal; margin-top: 10px; margin-bottom: 20px;">Créez une nouvelle
+    <h2 style="color: white; text-align: center; font-weight: normal; margin-top: 10px; margin-bottom: 20px;">Créez une
+        nouvelle
         activité.</h2>
 
-        <form class="insert-act" action="./functions/administration.php" method="POST">
-                
-                <input type="hidden" name="add">
+    <form class="insert-act" action="./functions/administration.php" method="POST">
 
-                <textarea style="max-height: 100px; min-height: 40px;" type="text" placeholder="Nom de l'activité (max 50c)" name="name" maxlength="50"></textarea required>
+        <input type="hidden" name="add">
+
+        <textarea style="max-height: 100px; min-height: 40px;" type="text" placeholder="Nom de l'activité (max 50c)"
+            name="name" maxlength="50"></textarea required>
             
                 <textarea style="max-height: 175px; min-height: 40px;" type="text" placeholder="Description (max 100c)" name="desc" maxlength="100"></textarea required>
                 
@@ -125,15 +127,15 @@ if ($_SESSION['userrole'] != 2) {
 
 
         <?php if (isset($_GET['error']) && $_GET['error'] == "create") { ?>
-            <p style="color: rgb(161, 0, 0); font-size: 1.2rem; text-align: center; font-weight: normal; margin-top: 20px;">
-                Échec de la
-                création de l'activité, veuillez réessayer.
-            </p>
+                <p style="color: rgb(161, 0, 0); font-size: 1.2rem; text-align: center; font-weight: normal; margin-top: 20px;">
+                    Échec de la
+                    création de l'activité, veuillez réessayer.
+                </p>
         <?php } else {
         } ?>
 
         <footer><a href="https://github.com/mateja-velickovic" target="_blank"><img id="icon-info"
-                    src="../../resources/images/github.png" alt=""></a>Réalisé par Velickovic Mateja -
+                    src="../../resources/images/github.png" alt="Logo de GitHub"></a>Réalisé par Velickovic Mateja -
             Septembre 2024 - Icônes <a href="https://www.flaticon.com" target="_blank">Flaticon</a></footer>
 
 </body>
