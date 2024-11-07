@@ -24,7 +24,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  margin-bottom: 60px;
+  height: 100vh;
 }
 
 /* Header */
@@ -32,7 +32,7 @@ header {
   padding: 40px;
   font-size: 1.4rem;
   align-items: center;
-  color: #cccccc;
+  color: white;
   text-align: left;
   display: flex;
   justify-content: space-between;
@@ -192,7 +192,7 @@ main {
   border-radius: 15px;
   word-wrap: break-word;
   padding: 10px 0px 70px 0px;
-  background-color: #e0e0e0;
+  background-color: white;
   overflow: hidden;
   font-weight: 200;
 }
@@ -269,20 +269,20 @@ h2 {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
+  width: 50%;
+  margin: auto;
 }
 
 .admin {
   margin-top: 40px;
-  background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-spacing: 0;
   margin-bottom: 5%;
 }
 
-.admin tbody:nth-child(odd) {
-  background-color: var(--background-blue);
+
+.admin tbody {
+  background-color: white;
 }
 
 .admin thead tr {
@@ -292,12 +292,17 @@ table {
 .admin thead tr th {
   background-color: var(--main-blue);
   color: white;
+  font-weight: 100;
+  border: 1px solid var(--main-blue);
+  margin-bottom: 10px;
 }
 
 .admin tbody tr td {
   color: black;
   margin-right: 10px;
   padding: 5px 10px 5px 10px;
+  border: 1px solid var(--main-blue);
+  text-align: center;
 }
 
 .admin tbody tr #rm img,
@@ -338,7 +343,7 @@ table {
   width: 130px;
   padding-left: 3px;
   border: 0;
-  background-color: #cccccc;
+  background-color: white;
 }
 
 .insert-act input::placeholder {
@@ -365,8 +370,8 @@ table {
   transition: .3s ease;
 }
 
-/* Edit Activity */
-.edit-act {
+/* Create & edit Activity */
+.edit-act, .insert-act {
   display: grid;
   margin: auto;
   text-align: center;
@@ -391,7 +396,7 @@ table {
   width: 50%;
 }
 
-.edit-act textarea {
+.edit-act textarea, .insert-act textarea {
   padding: 5px 20px 5px 20px;
   text-align: left;
   min-width: 250px;
@@ -400,7 +405,8 @@ table {
   max-height: 150px;
   justify-content: center;
   border: 0;
-  background-color: #cccccc;
+  background-color: white;
+  color: var(--main-blue);
   border-radius: 10px;
   transition: 0.3s ease;
   margin-bottom: 10px;
@@ -412,14 +418,15 @@ table {
   font-size: 1.2rem;
 }
 
-.edit-act input {
+.edit-act input, .insert-act input {
   padding: 5px 20px 5px 20px;
   margin: auto;
+  color: var(--main-blue);
   min-width: 250px;
   max-width: 250px;
   width: 250px;
   border: 0;
-  background-color: #cccccc;
+  background-color: white;
   font-size: 1.2rem;
   border-radius: 10px;
   transition: 0.3s ease;
@@ -427,12 +434,17 @@ table {
   margin-bottom: 10px;
 }
 
-.edit-act button {
+.insert-act input::placeholder,
+.insert-act textarea::placeholder {
+  color: var(--main-blue);
+}
+
+.edit-act button, .insert-act  button {
   background-color: transparent;
   border: none;
 }
 
-.edit-act button img {
+.edit-act button img, .insert-act button img {
   width: 25px;
   margin-top: 10px;
   filter: drop-shadow(1px 1px 1px transparent);
@@ -440,7 +452,7 @@ table {
   cursor: pointer;
 }
 
-.edit-act button img:hover {
+.edit-act button img:hover, .insert-act button img:hover {
   transition: .3s ease;
   filter: drop-shadow(1px 1px 1px var(--main-green));
 }
@@ -458,18 +470,16 @@ table {
   border-radius: 10px;
   transition: .3s ease;
   cursor: pointer;
-  color: white;
+  color: var(--main-blue);
   align-items: center;
-  background-color: #cccccc;
+  background-color: white;
   box-shadow: 1px 1px 5px transparent;
-  color: black;
   padding-left: 12px;
 }
 
 .disp-par .participant:hover {
   box-shadow: 1px 1px 5px black;
-  background-color: #ccccccb0;
-  color: black;
+  background-color: white;
   border-radius: 10px;
   transition: .3s ease;
 }
@@ -500,14 +510,13 @@ table {
 footer {
   text-align: center;
   text-shadow: 1px 1px 5px black;
-  position: fixed;
+  position: relative;
   text-align: center;
-  width: 100%;
   bottom: 0;
-  margin: 20px 0px 20px 0px;
   color: white;
   font-size: 1rem;
   z-index: 500;
+  margin-top: 20px;
 }
 
 footer a {
@@ -579,6 +588,10 @@ footer a img {
   }
   
   .edit-right {
+    width: 100%;
+  } 
+
+  table {
     width: 100%;
   }
 }
