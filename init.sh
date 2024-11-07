@@ -1,7 +1,10 @@
 #!/bin/bash
 
+RED='\033[0;31m' # Rouge
+NC='\033[0m' # Blanc
+
 if ! docker info > /dev/null 2>&1; then
-    echo "Docker n'est pas lancé. Veuillez démarrer Docker et réessayer."
+    echo -e "${RED}>> Docker n'est pas lancé. Veuillez démarrer Docker et réessayer.${NC}"
     exit 1
 fi
 
