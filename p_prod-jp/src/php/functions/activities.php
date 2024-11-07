@@ -68,9 +68,9 @@ function hasUserJoined(PDO $pdo, int $idActivity, int $idUser)
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         return $result['count'] > 0;
-    }
-    catch (Exception $e){
+    } catch (Exception $e) {
         echo "Erreur lors de la récupération des données...";
+        return false;
     }
 }
 
@@ -93,9 +93,9 @@ function getActivityByID(PDO $pdo, int $idActivity)
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         return $result;
-    }
-    catch (Exception $e){
+    } catch (Exception $e) {
         echo "Erreur lors de la récupération des données...";
+        return $e;
     }
 }
 
@@ -122,8 +122,46 @@ function getUsersByActivityID(PDO $pdo, int $idActivity)
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
+    } catch (Exception $e) {
+        echo "Erreur lors de la récupération des données...";
     }
-    catch (Exception $e) {
+}
+
+/**
+ * Remplir les activités si elles se vident et que la fille d'attente n'est pas vide
+ *
+ * @param PDO $pdo Objet de connexion à la base de données.
+ */
+function fillActivites(PDO $pdo)
+{
+    require "lib/database.php";
+
+    foreach ($result as $activity) {
+        if (isActivityFull($pdo, $activity['idActivite']) && checkWaitingList($pdo, $activity['idActivite']) != null) {
+            echo $activity['actName'] . ' ' . $activity['actCapacity'];
+        }
+    }
+}
+
+/**
+ * Vérifier la liste d'attente des activités
+ *
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idActivity ID de l'activité
+ */
+function checkWaitingList(PDO $pdo, int $idActivity)
+{
+    try {
+        $sql = "SELECT * FROM t_waiting WHERE fkActivity = :activity";
+
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':activity', $idActivity, PDO::PARAM_INT);
+        $query->execute();
+
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    } catch (Exception $e) {
         echo "Erreur lors de la récupération des données...";
     }
 }
