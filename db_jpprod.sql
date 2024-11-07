@@ -165,17 +165,6 @@ ALTER TABLE `t_user`
   MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
---
-
---
--- Constraints for table `t_registration`
---
-ALTER TABLE `t_registration`
-  ADD CONSTRAINT `t_registration_ibfk_1` FOREIGN KEY (`fkUser`) REFERENCES `t_user` (`idUser`),
-  ADD CONSTRAINT `t_registration_ibfk_2` FOREIGN KEY (`fkActivity`) REFERENCES `t_activity` (`idActivite`);
-
---
 -- Constraints for table `t_user`
 --
 ALTER TABLE `t_user`
