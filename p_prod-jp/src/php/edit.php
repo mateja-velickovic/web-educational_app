@@ -76,15 +76,15 @@ if ($_SESSION['userrole'] != 2) {
                 
                     <?php foreach ($result as $row) { ?>
 
-                                        <input type="hidden" name="delete_user" value="<?php echo $row['idUser']; ?>">
-                                        <input type="hidden" name="delete_user_act" value="<?php echo $activity['idActivite']; ?>">
+                        <input type="hidden" name="delete_user" value="<?php echo $row['idUser']; ?>">
+                        <input type="hidden" name="delete_user_act" value="<?php echo $activity['idActivite']; ?>">
 
-                                            <div class="participant">
-                                                <p style="font-size: 1.2rem"><?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?></p>
-                                                <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur : <?php echo $row['useName'] . ' ' . $row['useSurname']; ?>');">
-                                                    <img src="../../resources/images/rm.png" alt="Corbeille rouge pour supprimer un utilisateur.">
-                                                </button>
-                                            </div>
+                            <div class="participant">
+                                <p style="font-size: 1.2rem"><?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?></p>
+                                <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur : <?php echo $row['useName'] . ' ' . $row['useSurname']; ?>');">
+                                    <img src="../../resources/images/rm.png" alt="Corbeille rouge pour supprimer un utilisateur.">
+                                </button>
+                            </div>
                     <?php } ?>
             
             </form>

@@ -22,7 +22,7 @@ if ($_SESSION['userrole'] != 2) {
 <body>
     <header>
         <div>
-            <h1 id="t1">Journée Pédagogique <?php echo date("Y") ?></h1>
+            <h1 id="t1">Dashboard - Journée Pédagogique <?php echo date("Y") ?></h1>
             <p>Connecté en tant que <?php echo $_SESSION['name'] . " " . $_SESSION['surname'] ?></a>
         </div>
         <div class="log">
@@ -127,10 +127,10 @@ if ($_SESSION['userrole'] != 2) {
 
 
         <?php if (isset($_GET['error']) && $_GET['error'] == "create") { ?>
-                <p style="color: rgb(161, 0, 0); font-size: 1.2rem; text-align: center; font-weight: normal; margin-top: 20px;">
-                    Échec de la
-                    création de l'activité, veuillez réessayer.
-                </p>
+                    <p style="color: rgb(161, 0, 0); font-size: 1.2rem; text-align: center; font-weight: normal; margin-top: 20px;">
+                        Échec de la
+                        création de l'activité, veuillez réessayer.
+                    </p>
         <?php } else {
         } ?>
 
