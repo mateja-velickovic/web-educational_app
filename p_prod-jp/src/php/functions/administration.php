@@ -9,22 +9,27 @@
  */
 function isUserAdmin(PDO $pdo, int $idUser): bool
 {
-    $sql = "SELECT r.rolName 
-            FROM t_user AS u
-            JOIN t_role AS r ON u.fkRole = r.idRole
-            WHERE u.idUser = :id";
+    try {
+        $sql = "SELECT r.rolName 
+                FROM t_user AS u
+                JOIN t_role AS r ON u.fkRole = r.idRole
+                WHERE u.idUser = :id";
 
-    $query = $pdo->prepare($sql);
-    $query->bindParam(':id', $idUser, PDO::PARAM_INT);
-    $query->execute();
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':id', $idUser, PDO::PARAM_INT);
+        $query->execute();
 
-    $result = $query->fetch(PDO::FETCH_ASSOC);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
 
-    if ($result === false) {
-        return false;
+        if ($result === false) {
+            return false;
+        }
+
+        return $result['rolName'] === 'admin';
     }
-
-    return $result['rolName'] === 'admin';
+    catch (Exception $e){
+        echo "Erreur lors de la récupération des données...";
+    }
 }
 
 /**
@@ -50,7 +55,7 @@ function deleteActivity(PDO $pdo): void
         header('Location: ../admin.php');
 
     } catch (Exception $e) {
-        // header('Location: ../admin.php?error=delete');
+        header('Location: ../admin.php?error=delete');
     }
 }
 
@@ -132,7 +137,7 @@ function editActivity(PDO $pdo): void
  *
  * @param PDO $pdo Objet de connexion à la base de données.
  */
-function deletUser(PDO $pdo): void
+function deleteUser(PDO $pdo): void
 {
 
     session_start();
@@ -140,12 +145,13 @@ function deletUser(PDO $pdo): void
     try {
 
         if ($_SESSION['userrole'] == 2) {
-            $delete_user = "DELETE FROM `t_registration` WHERE fKuser = :id";
+            $delete_user = "DELETE FROM `t_registration` WHERE fkUser = :id AND fkActivity = :activity";
 
             // Préparer la requête
             $query = $pdo->prepare($delete_user);
 
             $query->bindParam(':id', $_POST['delete_user'], PDO::PARAM_INT);
+            $query->bindParam(':activity', $_POST['delete_user_act'], PDO::PARAM_INT);
 
             $query->execute();
         }
@@ -176,5 +182,5 @@ if (isset($_POST['edit'])) {
 
 if (isset($_POST['delete_user'])) {
     require "../lib/database.php";
-    deletUser($pdo);
+    deleteUser($pdo);
 }

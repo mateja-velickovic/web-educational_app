@@ -57,16 +57,21 @@ function isActivityFull(PDO $pdo, int $idActivity): bool
  */
 function hasUserJoined(PDO $pdo, int $idActivity, int $idUser)
 {
-    $sql = "SELECT COUNT(*) AS count FROM t_registration WHERE fkUser = :id AND fkActivity = :activity";
+    try {
+        $sql = "SELECT COUNT(*) AS count FROM t_registration WHERE fkUser = :id AND fkActivity = :activity";
 
-    $query = $pdo->prepare($sql);
-    $query->bindParam(':id', $idUser, PDO::PARAM_INT);
-    $query->bindParam(':activity', $idActivity, PDO::PARAM_INT);
-    $query->execute();
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':id', $idUser, PDO::PARAM_INT);
+        $query->bindParam(':activity', $idActivity, PDO::PARAM_INT);
+        $query->execute();
 
-    $result = $query->fetch(PDO::FETCH_ASSOC);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
 
-    return $result['count'] > 0;
+        return $result['count'] > 0;
+    }
+    catch (Exception $e){
+        echo "Erreur lors de la récupération des données...";
+    }
 }
 
 
@@ -78,15 +83,20 @@ function hasUserJoined(PDO $pdo, int $idActivity, int $idUser)
  */
 function getActivityByID(PDO $pdo, int $idActivity)
 {
-    $sql = "SELECT * FROM t_activity WHERE idActivite = :idActivite";
+    try {
+        $sql = "SELECT * FROM t_activity WHERE idActivite = :idActivite";
 
-    $query = $pdo->prepare($sql);
-    $query->bindParam(':idActivite', $idActivity, PDO::PARAM_INT);
-    $query->execute();
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':idActivite', $idActivity, PDO::PARAM_INT);
+        $query->execute();
 
-    $result = $query->fetch(PDO::FETCH_ASSOC);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
 
-    return $result;
+        return $result;
+    }
+    catch (Exception $e){
+        echo "Erreur lors de la récupération des données...";
+    }
 }
 
 /**
@@ -97,18 +107,23 @@ function getActivityByID(PDO $pdo, int $idActivity)
  */
 function getUsersByActivityID(PDO $pdo, int $idActivity)
 {
-    $sql = "
-        SELECT u.*
-        FROM t_registration a
-        INNER JOIN t_user u ON a.fkUser = u.idUser
-        WHERE a.fkActivity = :idActivite
-    ";
+    try {
+        $sql = "
+            SELECT u.*
+            FROM t_registration a
+            INNER JOIN t_user u ON a.fkUser = u.idUser
+            WHERE a.fkActivity = :idActivite
+        ";
 
-    $query = $pdo->prepare($sql);
-    $query->bindParam(':idActivite', $idActivity, PDO::PARAM_INT);
-    $query->execute();
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':idActivite', $idActivity, PDO::PARAM_INT);
+        $query->execute();
 
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    return $result;
+        return $result;
+    }
+    catch (Exception $e) {
+        echo "Erreur lors de la récupération des données...";
+    }
 }
