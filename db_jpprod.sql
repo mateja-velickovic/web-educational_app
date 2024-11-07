@@ -11,23 +11,8 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données : `db_jpprod`
---
 CREATE DATABASE IF NOT EXISTS `db_jpprod` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
 USE `db_jpprod`;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `t_activity`
---
 
 DROP TABLE IF EXISTS `t_activity`;
 CREATE TABLE `t_activity` (
@@ -38,10 +23,6 @@ CREATE TABLE `t_activity` (
   `actPlace` varchar(50) NOT NULL,
   `actCapacity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Déchargement des données de la table `t_activity`
---
 
 INSERT INTO `t_activity` (`idActivite`, `actName`, `actDesc`, `actDate`, `actPlace`, `actCapacity`) VALUES
 (1, 'Randonée en montagne', 'Description de lactivité ', '2024-11-07 08:51:56', 'Lausanne', 20),
@@ -55,12 +36,6 @@ INSERT INTO `t_activity` (`idActivite`, `actName`, `actDesc`, `actDate`, `actPla
 (9, 'Cours de photographie', 'Description de lactivité', '2024-11-18 13:00:00', 'Montreux', 12),
 (10, 'Marathon de Genève', 'Description de lactivité', '2024-11-25 07:00:00', 'Genève', 300);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `t_registration`
---
-
 DROP TABLE IF EXISTS `t_registration`;
 CREATE TABLE `t_registration` (
   `idRegistration` int NOT NULL,
@@ -68,11 +43,12 @@ CREATE TABLE `t_registration` (
   `fkActivity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `t_role`
---
+DROP TABLE IF EXISTS `t_waiting`;
+CREATE TABLE `t_waiting` (
+  `idWaiting` int NOT NULL,
+  `fkUser` int NOT NULL,
+  `fkActivity` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 DROP TABLE IF EXISTS `t_role`;
 CREATE TABLE `t_role` (
@@ -80,19 +56,9 @@ CREATE TABLE `t_role` (
   `rolName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
---
--- Déchargement des données de la table `t_role`
---
-
 INSERT INTO `t_role` (`idRole`, `rolName`) VALUES
 (1, 'user'),
 (2, 'admin');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `t_user`
---
 
 DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
@@ -103,85 +69,52 @@ CREATE TABLE `t_user` (
   `fkRole` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
---
--- Index pour les tables déchargées
---
 
---
--- Index pour la table `t_activity`
---
 ALTER TABLE `t_activity`
   ADD PRIMARY KEY (`idActivite`);
 
---
--- Index pour la table `t_registration`
---
 ALTER TABLE `t_registration`
   ADD PRIMARY KEY (`idRegistration`),
   ADD KEY `fkUser` (`fkUser`,`fkActivity`),
   ADD KEY `fkActivity` (`fkActivity`);
 
---
--- Index pour la table `t_role`
---
+ALTER TABLE `t_waiting`
+  ADD PRIMARY KEY (`idWaiting`),
+  ADD KEY `fkUser` (`fkUser`,`fkActivity`),
+  ADD KEY `fkActivity` (`fkActivity`);
+
 ALTER TABLE `t_role`
   ADD PRIMARY KEY (`idRole`),
   ADD UNIQUE KEY `idRole` (`idRole`);
 
---
--- Index pour la table `t_user`
---
+
 ALTER TABLE `t_user`
   ADD PRIMARY KEY (`idUser`),
   ADD UNIQUE KEY `idUser` (`idUser`),
   ADD KEY `fkRole` (`fkRole`);
 
---
--- AUTO_INCREMENT pour les tables déchargées
---
 
---
--- AUTO_INCREMENT pour la table `t_activity`
---
 ALTER TABLE `t_activity`
   MODIFY `idActivite` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT pour la table `t_registration`
---
 ALTER TABLE `t_registration`
   MODIFY `idRegistration` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT pour la table `t_role`
---
+ALTER TABLE `t_waiting`
+  MODIFY `idWaiting` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 ALTER TABLE `t_role`
   MODIFY `idRole` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT pour la table `t_user`
---
 ALTER TABLE `t_user`
   MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- Contraintes pour les tables déchargées
---
 
---
--- Contraintes pour la table `t_registration`
---
 ALTER TABLE `t_registration`
   ADD CONSTRAINT `t_registration_ibfk_1` FOREIGN KEY (`fkActivity`) REFERENCES `t_activity` (`idActivite`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `t_registration_ibfk_2` FOREIGN KEY (`fkUser`) REFERENCES `t_user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Contraintes pour la table `t_user`
---
+ALTER TABLE `t_waiting`
+  ADD CONSTRAINT `t_waiting_ibfk_1` FOREIGN KEY (`fkActivity`) REFERENCES `t_activity` (`idActivite`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `t_waiting_ibfk_2` FOREIGN KEY (`fkUser`) REFERENCES `t_user` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
 ALTER TABLE `t_user`
   ADD CONSTRAINT `t_user_ibfk_1` FOREIGN KEY (`fkRole`) REFERENCES `t_role` (`idRole`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
