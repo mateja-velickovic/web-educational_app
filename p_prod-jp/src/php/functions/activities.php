@@ -134,11 +134,24 @@ function getUsersByActivityID(PDO $pdo, int $idActivity)
  */
 function fillActivites(PDO $pdo)
 {
-    require "lib/database.php";
+    try {
+
+        $actQuery = "SELECT * FROM t_activity";
+        $getactivities = $pdo->prepare($actQuery);
+        $getactivities->execute();
+        $result = $getactivities->fetchAll(PDO::FETCH_ASSOC);
+
+    } catch (PDOException $e) {
+        echo "Erreur de connexion : " . $e->getMessage();
+        exit();
+    }
 
     foreach ($result as $activity) {
-        if (isActivityFull($pdo, $activity['idActivite']) && checkWaitingList($pdo, $activity['idActivite']) != null) {
-            echo $activity['actName'] . ' ' . $activity['actCapacity'];
+        if (!isActivityFull($pdo, $activity['idActivite']) && checkWaitingList($pdo, $activity['idActivite'])) {
+            $first_user = getUserFromWaitingList($pdo, $activity['idActivite']);
+            echo $first_user;
+            // removeUserFromWaitingList($pdo, $first_user, $activity['idActivite']);
+            // insertUserIntoActivity($pdo, $first_user, $activity['idActivite']);
         }
     }
 }
@@ -152,16 +165,63 @@ function fillActivites(PDO $pdo)
 function checkWaitingList(PDO $pdo, int $idActivity)
 {
     try {
-        $sql = "SELECT * FROM t_waiting WHERE fkActivity = :activity";
+        $sql = "SELECT 1 FROM t_waiting WHERE fkActivity = :activity LIMIT 1";
 
         $query = $pdo->prepare($sql);
         $query->bindParam(':activity', $idActivity, PDO::PARAM_INT);
         $query->execute();
 
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-
-        return $result;
+        return $query->fetch(PDO::FETCH_ASSOC) !== false;
     } catch (Exception $e) {
-        echo "Erreur lors de la récupération des données...";
+        error_log("Erreur lors de la récupération des données : " . $e->getMessage());
+        return false;
     }
+}
+
+function insertUserIntoActivity(PDO $pdo, int $idUser, int $idActivity)
+{
+    $insertUser = "INSERT INTO `t_registration` (`fkUser`, `fkActivity`) VALUES (:fkUser, :fkActivity)";
+
+    $insert = $pdo->prepare($insertUser);
+
+    $insert->bindParam(':fkUser', $idUser, PDO::PARAM_INT);
+    $insert->bindParam(':fkActivity', $idActivity, PDO::PARAM_INT);
+
+    // Exécuter la requête
+    $insert->execute();
+}
+
+
+function removeUserFromWaitingList(PDO $pdo, int $idUser, int $idActivity)
+{
+    try {
+        $removeUser = "DELETE FROM `t_waiting` WHERE fkUser = :fkUser AND fkActivity = :fkActivity)";
+
+        $remove = $pdo->prepare($removeUser);
+
+        $remove->bindParam(':fkUser', $idUser, PDO::PARAM_INT);
+        $remove->bindParam(':fkActivity', $idActivity, PDO::PARAM_INT);
+
+        // Exécuter la requête
+        $remove->execute();
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
+
+}
+
+function getUserFromWaitingList(PDO $pdo, int $idActivity)
+{
+    $getUser = "SELECT fkUser FROM t_waiting WHERE fkActivity = :fkActivity ORDER BY idWaiting ASC";
+
+    $get = $pdo->prepare($getUser);
+
+    $get->bindParam(':fkActivity', $idActivity, PDO::PARAM_INT);
+
+    // Exécuter la requête
+    $get->execute();
+
+    $userId = $get->fetchColumn();
+
+    return $userId;
 }
