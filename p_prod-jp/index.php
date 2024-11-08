@@ -2,6 +2,8 @@
 session_start();
 require "src/php/lib/database.php";
 require "src/php/functions/administration.php";
+require "./src/php/functions/activities.php";
+fillActivites($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +45,8 @@ require "src/php/functions/administration.php";
         <main>
             <div class="grp-activite">
                 <?php
-                require "./src/php/functions/activities.php";
+
+
                 foreach ($result as $row):
                     $inscriptions = getInscriptionsCount($pdo, $row['idActivite']);
                     $hasUserJoined = hasUserJoined($pdo, $row['idActivite'], $_SESSION['userid']);
