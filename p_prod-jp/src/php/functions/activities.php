@@ -279,3 +279,31 @@ function isUserOnWaitingList(PDO $pdo, int $idUser, int $idActivity){
         return false;
     }
 }
+
+/**
+ * Récupérer les activités d'un utilisateur
+ *
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idUser ID de l'utilisateur
+ */
+function getUserActivites(PDO $pdo, int $idUser)
+{
+    try {
+        $sql = "
+            SELECT a.*
+            FROM t_activity a
+            INNER JOIN t_registration u ON a.idActivite = u.fkActivity
+            WHERE u.fkUser = :idUser
+            ORDER BY a.actDate ASC";
+
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+        $query->execute();
+
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    } catch (Exception $e) {
+        echo "Erreur lors de la récupération des données...";
+    }
+}

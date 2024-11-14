@@ -37,7 +37,19 @@ if ($_SESSION['userrole'] != 2) {
 
 
     <main class="planning">
-        <?php fillActivites($pdo); ?>
+
+        <div class="user-activities">
+        <h2>Récapitulatif de vos activités</h2>
+
+            <?php  
+            $activities = getUserActivites($pdo, $_SESSION['userid']);
+            foreach ($activities as $act):?>
+                <p class="date"><?php echo $act['actDate'];?></p>
+                <p><?php echo $act['actName'];?></p>
+            <?php endforeach; ?>
+
+        </div>
+
     </main>
 
 

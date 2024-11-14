@@ -519,6 +519,25 @@ table {
 /* Planning */
 .planning {
   color: white;
+  text-align: center;
+}
+
+.planning h2 {
+  margin: 15px 0px 15px 0px;
+}
+
+.user-activities {
+  margin: auto;
+  width: 35%;
+}
+.user-activities p {
+  font-size: 1.3rem;
+}
+
+.user-activities .date {
+  background-color: var(--main-blue);
+  margin: 20px 0px 0px 0px;
+  font-weight: bold;
 }
 
 /* Two Face Card */
