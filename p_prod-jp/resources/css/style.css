@@ -195,7 +195,7 @@ main {
   padding: 10px 0px 70px 0px;
   background-color: white;
   overflow: hidden;
-  font-weight: 200;
+  backface-visibility: hidden;
 }
 
 .activite .info {

@@ -110,8 +110,7 @@ function getUsersByActivityID(PDO $pdo, int $idActivity)
             SELECT u.*
             FROM t_registration a
             INNER JOIN t_user u ON a.fkUser = u.idUser
-            WHERE a.fkActivity = :idActivite
-        ";
+            WHERE a.fkActivity = :idActivite";
 
         $query = $pdo->prepare($sql);
         $query->bindParam(':idActivite', $idActivity, PDO::PARAM_INT);

@@ -68,27 +68,29 @@ if ($_SESSION['userrole'] != 2) {
      </div>
 
     <div class="edit-right">
-            <h2 style="color: white; text-align: center; font-weight: normal; margin: 20px 0px 20px 0px;">Participants de l'activité n°<?php echo $activity['idActivite'] ?>.</h2>
-            
-            <!-- Liste des participants de l'activité avec la possibilité de les supprimer-->
-            <form class="disp-par" action="./functions/administration.php" method="POST">
 
-                <?php $result = getUsersByActivityID($pdo, $activity['idActivite']); ?>
+        <h2 style="color: white; text-align: center; font-weight: normal; margin: 20px 0px 20px 0px;">Participants de l'activité n°<?php echo $activity['idActivite'] ?>.</h2>
+        
+        <!-- Liste des participants de l'activité avec la possibilité de les supprimer-->
+        <form class="disp-par" action="./functions/administration.php" method="POST">
+
+        <?php $result = getUsersByActivityID($pdo, $activity['idActivite']); ?>
+        
+            <?php foreach ($result as $row) { ?>
+
+                <input type="hidden" name="delete_user" value="<?php echo $row['idUser']; ?>">
+                <input type="hidden" name="delete_user_act" value="<?php echo $activity['idActivite']; ?>">
+
+                <div class="participant">
+                    <p style="font-size: 1.2rem"><?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?></p>
+                    <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur : <?php echo $row['useName'] . ' ' . $row['useSurname']; ?>');">
+                        <img src="../../resources/images/rm.png" alt="Corbeille rouge pour supprimer un utilisateur.">
+                    </button>
+                </div>
                 
-                    <?php foreach ($result as $row) { ?>
-
-                        <input type="hidden" name="delete_user" value="<?php echo $row['idUser']; ?>">
-                        <input type="hidden" name="delete_user_act" value="<?php echo $activity['idActivite']; ?>">
-
-                            <div class="participant">
-                                <p style="font-size: 1.2rem"><?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?></p>
-                                <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur : <?php echo $row['useName'] . ' ' . $row['useSurname']; ?>');">
-                                    <img src="../../resources/images/rm.png" alt="Corbeille rouge pour supprimer un utilisateur.">
-                                </button>
-                            </div>
-                    <?php } ?>
-            
-            </form>
+            <?php } ?>
+        
+        </form>
     </div>
      </div>
 
