@@ -46,7 +46,6 @@ function isActivityFull(PDO $pdo, int $idActivity): bool
     return $registrations >= $result['capacity'];
 }
 
-
 /**
  * Vérifier si un utilisater a rejoint une activité avec son ID.
  *
@@ -73,7 +72,6 @@ function hasUserJoined(PDO $pdo, int $idActivity, int $idUser)
         return false;
     }
 }
-
 
 /**
  * Obtenir une activité avec son ID.
@@ -185,6 +183,13 @@ function checkWaitingList(PDO $pdo, int $idActivity)
     }
 }
 
+/**
+ * Ajout d'un utilisateur de la file d'attente dans l'activité
+ *
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idUser ID de l'utilisateur
+ * @param int $idActivity ID de l'activité
+ */
 function insertUserIntoActivity(PDO $pdo, int $idUser, int $idActivity)
 {
     $insertUser = "INSERT INTO `t_registration` (`fkUser`, `fkActivity`) VALUES (:fkUser, :fkActivity)";
@@ -198,7 +203,13 @@ function insertUserIntoActivity(PDO $pdo, int $idUser, int $idActivity)
     $insert->execute();
 }
 
-
+/**
+ * Suppression d'un utilisateur de la file d'attente lorsqu'il a été ajouté à l'activité
+ *
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idUser ID de l'utilisateur
+ * @param int $idActivity ID de l'activité
+ */
 function removeUserFromWaitingList(PDO $pdo, int $idUser, int $idActivity)
 {
     try {
@@ -219,6 +230,13 @@ function removeUserFromWaitingList(PDO $pdo, int $idUser, int $idActivity)
 
 }
 
+/**
+ * Récupération des utilisateurs de la file d'attente selon la place libérée
+ *
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idUser ID de l'utilisateur
+ * @param int $idActivity ID de l'activité
+ */
 function getUserFromWaitingList(PDO $pdo, int $idActivity)
 {
     $getUser = "SELECT fkUser FROM t_waiting WHERE fkActivity = :fkActivity ORDER BY idWaiting ASC LIMIT :remaining";
@@ -236,4 +254,29 @@ function getUserFromWaitingList(PDO $pdo, int $idActivity)
     $users = $get->fetchAll(PDO::FETCH_ASSOC);
 
     return $users;
+}
+
+/**
+ * Vérifier si l'utilisateur est présent ou non dans la liste d'attente de l'activité
+ *
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idUser ID de l'utilisateur
+ * @param int $idActivity ID de l'activité
+ */
+function isUserOnWaitingList(PDO $pdo, int $idUser, int $idActivity){
+    try {
+        $sql = "SELECT COUNT(*) AS count FROM t_waiting WHERE fkUser = :id AND fkActivity = :activity";
+
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':id', $idUser, PDO::PARAM_INT);
+        $query->bindParam(':activity', $idActivity, PDO::PARAM_INT);
+        $query->execute();
+
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'] > 0;
+    } catch (Exception $e) {
+        echo "Erreur lors de la récupération des données...";
+        return false;
+    }
 }
