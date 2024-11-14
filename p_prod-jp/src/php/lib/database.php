@@ -14,7 +14,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-    $actQuery = "SELECT * FROM t_activity";
+    $actQuery = "SELECT * FROM t_activity ORDER BY actDate";
     $getactivities = $pdo->prepare($actQuery);
     $getactivities->execute();
     $result = $getactivities->fetchAll(PDO::FETCH_ASSOC);
