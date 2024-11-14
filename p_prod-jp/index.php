@@ -2,7 +2,7 @@
 session_start();
 require "src/php/lib/database.php";
 require "src/php/functions/administration.php";
-require "./src/php/functions/activities.php";
+include "./src/php/functions/activities.php";
 fillActivites($pdo);
 ?>
 
@@ -50,6 +50,7 @@ fillActivites($pdo);
                 foreach ($result as $row):
                     $inscriptions = getInscriptionsCount($pdo, $row['idActivite']);
                     $hasUserJoined = hasUserJoined($pdo, $row['idActivite'], $_SESSION['userid']);
+                    $hasUserJoined_waiting = isUserOnWaitingList($pdo, $_SESSION['userid'], $row['idActivite']);
                     ?>
 
                     <div class="activite">
@@ -66,12 +67,12 @@ fillActivites($pdo);
                         <form action="src/php/joinActivite.php" method="POST">
                             <input type="hidden" name="id" value="<?php echo $row['idActivite']; ?>">
 
-                            <?php if ($inscriptions >= $row['actCapacity'] && !$hasUserJoined): ?>
+                            <?php if ($hasUserJoined_waiting):?>
+                                <button id="leave_waiting_list">QUITTER LA LISTE D'ATTENTE</button>
+                            <?php elseif ($inscriptions >= $row['actCapacity'] && !$hasUserJoined): ?>
                                 <button id="waiting_list">SE METTRE EN ATTENTE</button>
-
                             <?php elseif ($hasUserJoined): ?>
                                 <button id="leave_activity">QUITTER L'ACTIVITÉ</button>
-
                             <?php else: ?>
                                 <button type="submit">REJOINDRE L'ACTIVITÉ</button>
 
