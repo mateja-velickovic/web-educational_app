@@ -11,6 +11,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 $hasUserJoined = hasUserJoined($pdo, $_POST['id'], $_SESSION['userid']);
+$hasUserJoined_waiting = isUserOnWaitingList($pdo, $_SESSION['userid'], $_POST['id']);
 $isActivityFull = isActivityFull($pdo, $_POST['id']);
 
 
@@ -54,6 +55,19 @@ if (isset($pdo)) {
 
         // Exécuter la requête
         $joinAct->execute();
+    }
+
+    // Si l'utilisateur est présent dans la file d'attente : Quitter File d'attente
+    if ($hasUserJoined_waiting) {
+        $leaveWaitQuery = "DELETE FROM `t_waiting` WHERE fkUser = :fkUser AND fkActivity = :fkActivity";
+
+        $leaveWait = $pdo->prepare($leaveWaitQuery);
+
+        $leaveWait->bindParam(':fkUser', $_SESSION['userid'], PDO::PARAM_INT);
+        $leaveWait->bindParam(':fkActivity', $_POST['id'], PDO::PARAM_INT);
+
+        // Exécuter la requête
+        $leaveWait->execute();
     }
 
     header("Location: ../../../index.php");
