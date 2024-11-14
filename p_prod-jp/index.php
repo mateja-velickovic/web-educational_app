@@ -107,11 +107,13 @@
 
                 </form>
             </div>
+    <?php endforeach; ?>
+
         </div>
+
 
     </main>
 
-    <?php endforeach; ?>
 
     <!-- Si l'utilisateur n'est pas connecté -->
     <?php else: ?>

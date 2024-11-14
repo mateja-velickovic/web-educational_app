@@ -30,7 +30,7 @@ if ($_SESSION['userrole'] != 2) {
 
         <div class="log">
             <a class="btn-admin" href="../../index.php">Revenir à la page d'accueil</a>
-            <a class="logout" href="src/php/functions/logout.php">Déconnexion</a>
+            <a class="logout" href="functions/logout.php">Déconnexion</a>
         </div>
 
     </header>
