@@ -14,6 +14,7 @@
   --main-green: #009a17;
   --main-red: rgb(182, 15, 43);
   --main-orange: rgb(192, 85, 13);
+  --dark-orange: rgb(143, 61, 6);
   --background-orange: rgba(192, 85, 13, 0.432);
 }
 
@@ -255,6 +256,10 @@ h2 {
 
 .activite #waiting_list {
   background-color: var(--main-orange);
+}
+
+.activite #leave_waiting_list {
+  background-color: var(--dark-orange);
 }
 
 .activite #leave_activity {
