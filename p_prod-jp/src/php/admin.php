@@ -82,7 +82,7 @@ if ($_SESSION['userrole'] != 2) {
                                 <form action="./functions/administration.php" method="POST">
                                     <input type="hidden" name="delete" value="<?php echo $row['idActivite']; ?>">
                                     <td id="rm"><button type="submit"
-                                            onclick="return confirm('Voulez-vous vraiment supprimer l\'activité n°<?php echo $row['idActivite']; ?>');"><img
+                                            onclick="return confirm('Voulez-vous vraiment supprimer l\'activité : <?php echo $row['actName']; ?>');"><img
                                                 src="../../resources/images/rm.png"
                                                 alt="Corbeille pour la supression d'une activité dans la page d'administration"></button>
                                     </td>
