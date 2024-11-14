@@ -26,8 +26,7 @@ function isUserAdmin(PDO $pdo, int $idUser): bool
         }
 
         return $result['rolName'] === 'admin';
-    }
-    catch (Exception $e){
+    } catch (Exception $e) {
         echo "Erreur lors de la récupération des données...";
     }
 }

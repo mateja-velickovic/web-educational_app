@@ -146,13 +146,13 @@ function fillActivites(PDO $pdo)
     foreach ($result as $activity) {
         if (!isActivityFull($pdo, $activity['idActivite']) && checkWaitingList($pdo, $activity['idActivite'])) {
             $users = getUserFromWaitingList($pdo, $activity['idActivite']);
-            
-            foreach($users as $u){
+
+            foreach ($users as $u) {
                 echo $u['fkUser'];
 
                 // Ajout de l'utilisateur dans l'activité
                 insertUserIntoActivity($pdo, $u['fkUser'], $activity['idActivite']);
-                
+
                 // Suppression de l'utilisateur de la file d'attente
                 removeUserFromWaitingList($pdo, $u['fkUser'], $activity['idActivite']);
             }
@@ -262,7 +262,8 @@ function getUserFromWaitingList(PDO $pdo, int $idActivity)
  * @param int $idUser ID de l'utilisateur
  * @param int $idActivity ID de l'activité
  */
-function isUserOnWaitingList(PDO $pdo, int $idUser, int $idActivity){
+function isUserOnWaitingList(PDO $pdo, int $idUser, int $idActivity)
+{
     try {
         $sql = "SELECT COUNT(*) AS count FROM t_waiting WHERE fkUser = :id AND fkActivity = :activity";
 

@@ -1,7 +1,7 @@
 <?php
 
 /** @noinspection PhpMissingFieldTypeInspection */
-if (! \filter_var(\ini_get('allow_url_fopen'), \FILTER_VALIDATE_BOOLEAN)) {
+if (!\filter_var(\ini_get('allow_url_fopen'), \FILTER_VALIDATE_BOOLEAN)) {
     exit('Sorry, this server has a misconfiguration which blocks SSO from working... Please contact the operator with errorCode 1:allow_url_fopen disabled');
 }
 
@@ -32,15 +32,15 @@ function InitiateSSOLogin(string $cid, array $customRedirectParameters = [], ?st
 {
     //Auto build redirect URI if necessary
     $redirectUri = $customCallbackURI ??
-        'http'.((! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '').'://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/callback.php';
+        'http' . ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/callback.php';
 
     $params = '';
     foreach ($customRedirectParameters as $name => $value) {
-        $params .= ($params == '' ? '?' : '&').$name.'='.$value;
+        $params .= ($params == '' ? '?' : '&') . $name . '=' . $value;
     }
     $redirectUri .= $params;
 
-    $SSO_URL = SSO_PORTAL.'redirect?'.'correlationId='.$cid.'&redirectUri='.urlencode($redirectUri);
+    $SSO_URL = SSO_PORTAL . 'redirect?' . 'correlationId=' . $cid . '&redirectUri=' . urlencode($redirectUri);
 
     //Redirect to SSO Login
     header("Location: $SSO_URL");
@@ -51,7 +51,7 @@ function InitiateSSOLogin(string $cid, array $customRedirectParameters = [], ?st
  */
 function GenerateCorrelationId(string $apiKey, bool $storeInSession = true)
 {
-    $ssoCorrelationId = @json_decode(@file_get_contents(SSO_PORTAL.'bridge/cid?token='.$apiKey), true)['correlationId'];
+    $ssoCorrelationId = @json_decode(@file_get_contents(SSO_PORTAL . 'bridge/cid?token=' . $apiKey), true)['correlationId'];
     if ($ssoCorrelationId == '') {
         try {
             $randomBytes = random_bytes(32);
@@ -73,11 +73,11 @@ function GenerateCorrelationId(string $apiKey, bool $storeInSession = true)
  */
 function RetrieveSSOLoginInfos(string $token, string $correlationId): SSOLoginInfo
 {
-    $ssoResult = file_get_contents(SSO_PORTAL.'bridge/check?token='.$token.'&correlationId='.$correlationId);
+    $ssoResult = file_get_contents(SSO_PORTAL . 'bridge/check?token=' . $token . '&correlationId=' . $correlationId);
     $loginInfos = json_decode($ssoResult, true);
 
     $result = new SSOLoginInfo();
-    if (! array_key_exists('error', $loginInfos)) {
+    if (!array_key_exists('error', $loginInfos)) {
         $result->username = $loginInfos['username'];
         $result->email = $loginInfos['email'];
     } else {

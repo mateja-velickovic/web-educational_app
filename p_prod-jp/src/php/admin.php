@@ -109,7 +109,8 @@ if ($_SESSION['userrole'] != 2) {
 
         <input type="hidden" name="add">
 
-        <textarea style="max-height: 100px; min-height: 40px;" type="text" placeholder="Nom de l'activité (max 50c)" name="name" maxlength="50"></textarea required>
+        <textarea style="max-height: 100px; min-height: 40px;" type="text" placeholder="Nom de l'activité (max 50c)"
+            name="name" maxlength="50"></textarea required>
             
         <textarea style="max-height: 175px; min-height: 40px;" type="text" placeholder="Description (max 100c)" name="desc" maxlength="100"></textarea required>
         
@@ -127,10 +128,10 @@ if ($_SESSION['userrole'] != 2) {
 
 
     <?php if (isset($_GET['error']) && $_GET['error'] == "create") { ?>
-        <p style="color: rgb(161, 0, 0); font-size: 1.2rem; text-align: center; font-weight: normal; margin-top: 20px;">
-            Échec de la
-            création de l'activité, veuillez réessayer.
-        </p>
+                            <p style="color: rgb(161, 0, 0); font-size: 1.2rem; text-align: center; font-weight: normal; margin-top: 20px;">
+                                Échec de la
+                                création de l'activité, veuillez réessayer.
+                            </p>
     <?php } else {
     } ?>
 
