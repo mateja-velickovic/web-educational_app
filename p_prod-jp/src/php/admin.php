@@ -27,7 +27,7 @@ if ($_SESSION['userrole'] != 2) {
         </div>
         <div class="log">
             <a class="acc" href="../../../index.php">Revenir à la page d'accueil</a>
-            <a class="logout" href="src/php/functions/logout.php">Déconnexion</a>
+            <a class="logout" href="functions/logout.php">Déconnexion</a>
         </div>
 
     </header>
@@ -108,35 +108,40 @@ if ($_SESSION['userrole'] != 2) {
 
         <input type="hidden" name="add">
 
-        <textarea style="max-height: 100px; min-height: 40px;" type="text" placeholder="Nom de l'activité (max 50c)"
-            name="name" maxlength="50"></textarea required>
+        <textarea style="max-height: 100px; min-height: 40px;" type="text" placeholder="Nom de l'activité (max 50c)" name="name" maxlength="50"></textarea required>
             
-                <textarea style="max-height: 175px; min-height: 40px;" type="text" placeholder="Description (max 100c)" name="desc" maxlength="100"></textarea required>
-                
-                <input type="datetime-local" name="date" required>
-                
-                <textarea style="max-height: 100px; min-height: 40px;" placeholder="Lieu" type="text" name="place" maxlength="50"></textarea required>
-                
-                <input type="number" name="capacity" min="0" max="1000" placeholder="Capacité" required>
+        <textarea style="max-height: 175px; min-height: 40px;" type="text" placeholder="Description (max 100c)" name="desc" maxlength="100"></textarea required>
+        
+        <input type="datetime-local" name="date" required>
+        
+        <textarea style="max-height: 100px; min-height: 40px;" placeholder="Lieu" type="text" name="place" maxlength="50"></textarea required>
+        
+        <input type="number" name="capacity" min="0" max="1000" placeholder="Capacité" required>
+
+        <button type="submit">
+        <img src="../../resources/images/add.png" alt="Flèche verte pour créer une nouvelle activité.">
+        </button>
     
-                <button type="submit">
-                <img src="../../resources/images/add.png" alt="Flèche verte pour créer une nouvelle activité.">
-                </button>
-    
-            </form>
+    </form>
 
 
-        <?php if (isset($_GET['error']) && $_GET['error'] == "create") { ?>
-                    <p style="color: rgb(161, 0, 0); font-size: 1.2rem; text-align: center; font-weight: normal; margin-top: 20px;">
-                        Échec de la
-                        création de l'activité, veuillez réessayer.
-                    </p>
-        <?php } else {
-        } ?>
+    <?php if (isset($_GET['error']) && $_GET['error'] == "create") { ?>
+        <p style="color: rgb(161, 0, 0); font-size: 1.2rem; text-align: center; font-weight: normal; margin-top: 20px;">
+            Échec de la
+            création de l'activité, veuillez réessayer.
+        </p>
+    <?php } else {
+    } ?>
 
-        <footer><a href="https://github.com/mateja-velickovic" target="_blank"><img id="icon-info"
-                    src="../../resources/images/github.png" alt="Logo de GitHub"></a>Réalisé par Velickovic Mateja -
-            Septembre 2024 - Icônes <a href="https://www.flaticon.com" target="_blank">Flaticon</a></footer>
+    <footer>
+        <a href="https://github.com/mateja-velickovic" target="_blank">
+            <img id="icon-info" src="../../resources/images/github.png" alt="Logo de GitHub">
+        </a>
+        
+        Réalisé par Velickovic Mateja - Septembre 2024 - Icônes
+
+        <a href="https://www.flaticon.com" target="_blank">Flaticon</a>
+    </footer>
 
 </body>
 
