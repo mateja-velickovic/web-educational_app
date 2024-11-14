@@ -564,7 +564,7 @@ footer a img {
   }
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1275px) {
   header {
     flex-direction: column;
   }
