@@ -47,17 +47,18 @@ if ($_SESSION['userrole'] != 2) {
 
             <div class="ua">
 
+                <h2 class="ua-name"><?php echo $act['actName']; ?></h2>
 
-                <p class="date"><?php echo $act['actDate']; ?></p> 
-
+                <p class="ua-info"><img id="icon-info" src="../../resources/images/time.png" alt="Logo pour représenter le temps/date"><?php echo $act['actDate']; ?></p>
+                <p class="ua-info"><img id="icon-info" src="../../resources/images/place.png" alt="Logo pour représenter l'épingle d'une carte"><?php echo $act['actPlace']; ?></p>
+                <p class="ua-info"><img id="icon-info" src="../../resources/images/info.png" alt="Logo pour représenter un I d'information"><?php echo $act['actDesc']; ?></p>
+                
                 <form action="./joinActivite.php" method="POST">
                     <input type="hidden" name="id" value="<?php echo $act['idActivite']; ?>">
                     <input type="hidden" name="type" value="u-act">
-                    <p class="ua-name"><?php echo $act['actName']; ?><button class="icon-leave" onclick="return confirm('Voulez-vous vraiment quitter l\'activité : <?php echo $act['actName']; ?>');"><img id="icon-info" src="../../resources/images/leave.png" alt="Logo pour représenter une porte"></button></p>
+                    <button id="leave_activity">QUITTER L'ACTIVITÉ</button>
                 </form>
 
-                <p class="ua-info"><img id="icon-info" src="../../resources/images/place.png" alt="Logo pour représenter l'épingle d'une carte"><?php echo $act['actPlace']; ?></p>
-                <p class="ua-info"><img id="icon-info" src="../../resources/images/info.png" alt="Logo pour représenter un I d'information"><?php echo $act['actDesc']; ?></p>
                 
             </div>
 
