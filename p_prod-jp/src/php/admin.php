@@ -53,8 +53,8 @@ if ($_SESSION['userrole'] != 2) {
                             <th>Description</th>
                             <th>Date</th>
                             <th>Capacité</th>
-                            <th>Modifier</th>
-                            <th>Supprimer</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <?php
@@ -109,8 +109,7 @@ if ($_SESSION['userrole'] != 2) {
 
         <input type="hidden" name="add">
 
-        <textarea style="max-height: 100px; min-height: 40px;" type="text" placeholder="Nom de l'activité (max 50c)"
-            name="name" maxlength="50"></textarea required>
+        <textarea style="max-height: 100px; min-height: 40px;" type="text" placeholder="Nom de l'activité (max 50c)" name="name" maxlength="50"></textarea required>
             
         <textarea style="max-height: 175px; min-height: 40px;" type="text" placeholder="Description (max 100c)" name="desc" maxlength="100"></textarea required>
         
