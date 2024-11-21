@@ -42,6 +42,7 @@ if (isset($pdo)) {
 
         // Exécuter la requête
         $leaveAct->execute();
+
     }
 
     // Si l'utilisateur n'a pas rejoint l'acitivité et qu'elle est pleine : File d'attente
@@ -70,7 +71,12 @@ if (isset($pdo)) {
         $leaveWait->execute();
     }
 
-    header("Location: ../../../index.php");
+    if(!isset($_POST['type'])){
+        header("Location: ../../../index.php");
+    }
+    else {
+        header("Location: ./planning.php");
+    }
 
 } else {
     echo "Connecteur PDO non trouvé.";
