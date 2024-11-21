@@ -82,7 +82,7 @@ fillActivites($pdo);
 
                         <p>
                             <img id="icon-info" src="resources/images/info.png"
-                                alt="Logo pour représenter l'épingle d'une carte"><?php echo $row['actDesc']; ?>
+                                alt="Logo pour représenter un I d'information"><?php echo $row['actDesc']; ?>
                         </p>
 
                         <form action="src/php/joinActivite.php" method="POST">
@@ -105,6 +105,8 @@ fillActivites($pdo);
 
                         </form>
                     </div>
+
+
                 <?php endforeach; ?>
 
             </div>
