@@ -66,9 +66,9 @@ if ($_SESSION['userrole'] != 2) {
                         <tbody>
                             <tr>
 
-                                <td><?php echo $row['actName']; ?></td>
-                                <td><?php echo $row['actDesc']; ?></td>
-                                <td><?php echo $row['actDate']; ?></td>
+                                <td id="t-name"><?php echo $row['actName']; ?></td>
+                                <td id="t-desc"><?php echo $row['actDesc']; ?></td>
+                                <td id="t-date"><?php echo $row['actDate']; ?></td>
                                 <td><?php echo $registrations . '/' . $row['actCapacity'] ?></td>
 
                                 <!-- Modifier une activité -->
