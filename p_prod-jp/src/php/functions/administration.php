@@ -70,11 +70,11 @@ function createActivity(PDO $pdo): void
     try {
 
         if ($_SESSION['userrole'] == 2) {
-            $sql = "INSERT INTO t_activity (actName, actDesc, actDate, actPlace, actCapacity) 
+            $create_activity = "INSERT INTO t_activity (actName, actDesc, actDate, actPlace, actCapacity) 
                 VALUES (:name, :desc, :date, :place, :capacity)";
 
             // Préparer la requête
-            $query = $pdo->prepare($sql);
+            $query = $pdo->prepare($create_activity);
 
             $query->bindParam(':name', $_POST['name'], PDO::PARAM_STR);
             $query->bindParam(':desc', $_POST['desc'], PDO::PARAM_STR);
