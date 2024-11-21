@@ -30,22 +30,37 @@ if ($_SESSION['userrole'] != 2) {
 
         <div class="log">
             <a class="btn-admin" href="../../index.php">Revenir à la page d'accueil</a>
-            <a class="logout" href="src/php/functions/logout.php">Déconnexion</a>
+            <a class="logout" href="./functions/logout.php">Déconnexion</a>
         </div>
 
     </header>
 
 
     <main class="planning">
+            <h2>Vos prochaines activités.</h2>
 
         <div class="user-activities">
-            <h2>Récapitulatif de vos activités</h2>
 
             <?php
             $activities = getUserActivites($pdo, $_SESSION['userid']);
             foreach ($activities as $act): ?>
-                <p class="date"><?php echo $act['actDate']; ?></p>
-                <p><?php echo $act['actName']; ?></p>
+
+            <div class="ua">
+
+
+                <p class="date"><?php echo $act['actDate']; ?></p> 
+
+                <form action="./joinActivite.php" method="POST">
+                    <input type="hidden" name="id" value="<?php echo $act['idActivite']; ?>">
+                    <input type="hidden" name="type" value="u-act">
+                    <p class="ua-name"><?php echo $act['actName']; ?><button class="icon-leave"><img id="icon-info" src="../../resources/images/leave.png" alt="Logo pour représenter une porte"></button></p>
+                </form>
+
+                <p class="ua-info"><img id="icon-info" src="../../resources/images/place.png" alt="Logo pour représenter l'épingle d'une carte"><?php echo $act['actPlace']; ?></p>
+                <p class="ua-info"><img id="icon-info" src="../../resources/images/info.png" alt="Logo pour représenter un I d'information"><?php echo $act['actDesc']; ?></p>
+                
+            </div>
+
             <?php endforeach; ?>
 
         </div>
