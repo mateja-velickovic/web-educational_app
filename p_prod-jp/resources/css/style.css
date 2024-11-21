@@ -184,7 +184,6 @@ main {
   grid-template-columns: repeat(3, 1fr);
   margin-left: 241px;
   transition: 0.1s ease;
-  perspective: 600px;
   margin-right: 241px;
 }
 
@@ -196,7 +195,6 @@ main {
   padding: 10px 0px 70px 0px;
   background-color: white;
   overflow: hidden;
-  backface-visibility: hidden;
 }
 
 .activite .info {
@@ -308,6 +306,10 @@ table {
   padding: 5px 10px 5px 10px;
   border: 1px solid var(--main-blue);
   text-align: center;
+}
+.admin tbody tr #t-desc,
+.admin tbody tr #t-name {
+  max-width: 400px;
 }
 
 .admin tbody tr #rm img,
@@ -528,9 +530,42 @@ table {
 }
 
 .user-activities {
+  display: grid;
+  flex-direction: column;
+}
+
+.user-activities .ua {
+  position: relative;
+  border-radius: 15px;
+  word-wrap: break-word;
+  text-align: left;
+  padding: 10px 0px 70px 0px;
+  background-color: white;
+  overflow: hidden;
+  width: 30%;
   margin: auto;
-  width: 35%;
-  flex-wrap: nowrap;
+  transition: 0.1s ease;
+  padding-left: 10px;
+}
+
+.user-activities .ua button {
+  text-decoration: none;
+  color: white;
+  background-color: var(--main-red);
+  font-size: 1.2rem;
+  width: 100%;
+  border: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
+  padding: 10px 0px 10px 0px;
+}
+
+.user-activities .ua button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .user-activities .icon-leave {
@@ -543,23 +578,10 @@ table {
   border: none;
 }
 
-.user-activities p {
-  font-size: 1.3rem;
-}
-
 .user-activities .date {
   background-color: var(--main-blue);
   color: white;
   margin-bottom: 10px;
-}
-
-.user-activities .ua-info {
-  padding-bottom: 10px;
-}
-
-.user-activities .ua-name {
-  font-size: 1.4rem;
-  margin-bottom: 5px;
 }
 
 .user-activities {
@@ -568,7 +590,7 @@ table {
 }
 
 .user-activities .ua {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: white;
 }
@@ -643,6 +665,11 @@ footer a img {
     transition: 0.1s ease;
     text-align: center;
   }
+
+  .admin tbody tr #t-desc,
+  .admin tbody tr #t-name {
+    max-width: 200px;
+  }
 }
 
 @media (max-width: 840px) {
@@ -660,6 +687,18 @@ footer a img {
 
   table {
     width: 100%;
+  }
+
+  .user-activities .ua {
+    width: 80%;
+    transition: 0.1s ease;
+  }
+}
+
+@media (max-width: 715px) {
+  .admin tbody tr #t-desc,
+  .admin tbody tr #t-name {
+    max-width: 100px;
   }
 }
 
@@ -697,5 +736,22 @@ footer a img {
   .disp-par .participant:hover {
     background-color: transparent;
     color: white;
+  }
+
+  .user-activities {
+    width: 80%;
+    margin: auto;
+    transition: 0.1s ease;
+  }
+}
+
+@media (max-width: 530px) {
+  .admin thead tr th {
+    display: none;
+  }
+
+  .admin tbody #t-desc,
+  .admin tbody #t-date {
+    display: none;
   }
 }
