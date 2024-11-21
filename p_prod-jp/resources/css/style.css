@@ -4,6 +4,7 @@
 * {
   margin: 0;
   padding: 0;
+  word-wrap: break-word;
   font-family: "Poppins";
 }
 
@@ -203,7 +204,7 @@ main {
   margin-left: 20px;
 }
 
-.activite #icon-info {
+#icon-info {
   width: 20px;
   margin-right: 10px;
 }
@@ -529,42 +530,47 @@ table {
 .user-activities {
   margin: auto;
   width: 35%;
+  flex-wrap: nowrap;
 }
+
+.user-activities .icon-leave {
+  margin-left: 10px;
+}
+
+.user-activities button {
+  background: none;
+  cursor: pointer;
+  border: none;
+}
+
 .user-activities p {
   font-size: 1.3rem;
 }
 
 .user-activities .date {
   background-color: var(--main-blue);
-  margin: 20px 0px 0px 0px;
-  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
 }
 
-/* Two Face Card */
-.scene {
-  display: inline-block;
-  height: 260px;
-  margin: 40px 0;
-  perspective: 600px;
+.user-activities .ua-info {
+  padding-bottom: 10px;
 }
 
-.card {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  transform-origin: center right;
-  transition: transform 1s;
+.user-activities .ua-name {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
 }
 
-.card.is-flipped {
-  transform: translateX(-100%) rotateY(-180deg);
+.user-activities {
+  color: black;
+  border-radius: 15px;
 }
 
-.activite--back-activite {
-  background: slateblue;
-  transform: rotateY(180deg);
+.user-activities .ua {
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
 }
 
 /* Footer */
