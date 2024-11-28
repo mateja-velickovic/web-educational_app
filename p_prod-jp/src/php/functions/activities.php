@@ -333,3 +333,9 @@ function getUserActivites(PDO $pdo, int $idUser)
         echo "Erreur lors de la récupération des données...";
     }
 }
+
+if (isset($_POST['insert_user_act'])) {
+    require "../lib/database.php";
+    insertUserIntoActivity($pdo, $_POST['insert_user'], $_POST['insert_user_act']);
+    header('Location: ../edit.php');
+}
