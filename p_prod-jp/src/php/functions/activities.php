@@ -337,5 +337,6 @@ function getUserActivites(PDO $pdo, int $idUser)
 if (isset($_POST['insert_user_act'])) {
     require "../lib/database.php";
     insertUserIntoActivity($pdo, $_POST['insert_user'], $_POST['insert_user_act']);
+    removeUserFromWaitingList($pdo, $_POST['insert_user'], $_POST['insert_user_act']);
     header('Location: ../edit.php');
 }
