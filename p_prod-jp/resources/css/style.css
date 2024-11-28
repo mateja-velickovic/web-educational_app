@@ -218,7 +218,7 @@ main {
   filter: blur(0.5px);
 }
 
-.activite > p,
+.activite>p,
 h2 {
   position: relative;
   font-weight: 200;
@@ -307,6 +307,7 @@ table {
   border: 1px solid var(--main-blue);
   text-align: center;
 }
+
 .admin tbody tr #t-desc,
 .admin tbody tr #t-name {
   max-width: 400px;
@@ -381,7 +382,6 @@ table {
 .edit-act,
 .insert-act {
   display: grid;
-  margin: auto;
   text-align: center;
   justify-content: center;
   gap: 5px;
@@ -391,13 +391,11 @@ table {
 
 .edit-main {
   display: flex;
-  justify-content: space-between;
-  margin-left: 50px;
-  margin-right: 50px;
 }
 
 .edit-left {
   width: 50%;
+  margin: auto;
 }
 
 .edit-right {
@@ -410,7 +408,6 @@ table {
   text-align: left;
   min-width: 250px;
   max-width: 250px;
-  width: 250px;
   max-height: 150px;
   justify-content: center;
   border: 0;
@@ -434,7 +431,6 @@ table {
   color: var(--main-blue);
   min-width: 250px;
   max-width: 250px;
-  width: 250px;
   border: 0;
   background-color: white;
   font-size: 1.2rem;
@@ -471,17 +467,14 @@ table {
 }
 
 /* Liste des participants */
-.disp-par {
-  margin: auto;
-}
-
 .disp-par .participant {
   display: flex;
   margin: 10px;
   justify-content: center;
-  width: 100%;
   border-radius: 10px;
   transition: 0.3s ease;
+  margin: auto;
+  width: 400px;
   cursor: pointer;
   color: var(--main-blue);
   align-items: center;
@@ -677,11 +670,8 @@ footer a img {
     flex-direction: column;
   }
 
-  .edit-left {
-    width: 100%;
-  }
-
   .edit-right {
+    margin: auto;
     width: 100%;
   }
 
@@ -696,6 +686,7 @@ footer a img {
 }
 
 @media (max-width: 715px) {
+
   .admin tbody tr #t-desc,
   .admin tbody tr #t-name {
     max-width: 100px;
@@ -728,6 +719,7 @@ footer a img {
     transition: 0.1s ease;
     margin-top: 10px;
   }
+
   .disp-par .participant {
     background-color: transparent;
     color: white;
