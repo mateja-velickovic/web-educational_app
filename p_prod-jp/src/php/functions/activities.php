@@ -144,8 +144,8 @@ function fillActivites(PDO $pdo)
     }
 
     foreach ($result as $activity) {
-        if (!isActivityFull($pdo, $activity['idActivite']) && checkWaitingList($pdo, $activity['idActivite'])) {
-            $users = getUserFromWaitingList($pdo, $activity['idActivite']);
+        if (!isActivityFull($pdo, $activity['idActivite']) && isWaitingListEmpty($pdo, $activity['idActivite'])) {
+            $users = getUsersIDFromWaitingList($pdo, $activity['idActivite']);
 
             foreach ($users as $u) {
                 echo $u['fkUser'];
@@ -161,12 +161,12 @@ function fillActivites(PDO $pdo)
 }
 
 /**
- * Vérifier si la liste d'attente est vide ou non
+ * Retourne vrai si la liste d'attente de l'activité est vide
  *
  * @param PDO $pdo Objet de connexion à la base de données.
  * @param int $idActivity ID de l'activité
  */
-function checkWaitingList(PDO $pdo, int $idActivity)
+function isWaitingListEmpty(PDO $pdo, int $idActivity)
 {
     try {
         $sql = "SELECT 1 FROM t_waiting WHERE fkActivity = :activity LIMIT 1";
@@ -174,7 +174,6 @@ function checkWaitingList(PDO $pdo, int $idActivity)
         $query = $pdo->prepare($sql);
         $query->bindParam(':activity', $idActivity, PDO::PARAM_INT);
         $query->execute();
-
         return $query->fetch(PDO::FETCH_ASSOC) !== false;
     } catch (Exception $e) {
         error_log("Erreur lors de la récupération des données : " . $e->getMessage());
@@ -230,17 +229,17 @@ function removeUserFromWaitingList(PDO $pdo, int $idUser, int $idActivity)
 }
 
 /**
- * Récupération des utilisateurs de la file d'attente selon la place libérée
+ * Récupération des ID utilisateurs de la file d'attente selon la place libérée
  *
  * @param PDO $pdo Objet de connexion à la base de données.
  * @param int $idUser ID de l'utilisateur
  * @param int $idActivity ID de l'activité
  */
-function getUserFromWaitingList(PDO $pdo, int $idActivity)
+function getUsersIDFromWaitingList(PDO $pdo, int $idActivity)
 {
-    $getUser = "SELECT fkUser FROM t_waiting WHERE fkActivity = :fkActivity ORDER BY idWaiting ASC LIMIT :remaining";
+    $getUsersID = "SELECT fkUser FROM t_waiting WHERE fkActivity = :fkActivity ORDER BY idWaiting ASC LIMIT :remaining";
 
-    $get = $pdo->prepare($getUser);
+    $get = $pdo->prepare($getUsersID);
     $get_activity = getActivityByID($pdo, $idActivity);
     $remaining_places = $get_activity['actCapacity'] - getInscriptionsCount($pdo, $idActivity);
 
@@ -251,7 +250,33 @@ function getUserFromWaitingList(PDO $pdo, int $idActivity)
     $get->execute();
 
     $users = $get->fetchAll(PDO::FETCH_ASSOC);
+    return $users;
+}
 
+
+/**
+ * Récupération de tous les utilisateurs présents dans la liste d'attente d'une activité
+ *
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idUser ID de l'utilisateur
+ * @param int $idActivity ID de l'activité
+ */
+function getUsersFromWaitingList(PDO $pdo, int $idActivity)
+{
+    $getUsers = "
+            SELECT u.*
+            FROM t_user u
+            INNER JOIN t_waiting w ON u.idUser = w.fkUser
+            WHERE u.idUser = w.fkUser AND w.fkActivity = :fkActivity";
+
+    $get = $pdo->prepare($getUsers);
+
+    $get->bindParam(':fkActivity', $idActivity, PDO::PARAM_INT);
+
+    // Exécuter la requête
+    $get->execute();
+
+    $users = $get->fetchAll(PDO::FETCH_ASSOC);
     return $users;
 }
 
