@@ -35,11 +35,26 @@ if ($_SESSION['userrole'] != 2) {
 
     </header>
 
-    <?php $activity = getActivityByID($pdo, $_POST['edit']); ?>
+    <?php
 
-    <!-- Modifier une activité -->
+    try {
+        if (isset($_POST['edit'])) {
+            $activity = getActivityByID($pdo, $_POST['edit']);
+            $_SESSION['edit'] = $_POST['edit'];
+        } else {
+            throw new Exception("ID d'activité invalide ou manquante.");
+        }
+    } catch (Exception $e) {
+        if (isset($_SESSION['edit'])) {
+            $activity = getActivityByID($pdo, $_SESSION['edit']);
+        } else {
+            echo "Aucune activité à récupérer.";
+        }
+    }
+    ?>
+
     <div class="edit-main">
-
+        <!-- Modifier une activité -->
         <div class="edit-left">
 
             <form class="edit-act" action="./functions/administration.php" method="POST">
@@ -70,40 +85,63 @@ if ($_SESSION['userrole'] != 2) {
                     <img src="../../resources/images/validate.png"
                         alt="Stylo orange pour modifier l'activité sélectionnée.">
                 </button>
+            </form>
+        </div>
+
+        <div class="edit-right">
+            <br>
+            <!-- Liste des participants de l'activité avec la possibilité de les supprimer-->
+            <form class="disp-par" action="./functions/administration.php" method="POST">
+
+                <?php $result = getUsersByActivityID($pdo, $activity['idActivite']); ?>
+
+                <?php foreach ($result as $row) { ?>
+
+                    <input type="hidden" name="delete_user" value="<?php echo $row['idUser']; ?>">
+                    <input type="hidden" name="delete_user_act" value="<?php echo $activity['idActivite']; ?>">
+
+                    <div class="participant">
+                        <p style="font-size: 1.2rem">
+                            <?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?>
+                        </p>
+                        <button id="delete_user" type="submit"
+                            onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur : <?php echo $row['useName'] . ' ' . $row['useSurname']; ?>');">
+                            <img src="../../resources/images/rm.png" alt="Corbeille rouge pour supprimer un utilisateur.">
+                        </button>
+                    </div>
+
+                <?php } ?>
 
             </form>
 
-        </div>
-    </div>
+            <!-- Liste des utilisateurs présents dans la file d'attente -->
+            <?php if (isWaitingListEmpty($pdo, $activity['idActivite'])) { ?>
+                <h2 style="text-align:center; color:white; margin-top:20px;">Utilisateurs en attente</h2>
+                <form class="disp-par" action="./functions/activities.php" method="POST">
 
-    <div class="edit-right">
+                    <?php $waiting_users = getUsersFromWaitingList($pdo, $activity['idActivite']); ?>
 
-        <h2 style="color: white; text-align: center; font-weight: normal; margin: 20px 0px 20px 0px;">Participants de
-            l'activité n°<?php echo $activity['idActivite'] ?>.</h2>
+                    <?php foreach ($waiting_users as $wu) { ?>
 
-        <!-- Liste des participants de l'activité avec la possibilité de les supprimer-->
-        <form class="disp-par" action="./functions/administration.php" method="POST">
+                        <input type="hidden" name="insert_user" value="<?php echo $wu['idUser']; ?>">
+                        <input type="hidden" name="insert_user_act" value="<?php echo $activity['idActivite']; ?>">
 
-            <?php $result = getUsersByActivityID($pdo, $activity['idActivite']); ?>
+                        <div class="participant">
+                            <p style="font-size: 1.2rem">
+                                <?php echo $wu['useName'] . ' ' . $wu['useSurname'] . ' / ' . $wu['useEmail'] ?>
+                            </p>
+                            <button id="insert_user" type="submit"
+                                onclick="return confirm('Voulez-vous ajouter l\'utilisateur : <?php echo $wu['useName'] . ' ' . $wu['useSurname']; ?> à l\'activité n°<?php echo $activity['idActivite']; ?>');">
+                                <img src="../../resources/images/add.png"
+                                    alt="Flèche verte pour ajouter un utilisateur à une activité.">
+                            </button>
+                        </div>
 
-            <?php foreach ($result as $row) { ?>
+                    <?php } ?>
 
-                <input type="hidden" name="delete_user" value="<?php echo $row['idUser']; ?>">
-                <input type="hidden" name="delete_user_act" value="<?php echo $activity['idActivite']; ?>">
-
-                <div class="participant">
-                    <p style="font-size: 1.2rem">
-                        <?php echo $row['useName'] . ' ' . $row['useSurname'] . ' / ' . $row['useEmail'] ?>
-                    </p>
-                    <button type="submit"
-                        onclick="return confirm('Voulez-vous vraiment supprimer l\'utilisateur : <?php echo $row['useName'] . ' ' . $row['useSurname']; ?>');">
-                        <img src="../../resources/images/rm.png" alt="Corbeille rouge pour supprimer un utilisateur.">
-                    </button>
-                </div>
-
+                </form>
             <?php } ?>
-
-        </form>
+        </div>
     </div>
 
     <footer>
