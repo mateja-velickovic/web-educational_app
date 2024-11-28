@@ -123,7 +123,7 @@ function editActivity(PDO $pdo): void
             $query->execute();
         }
 
-        header('Location: ../admin.php');
+        header('Location: ../edit.php');
 
     } catch (Exception $e) {
         // header('Location: ../admin.php?error=edit');
@@ -155,7 +155,7 @@ function deleteUser(PDO $pdo): void
             $query->execute();
         }
 
-        header('Location: ../admin.php');
+        header('Location: ../edit.php');
 
     } catch (Exception $e) {
         // header('Location: ../admin.php?error=delete_user');
