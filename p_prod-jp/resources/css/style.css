@@ -481,6 +481,7 @@ table {
   background-color: white;
   box-shadow: 1px 1px 5px transparent;
   padding-left: 12px;
+  margin-top: 10px;
 }
 
 .disp-par .participant:hover {
@@ -506,11 +507,18 @@ table {
   padding: 5px 5px 5px 8px;
 }
 
-.disp-par .participant button img:hover {
+.disp-par .participant #delete_user img:hover {
   filter: drop-shadow(1px 1px 1px var(--main-red));
   border-radius: 10px;
   transition: 0.3s ease;
 }
+
+.disp-par .participant #insert_user img:hover {
+  filter: drop-shadow(1px 1px 1px var(--main-green));
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
 
 /* Planning */
 .planning {
