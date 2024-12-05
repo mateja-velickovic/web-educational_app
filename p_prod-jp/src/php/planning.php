@@ -4,10 +4,6 @@ require "./lib/database.php";
 require "./functions/activities.php";
 require "./functions/administration.php";
 
-// If the user isn't an admin, redirect on the home page
-if ($_SESSION['userrole'] != 2) {
-    header('Location: ../../../index.php');
-}
 ?>
 
 <!DOCTYPE html>
