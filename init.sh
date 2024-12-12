@@ -22,4 +22,4 @@ docker compose up -d > /dev/null 2>&1
 
 localhost="http://localhost:8080"
 
-echo -e "${GREEN}Profitez de l'application dans votre navigateur à l'adresse : \033[4m${localhost}\033[0m"
+echo -e "${GREEN}Profitez de l'application dans votre navigateur : \033[4m${localhost}\033[0m"
