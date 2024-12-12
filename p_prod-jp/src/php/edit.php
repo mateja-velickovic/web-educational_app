@@ -29,7 +29,7 @@ if ($_SESSION['userrole'] != 2) {
         </div>
 
         <div class="log">
-            <a class="btn-admin" href="../../index.php">Revenir à la page d'accueil</a>
+            <a class="btn-admin" href="admin.php">Retourner</a>
             <a class="logout" href="functions/logout.php">Déconnexion</a>
         </div>
 
