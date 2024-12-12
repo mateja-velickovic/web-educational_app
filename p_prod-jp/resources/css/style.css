@@ -46,10 +46,6 @@ header #t1 {
   margin-bottom: 5px;
 }
 
-header div p {
-  text-align: center;
-}
-
 header p {
   font-weight: 200;
   margin: 0;
@@ -624,31 +620,7 @@ footer a img {
 }
 
 /* Responsive */
-@media (max-width: 1200px) {
-  .grp-activite {
-    grid-template-columns: repeat(2, 1fr);
-    margin: auto;
-    margin-right: 100px;
-    margin-left: 100px;
-    transition: 0.1s ease;
-  }
-
-  .infoacc .grp-info img {
-    display: none;
-  }
-}
-
-@media (max-width: 1000px) {
-  .grp-activite {
-    margin: auto;
-    margin-right: 50px;
-    margin-left: 50px;
-    transition: 0.1s ease;
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
-@media (max-width: 1275px) {
+@media (max-width: 1335px) {
   header {
     flex-direction: column;
   }
@@ -675,6 +647,34 @@ footer a img {
   .admin tbody tr #t-name {
     max-width: 200px;
   }
+
+  header div p {
+    text-align: center;
+  }
+}
+
+@media (max-width: 1200px) {
+  .grp-activite {
+    grid-template-columns: repeat(2, 1fr);
+    margin: auto;
+    margin-right: 100px;
+    margin-left: 100px;
+    transition: 0.1s ease;
+  }
+
+  .infoacc .grp-info img {
+    display: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  .grp-activite {
+    margin: auto;
+    margin-right: 50px;
+    margin-left: 50px;
+    transition: 0.1s ease;
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 @media (max-width: 840px) {
@@ -694,6 +694,10 @@ footer a img {
   .user-activities .ua {
     width: 80%;
     transition: 0.1s ease;
+  }
+
+  header #t1 {
+    text-align: center;
   }
 }
 
