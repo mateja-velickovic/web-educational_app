@@ -55,7 +55,11 @@ if ($_SESSION['userrole'] != 2) {
 
     <div class="edit-main">
         <!-- Modifier une activité -->
-        <div class="edit-left">
+        <?php if(isWaitingListEmpty($pdo, $activity['idActivite']) && isActivityEmpty($pdo, $activity['idActivite'])){ ?>
+        <div class="edit-left" style="width: 100%; margin: auto;">
+        <?php } else { ?>
+        <div class="edit-left" style="width: 50%; margin: auto;">
+        <?php } ?>
 
             <form class="edit-act" action="./functions/administration.php" method="POST">
 
@@ -88,7 +92,12 @@ if ($_SESSION['userrole'] != 2) {
             </form>
         </div>
 
-        <div class="edit-right">
+        <?php if(isWaitingListEmpty($pdo, $activity['idActivite']) && isActivityEmpty($pdo, $activity['idActivite'])){ ?>
+        <div class="edit-right" style="width: 0%; margin: auto;">
+        <?php } else { ?>
+        <div class="edit-right" style="width: 50%; margin: auto;">
+        <?php } ?>
+
             <br>
             <!-- Liste des participants de l'activité avec la possibilité de les supprimer-->
             <form class="disp-par" action="./functions/administration.php" method="POST">
