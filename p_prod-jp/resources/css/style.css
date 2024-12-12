@@ -620,7 +620,7 @@ footer a img {
 }
 
 /* Responsive */
-@media (max-width: 1335px) {
+@media (max-width: 1345px) {
   header {
     flex-direction: column;
   }
