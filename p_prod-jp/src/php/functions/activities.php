@@ -182,6 +182,27 @@ function isWaitingListEmpty(PDO $pdo, int $idActivity)
 }
 
 /**
+ * Retourne vrai si l'activité est vide
+ *
+ * @param PDO $pdo Objet de connexion à la base de données.
+ * @param int $idActivity ID de l'activité
+ */
+function isActivityEmpty(PDO $pdo, int $idActivity)
+{
+    try {
+        $sql = "SELECT 1 FROM t_registration WHERE fkActivity = :activity LIMIT 1";
+
+        $query = $pdo->prepare($sql);
+        $query->bindParam(':activity', $idActivity, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC) === false;
+    } catch (Exception $e) {
+        error_log("Erreur lors de la récupération des données : " . $e->getMessage());
+        return false;
+    }
+}
+
+/**
  * Ajout d'un utilisateur de la file d'attente dans l'activité
  *
  * @param PDO $pdo Objet de connexion à la base de données.
