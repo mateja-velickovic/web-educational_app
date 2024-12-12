@@ -67,8 +67,9 @@ function createActivity(PDO $pdo): void
 {
     session_start();
 
-    try {
+   try {
 
+        // Valeur de l'AI à 20 pour ne pas rentrer en collision avec les activités déjà créés
         if ($_SESSION['userrole'] == 2) {
             $create_activity = "INSERT INTO t_activity (actName, actDesc, actDate, actPlace, actCapacity) 
                 VALUES (:name, :desc, :date, :place, :capacity)";
