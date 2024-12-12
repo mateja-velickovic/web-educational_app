@@ -144,7 +144,7 @@ function fillActivites(PDO $pdo)
     }
 
     foreach ($result as $activity) {
-        if (!isActivityFull($pdo, $activity['idActivite']) && isWaitingListEmpty($pdo, $activity['idActivite'])) {
+        if (!isActivityFull($pdo, $activity['idActivite']) && !isWaitingListEmpty($pdo, $activity['idActivite'])) {
             $users = getUsersIDFromWaitingList($pdo, $activity['idActivite']);
 
             foreach ($users as $u) {
@@ -174,7 +174,7 @@ function isWaitingListEmpty(PDO $pdo, int $idActivity)
         $query = $pdo->prepare($sql);
         $query->bindParam(':activity', $idActivity, PDO::PARAM_INT);
         $query->execute();
-        return $query->fetch(PDO::FETCH_ASSOC) !== false;
+        return $query->fetch(PDO::FETCH_ASSOC) === false;
     } catch (Exception $e) {
         error_log("Erreur lors de la récupération des données : " . $e->getMessage());
         return false;

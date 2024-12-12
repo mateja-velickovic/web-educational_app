@@ -115,7 +115,7 @@ if ($_SESSION['userrole'] != 2) {
             </form>
 
             <!-- Liste des utilisateurs présents dans la file d'attente -->
-            <?php if (isWaitingListEmpty($pdo, $activity['idActivite'])) { ?>
+            <?php if (!isWaitingListEmpty($pdo, $activity['idActivite'])) { ?>
                 <h2 style="text-align:center; color:white; margin-top:20px;">Utilisateurs en attente</h2>
                 <form class="disp-par" action="./functions/activities.php" method="POST">
 
