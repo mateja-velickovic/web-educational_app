@@ -20,7 +20,7 @@ require "./functions/administration.php";
 <body>
     <header>
         <div>
-            <h1 id="t1">Journée Pédagogique <?php echo date("Y") ?></h1>
+            <h1 id="t1">Planning - Journée Pédagogique <?php echo date("Y") ?></h1>
             <p>Connecté en tant que <?php echo $_SESSION['name'] . " " . $_SESSION['surname'] ?></a>
         </div>
 

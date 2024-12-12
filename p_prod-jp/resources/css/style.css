@@ -46,6 +46,10 @@ header #t1 {
   margin-bottom: 5px;
 }
 
+header div p {
+  text-align: center;
+}
+
 header p {
   font-weight: 200;
   margin: 0;

@@ -24,7 +24,7 @@ if ($_SESSION['userrole'] != 2) {
 <body>
     <header>
         <div>
-            <h1 id="t1">Journée Pédagogique <?php echo date("Y") ?></h1>
+            <h1 id="t1">Modification - Journée Pédagogique <?php echo date("Y") ?></h1>
             <p>Connecté en tant que <?php echo $_SESSION['name'] . " " . $_SESSION['surname'] ?></a>
         </div>
 
