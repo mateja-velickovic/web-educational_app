@@ -90,7 +90,7 @@ fillActivites($pdo);
                             <input type="hidden" name="id" value="<?php echo $row['idActivite']; ?>">
 
                             <?php if ($hasUserJoined_waiting): ?>
-                                <button id="leave_waiting_list">QUITTER LA LISTE D'ATTENTE</button>
+                                <button id="leave_waiting_list">QUITTER L'ATTENTE</button>
 
                             <?php elseif ($inscriptions >= $row['actCapacity'] && !$hasUserJoined): ?>
                                 <button id="waiting_list">SE METTRE EN ATTENTE</button>
