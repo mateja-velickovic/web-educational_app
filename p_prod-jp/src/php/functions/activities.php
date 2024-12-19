@@ -147,14 +147,28 @@ function fillActivites(PDO $pdo)
         if (!isActivityFull($pdo, $activity['idActivite']) && !isWaitingListEmpty($pdo, $activity['idActivite'])) {
             $users = getUsersIDFromWaitingList($pdo, $activity['idActivite']);
 
-            foreach ($users as $u) {
-                echo $u['fkUser'];
+            foreach ($users as $user) {
+                try {
+                    // Supression des X utilisateurs de la file d'attente et insertion de ces derniers dans l'activité
+                    $pdo->beginTransaction();
 
-                // Ajout de l'utilisateur dans l'activité
-                insertUserIntoActivity($pdo, $u['fkUser'], $activity['idActivite']);
+                    $insertUser = "INSERT INTO `t_registration` (`fkUser`, `fkActivity`) VALUES (:fkUser, :fkActivity)";
+                    $insert = $pdo->prepare($insertUser);
+                    $insert->bindParam(':fkUser', $user, PDO::PARAM_INT);
+                    $insert->bindParam(':fkActivity', $activity['idActivite'], PDO::PARAM_INT);
+                    $insert->execute();
 
-                // Suppression de l'utilisateur de la file d'attente
-                removeUserFromWaitingList($pdo, $u['fkUser'], $activity['idActivite']);
+                    $removeUser = "DELETE FROM `t_waiting` WHERE fkUser = :fkUser AND fkActivity = :fkActivity";
+                    $remove = $pdo->prepare($removeUser);
+                    $remove->bindParam(':fkUser', $user, PDO::PARAM_INT);
+                    $remove->bindParam(':fkActivity', $activity['idActivite'], PDO::PARAM_INT);
+                    $remove->execute();
+
+                    $pdo->commit();
+                } catch (Exception $e) {
+                    $pdo->rollBack();
+                    echo "Rollback : " . $e->getMessage();
+                }
             }
         }
     }
