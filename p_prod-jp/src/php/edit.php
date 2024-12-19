@@ -100,6 +100,9 @@ if ($_SESSION['userrole'] != 2) {
 
             <br>
             <!-- Liste des participants de l'activité avec la possibilité de les supprimer-->
+        <?php if(!isActivityEmpty($pdo, $activity['idActivite'])){ ?>
+            <h2 style="text-align:center; color:white; margin-top:20px;">Utilisateurs dans l'activité</h2>
+        <?php }?>
             <form class="disp-par" action="./functions/administration.php" method="POST">
 
                 <?php $result = getUsersByActivityID($pdo, $activity['idActivite']); ?>
