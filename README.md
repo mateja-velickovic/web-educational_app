@@ -13,7 +13,7 @@
 ## ✏ Administrez facilement et rapidement les différentes activités (privilège requis)
 ![Image de la page pour editer et supprimer des activités](https://github.com/user-attachments/assets/9a18860d-b7f7-49ea-9f21-55e733eb2d98)
 
-## 🧠 Innovez et proposez de nouvelles activités 
+## 🧠 Innovez et proposez de nouvelles activités (privilège requis)
 ![Image qui représente la création d'une nouvelle activité](https://github.com/user-attachments/assets/9f6fae4a-6600-42d8-a2dc-e915314d7ab3)
 
 
